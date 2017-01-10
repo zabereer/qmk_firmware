@@ -32,12 +32,13 @@ enum custom_keycodes {
 #define UM_RET M(7)
 #define UM_INC M(8)
 #define UM_OBJ M(9)
+#define UM_GITLOG M(10)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * | ESC    |   1  |   2  |   3  |   4  |   5  | LEFT |           | RIGHT|   6  |   7  |   8  |   9  |   0  | BkSp   |
+ * | ESC    |   1  |   2  |   3  |   4  |   5  | SfLt |           | SfRt |   6  |   7  |   8  |   9  |   0  | BkSp   |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * | Tab    |   Q  |   W  |   E  |   R  |   T  |  L1  |           |  L1  |   Y  |   U  |   I  |   O  |   P  | Del    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -45,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|  L2  |           | Ins  |------+------+------+------+------+--------|
  * | LSft/( |   Z  |   X  |   C  | V/L3 | B/L4 |      |           |      | N/L4 | M/L3 |   ,  |   .  |   /  | RSft/) |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |Ctrl/[| Alt/{|   \  | Left |Right |                                       |  Up  | Down |   #  | Alt/}|Ctrl/]|
+ *   |Ctrl/[| Alt/{|   #  | Left |Right |                                       | Down |  Up  |   -  | Alt/}|Ctrl/]|
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        | [/L5 |  {   |       |   }  | ]/L5 |
@@ -57,20 +58,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
-        KC_ESC,         KC_1,            KC_2,       KC_3,      KC_4,           KC_5,           KC_LEFT,
+        KC_ESC,         KC_1,            KC_2,       KC_3,      KC_4,           KC_5,           LSFT(KC_LEFT),
         KC_TAB,         KC_Q,            KC_W,       KC_E,      KC_R,           KC_T,           MO(SYMB),
         KC_CAPS,        KC_A,            KC_S,       KC_D,      KC_F,           KC_G,
         KC_LSPO,        KC_Z,            KC_X,       KC_C,      LT(CRSR, KC_V), LT(MOUS, KC_B), TG(NUMB),
-        CTL_T(KC_LBRC), ALT_T(KC_LCBR),  UK_BSLS,    KC_LEFT,   KC_RGHT,
+        CTL_T(KC_LBRC), ALT_T(KC_LCBR),  UK_HASH,    KC_LEFT,   KC_RGHT,
                                                                                  LT(KEYW, KC_LBRC),  KC_LCBR,
                                                                                                      KC_HOME,
                                                                  CTL_T(KC_SPC),  ALT_T(KC_BSPC),     KC_END,
         // right hand
-             KC_RGHT,     KC_6,            KC_7,            KC_8,      KC_9,       KC_0,             KC_BSPC,
-             MO(SYMB),    KC_Y,            KC_U,            KC_I,      KC_O,       KC_P,             KC_DELT,
-                          KC_H,            KC_J,            KC_K,      KC_L,       KC_SCLN,          KC_ENT,
-             KC_INS,      LT(MOUS, KC_N),  LT(CRSR, KC_M),  KC_COMM,   KC_DOT,     KC_SLSH,          KC_RSPC,
-                                           KC_UP,           KC_DOWN,   UK_HASH,    ALT_T(KC_RCBR),   CTL_T(KC_RBRC),
+             LSFT(KC_RGHT),  KC_6,            KC_7,            KC_8,      KC_9,       KC_0,             KC_BSPC,
+             MO(SYMB),       KC_Y,            KC_U,            KC_I,      KC_O,       KC_P,             KC_DELT,
+                             KC_H,            KC_J,            KC_K,      KC_L,       KC_SCLN,          KC_ENT,
+             KC_INS,         LT(MOUS, KC_N),  LT(CRSR, KC_M),  KC_COMM,   KC_DOT,     KC_SLSH,          KC_RSPC,
+                                              KC_DOWN,         KC_UP,     KC_MINS,    ALT_T(KC_RCBR),   CTL_T(KC_RBRC),
            KC_RCBR,    LT(KEYW, KC_RBRC),
            KC_PGUP,
            KC_PGDN,    ALT_T(KC_ENT),      CTL_T(KC_SPC)
@@ -246,11 +247,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
  * |         |      |      |      |  ret |      |      |           |      |      |      |  prv |  pro | pub  |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |         |      |  str |  obj |      |      |------|           |------|      |      |      |      |      |        |
+ * |         |      |  str |  obj |      | gitl |------|           |------|      |      |      |      |      |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |         |      |      |  cls |      |      |      |           |      |      |      |      |      |      |        |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |       |      |      |      |      |                                       |      |      |  inc |      |      |
+ *   |       |      |  inc |      |      |                                       |      |      |      |      |      |
  *   `-----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |  ##  |      |       |      |  ##  |
@@ -264,9 +265,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // left hand
         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
         KC_NO,     KC_NO,     KC_NO,     KC_NO,     UM_RET,    KC_NO,     KC_NO,
-        KC_NO,     KC_NO,     UM_STR,    UM_OBJ,    KC_NO,     KC_NO,
+        KC_NO,     KC_NO,     UM_STR,    UM_OBJ,    KC_NO,     UM_GITLOG,
         KC_NO,     KC_NO,     KC_NO,     UM_CLS,    KC_NO,     KC_NO,     KC_NO,
-        KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
+        KC_NO,     KC_NO,     UM_INC,    KC_NO,     KC_NO,
                                                                    KC_TRNS,   KC_NO,
                                                                               KC_NO,
                                                           KC_NO,   KC_NO,     KC_NO,
@@ -275,7 +276,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_NO,     KC_NO,     KC_NO,     UM_PRV,    UM_PRO,    UM_PUB,    KC_NO,
                         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
              KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
-                                   KC_NO,     KC_NO,     KC_NO,     UM_INC,    KC_NO,
+                                   KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
            KC_NO,   KC_TRNS,
            KC_NO,
            KC_NO,   KC_NO,     KC_NO
@@ -297,7 +298,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 1:
         if (record->event.pressed) {
-            /* SEND_STRING("0x"); */
             return MACRO(T(0), T(X), END);
         }
         break;
@@ -339,6 +339,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case 9:
         if (record->event.pressed) {
             SEND_STRING("objdump -CT -x -d");
+        }
+        break;
+    case 10:
+        if (record->event.pressed) {
+            SEND_STRING("git log --oneline --graph --decorate=short");
         }
         break;
     }
