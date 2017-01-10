@@ -26,6 +26,7 @@ enum custom_keycodes {
 #define UM_STR M(6)
 #define UM_RET M(7)
 #define UM_INC M(8)
+#define UM_OBJ M(9)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -240,7 +241,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
  * |         |      |      |      |  ret |      |      |           |      |      |      |  prv |  pro | pub  |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |         |      |  str |      |      |      |------|           |------|      |      |      |      |      |        |
+ * |         |      |  str |  obj |      |      |------|           |------|      |      |      |      |      |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |         |      |      |  cls |      |      |      |           |      |      |      |      |      |      |        |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
@@ -258,7 +259,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // left hand
         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
         KC_NO,     KC_NO,     KC_NO,     KC_NO,     UM_RET,    KC_NO,     KC_NO,
-        KC_NO,     KC_NO,     UM_STR,    KC_NO,     KC_NO,     KC_NO,
+        KC_NO,     KC_NO,     UM_STR,    UM_OBJ,    KC_NO,     KC_NO,
         KC_NO,     KC_NO,     KC_NO,     UM_CLS,    KC_NO,     KC_NO,     KC_NO,
         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
                                                                    KC_TRNS,   KC_NO,
@@ -328,6 +329,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case 8:
         if (record->event.pressed) {
             SEND_STRING("#include");
+        }
+        break;
+    case 9:
+        if (record->event.pressed) {
+            SEND_STRING("objdump -CT -x -d");
         }
         break;
     }
