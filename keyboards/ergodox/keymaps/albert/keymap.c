@@ -3,6 +3,11 @@
 #include "action_layer.h"
 #include "version.h"
 
+/* use UK keymap */
+
+#define UK_HASH KC_NONUS_HASH
+#define UK_BSLS KC_NONUS_BSLASH
+
 #define BASE 0 // default layer
 #define SYMB 1 // symbols
 #define NUMB 2 // numbers and hex
@@ -53,19 +58,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
         KC_ESC,         KC_1,            KC_2,       KC_3,      KC_4,           KC_5,           KC_LEFT,
-        KC_TAB,         KC_Q,            KC_W,       KC_E,      KC_R,           KC_T,           TG(SYMB),
+        KC_TAB,         KC_Q,            KC_W,       KC_E,      KC_R,           KC_T,           MO(SYMB),
         KC_CAPS,        KC_A,            KC_S,       KC_D,      KC_F,           KC_G,
         KC_LSPO,        KC_Z,            KC_X,       KC_C,      LT(CRSR, KC_V), LT(MOUS, KC_B), TG(NUMB),
-        CTL_T(KC_LBRC), ALT_T(KC_LCBR),  KC_BSLS,    KC_LEFT,   KC_RGHT,
+        CTL_T(KC_LBRC), ALT_T(KC_LCBR),  UK_BSLS,    KC_LEFT,   KC_RGHT,
                                                                                  LT(KEYW, KC_LBRC),  KC_LCBR,
                                                                                                      KC_HOME,
                                                                  CTL_T(KC_SPC),  ALT_T(KC_BSPC),     KC_END,
         // right hand
              KC_RGHT,     KC_6,            KC_7,            KC_8,      KC_9,       KC_0,             KC_BSPC,
-             TG(SYMB),    KC_Y,            KC_U,            KC_I,      KC_O,       KC_P,             KC_DELT,
+             MO(SYMB),    KC_Y,            KC_U,            KC_I,      KC_O,       KC_P,             KC_DELT,
                           KC_H,            KC_J,            KC_K,      KC_L,       KC_SCLN,          KC_ENT,
              KC_INS,      LT(MOUS, KC_N),  LT(CRSR, KC_M),  KC_COMM,   KC_DOT,     KC_SLSH,          KC_RSPC,
-                                           KC_UP,           KC_DOWN,   KC_HASH,    ALT_T(KC_RCBR),   CTL_T(KC_RBRC),
+                                           KC_UP,           KC_DOWN,   UK_HASH,    ALT_T(KC_RCBR),   CTL_T(KC_RBRC),
            KC_RCBR,    LT(KEYW, KC_RBRC),
            KC_PGUP,
            KC_PGDN,    ALT_T(KC_ENT),      CTL_T(KC_SPC)
@@ -95,16 +100,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // left hand
         KC_TRNS,   KC_F1,       KC_F2,       KC_F3,       KC_F4,          KC_F5,       KC_TRNS,
         KC_TRNS,   KC_EXLM,     LSFT(KC_2),  LSFT(KC_3),  LSFT(KC_4),     LSFT(KC_5),  KC_TRNS,
-        KC_TRNS,   LSFT(KC_6),  LSFT(KC_7),  LSFT(KC_8),  LSFT(KC_MINS),  KC_HASH,
-        KC_TRNS,   KC_BSLS,     KC_PIPE,     KC_GRV,      KC_MINS,        KC_SLSH,     KC_TRNS,
+        KC_TRNS,   LSFT(KC_6),  LSFT(KC_7),  LSFT(KC_8),  LSFT(KC_MINS),  UK_HASH,
+        KC_TRNS,   UK_BSLS,     KC_PIPE,     KC_GRV,      KC_MINS,        KC_SLSH,     KC_TRNS,
         KC_TRNS,   KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,
                                                                             KC_TRNS,   KC_TRNS,
                                                                                        KC_TRNS,
                                                                  KC_TRNS,   KC_TRNS,   KC_TRNS,
         // right hand
              KC_TRNS,   KC_F6,       KC_F7,       KC_F8,          KC_F9,          KC_F10,         KC_F11,
-             KC_TRNS,   KC_MINS,     KC_PLUS,     LSFT(KC_SCLN),  LSFT(KC_QUOT),  LSFT(KC_HASH),  KC_F12,
-                        KC_ASTR,     KC_SLSH,     KC_SCLN,        KC_QUOT,        KC_HASH,        KC_TRNS,
+             KC_TRNS,   KC_MINS,     KC_PLUS,     LSFT(KC_SCLN),  LSFT(KC_QUOT),  LSFT(UK_HASH),  KC_F12,
+                        KC_ASTR,     KC_SLSH,     KC_SCLN,        KC_QUOT,        UK_HASH,        KC_TRNS,
              KC_TRNS,   KC_EQL,      LSFT(KC_5),  LSFT(KC_COMM),  LSFT(KC_DOT),   LSFT(KC_SLSH),  KC_TRNS,
                                      KC_TRNS,     KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
            KC_TRNS,   KC_TRNS,
@@ -292,8 +297,8 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 1:
         if (record->event.pressed) {
-            SEND_STRING("0x");
-            /* return MACRO(T(0), T(X)); */
+            /* SEND_STRING("0x"); */
+            return MACRO(T(0), T(X), END);
         }
         break;
     case 2:
