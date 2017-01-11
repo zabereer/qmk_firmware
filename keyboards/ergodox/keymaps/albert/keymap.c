@@ -50,11 +50,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   |Ctrl/[| Alt/{|   #  | Left |Right |                                       | Down |  Up  |   -  | Alt/}|Ctrl/]|
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        | [/L5 |  {   |       |   }  | ]/L5 |
+ *                                        |  [   |  {   |       |   }  |   ]  |
  *                                 ,------|------|------|       |------+------+------.
  *                                 | Space| BkSp | Home |       | PgUp | Enter|Space |
  *                                 |  /   |  /   |------|       |------|   /  |  /   |
- *                                 | Ctrl | Alt  | End  |       | PgDn |  Alt | Ctrl |
+ *                                 | Ctrl | Alt  |End/L5|       |PDn/L5|  Alt | Ctrl |
  *                                 `--------------------'       `--------------------'
  */
 [BASE] = KEYMAP(  // layer 0 : default
@@ -64,18 +64,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         LT(NUMB, KC_CAPS), KC_A,            KC_S,       KC_D,      KC_F,           KC_G,
         KC_LSPO,           KC_Z,            KC_X,       KC_C,      LT(CRSR, KC_V), LT(MOUS, KC_B), TG(NUMB),
         CTL_T(KC_LBRC),    ALT_T(KC_LCBR),  UK_HASH,    KC_LEFT,   KC_RGHT,
-                                                                                     LT(KEYW, KC_LBRC),  KC_LCBR,
-                                                                                                         KC_HOME,
-                                                                     CTL_T(KC_SPC),  ALT_T(KC_BSPC),     KC_END,
+                                                                                     KC_LBRC,         KC_LCBR,
+                                                                                                      KC_HOME,
+                                                                     CTL_T(KC_SPC),  ALT_T(KC_BSPC),  LT(KEYW, KC_END),
         // right hand
              LSFT(KC_RGHT),  KC_6,            KC_7,            KC_8,      KC_9,       KC_0,             KC_BSPC,
              MO(SYMB),       KC_Y,            KC_U,            KC_I,      KC_O,       KC_P,             KC_DELT,
                              KC_H,            KC_J,            KC_K,      KC_L,       KC_SCLN,          KC_ENT,
              KC_INS,         LT(MOUS, KC_N),  LT(CRSR, KC_M),  KC_COMM,   KC_DOT,     KC_SLSH,          KC_RSPC,
                                               KC_DOWN,         KC_UP,     KC_MINS,    ALT_T(KC_RCBR),   CTL_T(KC_RBRC),
-           KC_RCBR,    LT(KEYW, KC_RBRC),
+           KC_RCBR,            KC_RBRC,
            KC_PGUP,
-           KC_PGDN,    ALT_T(KC_ENT),      CTL_T(KC_SPC)
+           LT(KEYW, KC_PGDN),  ALT_T(KC_ENT),   CTL_T(KC_SPC)
     ),
 /* Keymap 1: Symbol Layer with F keys
  *
@@ -329,7 +329,12 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 6:
         if (record->event.pressed) {
-            SEND_STRING("struct");
+            return MACRO(T(S), T(T), T(R), T(U), T(C), T(T), T(ENT),
+                         D(LSFT), T(LBRC), U(LSFT), T(ENT),
+                         T(ENT),
+                         D(LSFT), T(RBRC), U(LSFT), T(SCLN), T(ENT),
+                         T(UP), T(UP), T(UP), T(UP),
+                         T(END), T(SPC), END);
         }
         break;
     case 7:
