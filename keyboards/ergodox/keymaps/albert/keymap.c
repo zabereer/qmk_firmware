@@ -293,9 +293,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
   // MACRODOWN only works in this function
     switch(id) {
     case 0:
-        if (record->event.pressed) {
-            SEND_STRING(QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
-        }
         break;
     case 1:
         if (record->event.pressed) {
@@ -319,14 +316,15 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 5:
         if (record->event.pressed) {
-            return MACRO(T(C), T(L), T(A), T(S), T(S),
-                         T(ENT), D(LSFT), T(LBRC), U(LSFT), T(ENT),
+            return MACRO(T(C), T(L), T(A), T(S), T(S), T(ENT),
+                         D(LSFT), T(LBRC), U(LSFT), T(ENT),
                          T(P), T(U), T(B), T(L), T(I), T(C),
                          D(LSFT), T(SCLN), U(LSFT), T(ENT), T(ENT),
                          T(P), T(R), T(I), T(V), T(A), T(T), T(E),
                          D(LSFT), T(SCLN), U(LSFT), T(ENT), T(ENT),
-                         D(LSFT), T(RBRC), U(LSFT), T(SCLN), T(ENT), END);
-            /* SEND_STRING("class"); */
+                         D(LSFT), T(RBRC), U(LSFT), T(SCLN), T(ENT),
+                         T(UP), T(UP), T(UP), T(UP), T(UP), T(UP), T(UP),
+                         T(END), T(SPC), END);
         }
         break;
     case 6:
@@ -341,7 +339,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 8:
         if (record->event.pressed) {
-            SEND_STRING("#include");
+            return MACRO(T(NONUS_HASH), T(I), T(N), T(C), T(L), T(U), T(D), T(E), END);
         }
         break;
     case 9:
