@@ -42,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * | Tab    |   Q  |   W  |   E  |   R  |   T  |  L1  |           |  L1  |   Y  |   U  |   I  |   O  |   P  | Del    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * | Caps?  |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  | Enter  |
+ * | Caps/L2|   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  | Enter  |
  * |--------+------+------+------+------+------|  L2  |           | Ins  |------+------+------+------+------+--------|
  * | LSft/( |   Z  |   X  |   C  | V/L3 | B/L4 |      |           |      | N/L4 | M/L3 |   ,  |   .  |   /  | RSft/) |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
@@ -58,14 +58,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
-        KC_ESC,         KC_1,            KC_2,       KC_3,      KC_4,           KC_5,           LSFT(KC_LEFT),
-        KC_TAB,         KC_Q,            KC_W,       KC_E,      KC_R,           KC_T,           MO(SYMB),
-        KC_CAPS,        KC_A,            KC_S,       KC_D,      KC_F,           KC_G,
-        KC_LSPO,        KC_Z,            KC_X,       KC_C,      LT(CRSR, KC_V), LT(MOUS, KC_B), TG(NUMB),
-        CTL_T(KC_LBRC), ALT_T(KC_LCBR),  UK_HASH,    KC_LEFT,   KC_RGHT,
-                                                                                 LT(KEYW, KC_LBRC),  KC_LCBR,
-                                                                                                     KC_HOME,
-                                                                 CTL_T(KC_SPC),  ALT_T(KC_BSPC),     KC_END,
+        KC_ESC,            KC_1,            KC_2,       KC_3,      KC_4,           KC_5,           LSFT(KC_LEFT),
+        KC_TAB,            KC_Q,            KC_W,       KC_E,      KC_R,           KC_T,           MO(SYMB),
+        LT(NUMB, KC_CAPS), KC_A,            KC_S,       KC_D,      KC_F,           KC_G,
+        KC_LSPO,           KC_Z,            KC_X,       KC_C,      LT(CRSR, KC_V), LT(MOUS, KC_B), TG(NUMB),
+        CTL_T(KC_LBRC),    ALT_T(KC_LCBR),  UK_HASH,    KC_LEFT,   KC_RGHT,
+                                                                                     LT(KEYW, KC_LBRC),  KC_LCBR,
+                                                                                                         KC_HOME,
+                                                                     CTL_T(KC_SPC),  ALT_T(KC_BSPC),     KC_END,
         // right hand
              LSFT(KC_RGHT),  KC_6,            KC_7,            KC_8,      KC_9,       KC_0,             KC_BSPC,
              MO(SYMB),       KC_Y,            KC_U,            KC_I,      KC_O,       KC_P,             KC_DELT,
@@ -324,7 +324,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
                          D(LSFT), T(SCLN), U(LSFT), T(ENT), T(ENT),
                          T(P), T(R), T(I), T(V), T(A), T(T), T(E),
                          D(LSFT), T(SCLN), U(LSFT), T(ENT), T(ENT),
-                         D(LSFT), T(RBRC), U(LSFT), T(ENT), END);
+                         D(LSFT), T(RBRC), U(LSFT), T(SCLN), T(ENT), END);
             /* SEND_STRING("class"); */
         }
         break;
