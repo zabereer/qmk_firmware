@@ -23,16 +23,17 @@ enum custom_keycodes {
   RGB_SLD
 };
 
-// user macros
-#define UM_0x M(1)
-#define UM_PUB M(2)
-#define UM_PRO M(3)
-#define UM_PRV M(4)
-#define UM_CLS M(5)
-#define UM_STR M(6)
-#define UM_RET M(7)
-#define UM_INC M(8)
-#define UM_OBJ M(9)
+// my macros
+#define UM_ECET   M(0)  // ENT, LCBR, ENT, TAB
+#define UM_0x     M(1)
+#define UM_PUB    M(2)
+#define UM_PRO    M(3)
+#define UM_PRV    M(4)
+#define UM_CLS    M(5)
+#define UM_STR    M(6)
+#define UM_RET    M(7)
+#define UM_INC    M(8)
+#define UM_OBJ    M(9)
 #define UM_GITLOG M(10)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -255,11 +256,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   |       |      |  inc |      |      |                                       |      |      |      |      |      |
  *   `-----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        |  ##  |      |       |      |  ##  |
+ *                                        |      | ecet |       |      |      |
  *                                 ,------|------|------|       |------+------+------.
  *                                 |      |      |      |       |      |      |      |
  *                                 |      |      |------|       |------|      |      |
- *                                 |      |      |      |       |      |      |      |
+ *                                 |      |      |  ##  |       |  ##  |      |      |
  *                                 `--------------------'       `--------------------'
  */
 [KEYW] = KEYMAP(
@@ -269,18 +270,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,     KC_NO,     UM_STR,    UM_OBJ,    KC_NO,     UM_GITLOG,
         KC_NO,     KC_NO,     KC_NO,     UM_CLS,    KC_NO,     KC_NO,     KC_NO,
         KC_NO,     KC_NO,     UM_INC,    KC_NO,     KC_NO,
-                                                                   KC_TRNS,   KC_NO,
-                                                                              KC_NO,
-                                                          KC_NO,   KC_NO,     KC_NO,
+                                                                   KC_NO,    KC_NO,
+                                                                             KC_NO,
+                                                          KC_NO,   KC_NO,    KC_TRNS,
         // right hand
              KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
              KC_NO,     KC_NO,     KC_NO,     UM_PRV,    UM_PRO,    UM_PUB,    KC_NO,
                         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
              KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
                                    KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
-           KC_NO,   KC_TRNS,
+           UM_ECET,  KC_NO,
            KC_NO,
-           KC_NO,   KC_NO,     KC_NO
+           KC_TRNS,  KC_NO,   KC_NO
     ),
 };
 
@@ -293,6 +294,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
   // MACRODOWN only works in this function
     switch(id) {
     case 0:
+        return MACRO(T(ENT), D(LSFT), T(LBRC), U(LSFT), T(ENT), T(TAB), END);
         break;
     case 1:
         if (record->event.pressed) {
