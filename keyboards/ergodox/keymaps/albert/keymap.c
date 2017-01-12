@@ -36,6 +36,7 @@ enum custom_keycodes {
 #define UM_OBJ    M(9)
 #define UM_GITLOG M(10)
 #define UM_GOODM  M(11)
+#define UM_NAMESP M(12)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -252,7 +253,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |         |      |  str |  obj |      | gitl |------|           |------|      |      |      |      |      |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |         |      |      |  cls |      |      |      |           |      |      | goodm|      |      |      |        |
+ * |         |      |      |  cls |      |      |      |           |      |namesp| goodm|      |      |      |        |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |       |      |  inc |      |      |                                       |      |      |      |      |      |
  *   `-----------------------------------'                                       `----------------------------------'
@@ -278,7 +279,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
              KC_NO,     KC_NO,     KC_NO,     UM_PRV,    UM_PRO,    UM_PUB,    KC_NO,
                         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
-             KC_NO,     KC_NO,     UM_GOODM,  KC_NO,     KC_NO,     KC_NO,     KC_NO,
+             KC_NO,     UM_NAMESP, UM_GOODM,  KC_NO,     KC_NO,     KC_NO,     KC_NO,
                                    KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
            UM_ECET,  KC_NO,
            KC_NO,
@@ -363,6 +364,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case 11:
         if (record->event.pressed) {
             SEND_STRING("good morning");
+        }
+        break;
+    case 12:
+        if (record->event.pressed) {
+            SEND_STRING("namespace");
         }
         break;
     }
