@@ -175,7 +175,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |         |      | Left | Down | Right|      |------|           |------|      | Left | Down | Right|      |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |         |  Up  |      | Down |  ##  |      |      |           |      |      |  ##  | Down |      |  Up  |        |
+ * |   ##    |  Up  |      | Down |  ##  |      |      |           |      |      |  ##  | Down |      |  Up  |   ##   |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   | Left  | Down | Right|      |      |                                       |      |      | Left | Down | Right|
  *   `-----------------------------------'                                       `----------------------------------'
@@ -183,7 +183,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        |      |      |       |      |      |
  *                                 ,------|------|------|       |------+------+------.
  *                                 |      |      |      |       |      |      |      |
- *                                 |      |      |------|       |------|      |      |
+ *                                 |  ##  |  ##  |------|       |------|  ##  |  ##  |
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
@@ -192,20 +192,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
         KC_NO,     KC_NO,     KC_NO,     KC_UP,     KC_NO,     KC_NO,     KC_NO,
         KC_NO,     KC_NO,     KC_LEFT,   KC_DOWN,   KC_RGHT,   KC_NO,
-        KC_NO,     KC_UP,     KC_NO,     KC_DOWN,   KC_TRNS,   KC_NO,     KC_NO,
+        KC_TRNS,   KC_UP,     KC_NO,     KC_DOWN,   KC_TRNS,   KC_NO,     KC_NO,
         KC_LEFT,   KC_DOWN,   KC_RGHT,   KC_NO,     KC_NO,
-                                                                   KC_NO,   KC_NO,
-                                                                            KC_NO,
-                                                          KC_NO,   KC_NO,   KC_NO,
+                                                                   KC_NO,     KC_NO,
+                                                                              KC_NO,
+                                                        KC_TRNS,   KC_TRNS,   KC_NO,
         // right hand
              KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
              KC_NO,     KC_NO,     KC_NO,     KC_UP,     KC_NO,     KC_NO,     KC_NO,
                         KC_NO,     KC_LEFT,   KC_DOWN,   KC_RGHT,   KC_NO,     KC_NO,
-             KC_NO,     KC_NO,     KC_TRNS,   KC_DOWN,   KC_NO,     KC_UP,     KC_NO,
+             KC_NO,     KC_NO,     KC_TRNS,   KC_DOWN,   KC_NO,     KC_UP,     KC_TRNS,
                                    KC_NO,     KC_NO,     KC_LEFT,   KC_DOWN,   KC_RGHT,
            KC_NO,   KC_NO,
            KC_NO,
-           KC_NO,   KC_NO,   KC_NO
+           KC_NO,   KC_TRNS,   KC_TRNS
     ),
 /* Keymap 4: Media and mouse keys
  *
