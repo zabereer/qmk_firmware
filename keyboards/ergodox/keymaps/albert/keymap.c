@@ -56,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|  L6  |           | Ins  |------+------+------+------+------+--------|
  * | LSft/( |   Z  |   X  |   C  | V/L3 | B/L4 |      |           | /L6  | N/L4 | M/L3 |   ,  |   .  |   /  | RSft/) |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |Ctrl/[| Alt/{|   #  | Left |Right |                                       |  Up  | Down |   -  | Alt/}|Ctrl/]|
+ *   |Ctrl/[| Alt/]|   #  | Left |Right |                                       |  Up  | Down |   -  | Alt/[|Ctrl/]|
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |  [   |  L2  |       |  L2  |   ]  |
@@ -72,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,            KC_Q,            KC_W,       KC_E,      KC_R,           KC_T,           MO(SYMB),
         LT(NUMB, KC_CAPS), KC_A,            KC_S,       KC_D,      KC_F,           KC_G,
         KC_LSPO,           KC_Z,            KC_X,       KC_C,      LT(CRSR, KC_V), LT(MOUS, KC_B), MO(EMAC),
-        CTL_T(KC_LBRC),    ALT_T(KC_LCBR),  UK_HASH,    KC_LEFT,   KC_RGHT,
+        CTL_T(KC_LBRC),    ALT_T(KC_RBRC),  UK_HASH,    KC_LEFT,   KC_RGHT,
                                                                                      KC_LBRC,         TG(NUMB),
                                                                                                       KC_HOME,
                                                                      CTL_T(KC_SPC),  ALT_T(KC_BSPC),  LT(KEYW, KC_END),
@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              MO(SYMB),          KC_Y,            KC_U,            KC_I,      KC_O,       KC_P,             KC_DELT,
                                 KC_H,            KC_J,            KC_K,      KC_L,       KC_SCLN,          KC_ENT,
              LT(EMAC, KC_INS),  LT(MOUS, KC_N),  LT(CRSR, KC_M),  KC_COMM,   KC_DOT,     KC_SLSH,          KC_RSPC,
-                                                 KC_UP,           KC_DOWN,   KC_MINS,    ALT_T(KC_RCBR),   CTL_T(KC_RBRC),
+                                                 KC_UP,           KC_DOWN,   KC_MINS,    ALT_T(KC_LBRC),   CTL_T(KC_RBRC),
            TG(NUMB),            KC_RBRC,
            KC_PGUP,
            LT(KEYW, KC_PGDN),  ALT_T(KC_ENT),   CTL_T(KC_SPC)
