@@ -15,6 +15,7 @@
 #define CRSR 3 // cursor keys
 #define MOUS 4 // mouse keys
 #define KEYW 5 // keyword macros
+#define EMAC 6 // emacs
 
 enum custom_keycodes {
   PLACEHOLDER = SAFE_RANGE, // can always be here
@@ -38,6 +39,8 @@ enum custom_keycodes {
 #define UM_GOODM  M(11)
 #define UM_NAMESP M(12)
 #define UM_RHDT   M(13)
+#define UM_EMTR   M(14)
+#define UM_EMWR   M(15)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -48,13 +51,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | Tab    |   Q  |   W  |   E  |   R  |   T  |  L1  |           |  L1  |   Y  |   U  |   I  |   O  |   P  | Del    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | Caps/L2|   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  | Enter  |
- * |--------+------+------+------+------+------|  L2  |           | Ins  |------+------+------+------+------+--------|
- * | LSft/( |   Z  |   X  |   C  | V/L3 | B/L4 |      |           |      | N/L4 | M/L3 |   ,  |   .  |   /  | RSft/) |
+ * |--------+------+------+------+------+------|  L6  |           | Ins  |------+------+------+------+------+--------|
+ * | LSft/( |   Z  |   X  |   C  | V/L3 | B/L4 |      |           | /L6  | N/L4 | M/L3 |   ,  |   .  |   /  | RSft/) |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |Ctrl/[| Alt/{|   #  | Left |Right |                                       | Down |  Up  |   -  | Alt/}|Ctrl/]|
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        |  [   |  {   |       |   }  |   ]  |
+ *                                        |  [   |  L2  |       |  L2  |   ]  |
  *                                 ,------|------|------|       |------+------+------.
  *                                 | Space| BkSp | Home |       | PgUp | Enter|Space |
  *                                 |  /   |  /   |------|       |------|   /  |  /   |
@@ -66,18 +69,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC,            KC_1,            KC_2,       KC_3,      KC_4,           KC_5,           LSFT(KC_LEFT),
         KC_TAB,            KC_Q,            KC_W,       KC_E,      KC_R,           KC_T,           MO(SYMB),
         LT(NUMB, KC_CAPS), KC_A,            KC_S,       KC_D,      KC_F,           KC_G,
-        KC_LSPO,           KC_Z,            KC_X,       KC_C,      LT(CRSR, KC_V), LT(MOUS, KC_B), TG(NUMB),
+        KC_LSPO,           KC_Z,            KC_X,       KC_C,      LT(CRSR, KC_V), LT(MOUS, KC_B), MO(EMAC),
         CTL_T(KC_LBRC),    ALT_T(KC_LCBR),  UK_HASH,    KC_LEFT,   KC_RGHT,
-                                                                                     KC_LBRC,         KC_LCBR,
+                                                                                     KC_LBRC,         TG(NUMB),
                                                                                                       KC_HOME,
                                                                      CTL_T(KC_SPC),  ALT_T(KC_BSPC),  LT(KEYW, KC_END),
         // right hand
-             LSFT(KC_RGHT),  KC_6,            KC_7,            KC_8,      KC_9,       KC_0,             KC_BSPC,
-             MO(SYMB),       KC_Y,            KC_U,            KC_I,      KC_O,       KC_P,             KC_DELT,
-                             KC_H,            KC_J,            KC_K,      KC_L,       KC_SCLN,          KC_ENT,
-             KC_INS,         LT(MOUS, KC_N),  LT(CRSR, KC_M),  KC_COMM,   KC_DOT,     KC_SLSH,          KC_RSPC,
-                                              KC_DOWN,         KC_UP,     KC_MINS,    ALT_T(KC_RCBR),   CTL_T(KC_RBRC),
-           KC_RCBR,            KC_RBRC,
+             LSFT(KC_RGHT),     KC_6,            KC_7,            KC_8,      KC_9,       KC_0,             KC_BSPC,
+             MO(SYMB),          KC_Y,            KC_U,            KC_I,      KC_O,       KC_P,             KC_DELT,
+                                KC_H,            KC_J,            KC_K,      KC_L,       KC_SCLN,          KC_ENT,
+             LT(EMAC, KC_INS),  LT(MOUS, KC_N),  LT(CRSR, KC_M),  KC_COMM,   KC_DOT,     KC_SLSH,          KC_RSPC,
+                                                 KC_DOWN,         KC_UP,     KC_MINS,    ALT_T(KC_RCBR),   CTL_T(KC_RBRC),
+           TG(NUMB),            KC_RBRC,
            KC_PGUP,
            LT(KEYW, KC_PGDN),  ALT_T(KC_ENT),   CTL_T(KC_SPC)
     ),
@@ -286,6 +289,47 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            KC_NO,
            KC_TRNS,  KC_NO,   KC_NO
     ),
+/* Keymap 6: emacs
+ *
+ * ,---------------------------------------------------.           ,--------------------------------------------------.
+ * |         |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
+ * |         | emtr |      |      |      |      |      |           |      |      |      | b-up |      |      |        |
+ * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |         |      | emwr |      |      |      |------|           |------|      |b-left|b-down|b-right      |        |
+ * |---------+------+------+------+------+------|  ##  |           |  ##  |------+------+------+------+------+--------|
+ * |         |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   |       |      |      |      |      |                                       |      |      |      |      |      |
+ *   `-----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        |      |      |       |      |      |
+ *                                 ,------|------|------|       |------+------+------.
+ *                                 |      |      |      |       |      |      |      |
+ *                                 |      |      |------|       |------|      |      |
+ *                                 |      |      |      |       |      |      |      |
+ *                                 `--------------------'       `--------------------'
+ */
+[EMAC] = KEYMAP(
+        // left hand
+        KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
+        KC_NO,     UM_EMTR,   KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
+        KC_NO,     KC_NO,     UM_EMWR,   KC_NO,     KC_NO,     KC_NO,
+        KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_TRNS,
+        KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
+                                                                   KC_NO,   KC_NO,
+                                                                            KC_NO,
+                                                          KC_NO,   KC_NO,   KC_NO,
+        // right hand
+             KC_NO,     KC_NO,   KC_NO,          KC_NO,          KC_NO,          KC_NO,     KC_NO,
+             KC_NO,     KC_NO,   KC_NO,          LSFT(KC_UP),    KC_NO,          KC_NO,     KC_NO,
+                        KC_NO,   LSFT(KC_LEFT),  LSFT(KC_DOWN),  LSFT(KC_RGHT),  KC_NO,     KC_NO,
+             KC_TRNS,   KC_NO,   KC_NO,          KC_NO,          KC_NO,          KC_NO,     KC_NO,
+                                 KC_NO,          KC_NO,          KC_NO,          KC_NO,     KC_NO,
+           KC_NO,   KC_NO,
+           KC_NO,
+           KC_NO,   KC_NO,   KC_NO
+    ),
 };
 
 const uint16_t PROGMEM fn_actions[] = {
@@ -376,6 +420,14 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             SEND_STRING("/opt/rh/devtoolset-4/root/usr/bin/");
         }
         break;
+    case 14:
+        if (record->event.pressed) {
+            return MACRO(D(LCTL), T(X), T(Q), U(LCTL), END);
+        }
+    case 15:
+        if (record->event.pressed) {
+            return MACRO(D(LCTL), T(X), T(S), U(LCTL), END);
+        }
     }
     return MACRO_NONE;
 };
