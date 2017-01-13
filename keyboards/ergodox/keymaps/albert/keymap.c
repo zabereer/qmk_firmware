@@ -326,9 +326,9 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
                          T(P), T(U), T(B), T(L), T(I), T(C),
                          D(LSFT), T(SCLN), U(LSFT), T(ENT), T(ENT),
                          T(P), T(R), T(I), T(V), T(A), T(T), T(E),
-                         D(LSFT), T(SCLN), U(LSFT), T(ENT), T(ENT),
+                         D(LSFT), T(SCLN), U(LSFT), T(ENT),
                          D(LSFT), T(RBRC), U(LSFT), T(SCLN), T(ENT),
-                         T(UP), T(UP), T(UP), T(UP), T(UP), T(UP), T(UP), T(UP),
+                         T(UP), T(UP), T(UP), T(UP), T(UP), T(UP), T(UP),
                          T(END), T(SPC), END);
         }
         break;
@@ -336,9 +336,8 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         if (record->event.pressed) {
             return MACRO(T(S), T(T), T(R), T(U), T(C), T(T), T(ENT),
                          D(LSFT), T(LBRC), U(LSFT), T(ENT),
-                         T(ENT),
                          D(LSFT), T(RBRC), U(LSFT), T(SCLN), T(ENT),
-                         T(UP), T(UP), T(UP), T(UP), T(UP),
+                         T(UP), T(UP), T(UP), T(UP),
                          T(END), T(SPC), END);
         }
         break;
