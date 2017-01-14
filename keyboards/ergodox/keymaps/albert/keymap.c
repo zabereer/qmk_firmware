@@ -53,13 +53,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | Tab    |   Q  |   W  |   E  |   R  |   T  |  L1  |           |  L1  |   Y  |   U  |   I  |   O  |   P  | Del    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | Caps/L2|   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  |Enter/L2|
- * |--------+------+------+------+------+------|  L6  |           | Ins  |------+------+------+------+------+--------|
- * | LSft/( |   Z  |   X  |   C  | V/L3 | B/L4 |      |           | /L6  | N/L4 | M/L3 |   ,  |   .  |   /  | RSft/) |
+ * |--------+------+------+------+------+------|  L6  |           |  L6  |------+------+------+------+------+--------|
+ * | LSft/( |   Z  |   X  |   C  | V/L3 | B/L4 |      |           |      | N/L4 | M/L3 |   ,  |   .  |   /  | RSft/) |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |Ctrl/[| Alt/]|   #  | Left |Right |                                       |  Up  | Down |   -  | Alt/[|Ctrl/]|
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        |  [   |  L2  |       |  L2  |   ]  |
+ *                                        |  [   |  L2  |       |  L2  |  Ins |
  *                                 ,------|------|------|       |------+------+------.
  *                                 | Space| BkSp | Home |       | PgUp | Enter|Space |
  *                                 |  /   |  /   |------|       |------|   /  |  /   |
@@ -77,12 +77,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                                                       KC_HOME,
                                                                      CTL_T(KC_SPC),  ALT_T(KC_BSPC),  LT(KEYW, KC_END),
         // right hand
-             LSFT(KC_RGHT),     KC_6,            KC_7,            KC_8,      KC_9,       KC_0,             KC_BSPC,
-             MO(SYMB),          KC_Y,            KC_U,            KC_I,      KC_O,       KC_P,             KC_DELT,
-                                KC_H,            KC_J,            KC_K,      KC_L,       KC_SCLN,          LT(NUMB, KC_ENT),
-             LT(EMAC, KC_INS),  LT(MOUS, KC_N),  LT(CRSR, KC_M),  KC_COMM,   KC_DOT,     KC_SLSH,          KC_RSPC,
+             LSFT(KC_RGHT),   KC_6,            KC_7,            KC_8,      KC_9,       KC_0,             KC_BSPC,
+             MO(SYMB),        KC_Y,            KC_U,            KC_I,      KC_O,       KC_P,             KC_DELT,
+                              KC_H,            KC_J,            KC_K,      KC_L,       KC_SCLN,          LT(NUMB, KC_ENT),
+             MO(EMAC),        LT(MOUS, KC_N),  LT(CRSR, KC_M),  KC_COMM,   KC_DOT,     KC_SLSH,          KC_RSPC,
                                                  KC_UP,           KC_DOWN,   KC_MINS,    ALT_T(KC_LBRC),   CTL_T(KC_RBRC),
-           TG(NUMB),            KC_RBRC,
+           TG(NUMB),           KC_INS,
            KC_PGUP,
            LT(KEYW, KC_PGDN),  ALT_T(KC_ENT),   CTL_T(KC_SPC)
     ),
