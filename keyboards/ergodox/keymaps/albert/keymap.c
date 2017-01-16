@@ -347,7 +347,9 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
   // MACRODOWN only works in this function
     switch(id) {
     case 0:
-        return MACRO(T(ENT), D(LSFT), T(LBRC), U(LSFT), T(ENT), T(TAB), END);
+        if (record->event.pressed) {
+            return MACRO(T(ENT), D(LSFT), T(LBRC), U(LSFT), T(ENT), T(TAB), END);
+        }
         break;
     case 1:
         if (record->event.pressed) {
@@ -430,30 +432,37 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         if (record->event.pressed) {
             return MACRO(D(LCTL), T(X), T(Q), U(LCTL), END);
         }
+        break;
     case 15:
         if (record->event.pressed) {
             return MACRO(D(LCTL), T(X), T(S), U(LCTL), END);
         }
+        break;
     case 16:
         if (record->event.pressed) {
             return MACRO(D(LCTL), D(LSFT), T(MINS), U(LSFT), U(LCTL), END);
         }
+        break;
     case 17:
         if (record->event.pressed) {
             return MACRO(D(LALT), D(LSFT), T(MINS), U(LSFT), U(LALT), END);
         }
+        break;
     case 18:
         if (record->event.pressed) {
             return MACRO(D(LCTL), T(X), U(LCTL), T(LEFT), END);
         }
+        break;
     case 19:
         if (record->event.pressed) {
             return MACRO(D(LCTL), T(X), U(LCTL), T(RGHT), END);
         }
+        break;
     case 20:
         if (record->event.pressed) {
             SEND_STRING("good night");
         }
+        break;
     case 21:
         if (record->event.pressed) {
             return MACRO(T(M), T(Y), T(N), T(Y), T(SPC),
@@ -461,6 +470,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
                          T(C), T(H), T(E), T(E), T(R), T(S), T(ENT),
                          T(A), T(L), T(B), T(E), T(R), T(T), T(ENT), END);
         }
+        break;
     }
     return MACRO_NONE;
 };
