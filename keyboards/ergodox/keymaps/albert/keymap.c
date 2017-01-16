@@ -45,6 +45,8 @@ enum custom_keycodes {
 #define UM_EMRE   M(17) // emacs redo
 #define UM_EMPB   M(18) // emacs previous buffer
 #define UM_EMNB   M(19) // emacs next buffer
+#define UM_GOODN  M(20)
+#define UM_MTCA   M(21)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -261,7 +263,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |         |      |  str |  obj |      | gitl |------|           |------|      |      |      |      |      |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |         |      |      |  cls |      |      |      |           | rhdt |namesp| goodm|      |      |      |        |
+ * |         |      |      |  cls |      |      |      |           | rhdt |namesp| goodm| goodn| mtca |      |        |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |       |      |  inc |      |      |                                       |      |      |      |      |      |
  *   `-----------------------------------'                                       `----------------------------------'
@@ -287,7 +289,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
              KC_NO,     KC_NO,     KC_NO,     UM_PRV,    UM_PRO,    UM_PUB,    KC_NO,
                         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
-             UM_RHDT,   UM_NAMESP, UM_GOODM,  KC_NO,     KC_NO,     KC_NO,     KC_NO,
+             UM_RHDT,   UM_NAMESP, UM_GOODM,  UM_GOODN,  UM_MTCA,   KC_NO,     KC_NO,
                                    KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
            UM_ECET,  KC_NO,
            KC_NO,
@@ -447,6 +449,17 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case 19:
         if (record->event.pressed) {
             return MACRO(D(LCTL), T(X), U(LCTL), T(RGHT), END);
+        }
+    case 20:
+        if (record->event.pressed) {
+            SEND_STRING("good night");
+        }
+    case 21:
+        if (record->event.pressed) {
+            return MACRO(T(M), T(Y), T(N), T(Y), T(SPC),
+                         T(T), T(H), T(A), T(N), T(K), T(S), T(ENT),
+                         T(C), T(H), T(E), T(E), T(R), T(S), T(ENT),
+                         T(A), T(L), T(B), T(E), T(R), T(T), T(ENT), END);
         }
     }
     return MACRO_NONE;
