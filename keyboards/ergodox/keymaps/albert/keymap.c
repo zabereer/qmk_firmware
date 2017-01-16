@@ -43,6 +43,8 @@ enum custom_keycodes {
 #define UM_EMWR   M(15) // emacs write buffer (save)
 #define UM_EMUN   M(16) // emacs undo
 #define UM_EMRE   M(17) // emacs redo
+#define UM_EMPB   M(18) // emacs previous buffer
+#define UM_EMNB   M(19) // emacs next buffer
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -294,7 +296,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 6: emacs
  *
  * ,---------------------------------------------------.           ,--------------------------------------------------.
- * |         |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |         |      |      |      |      |      | empf |           | emnf |      |      |      |      |      |        |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
  * |         | emtr |      |      |      |      |      |           |      | emun | emre | w-up |      |      |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -314,7 +316,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [EMAC] = KEYMAP(
         // left hand
-        KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
+        KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     UM_EMPB,
         KC_NO,     UM_EMTR,   KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
         KC_NO,     KC_NO,     UM_EMWR,   KC_NO,     KC_NO,     KC_NO,
         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_TRNS,
@@ -323,7 +325,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                             KC_NO,
                                                           KC_NO,   KC_NO,   KC_NO,
         // right hand
-             KC_NO,     KC_NO,    KC_NO,          KC_NO,          KC_NO,          KC_NO,     KC_NO,
+             UM_EMNB,   KC_NO,    KC_NO,          KC_NO,          KC_NO,          KC_NO,     KC_NO,
              KC_NO,     UM_EMUN,  UM_EMRE,        LSFT(KC_UP),    KC_NO,          KC_NO,     KC_NO,
                         KC_NO,    LSFT(KC_LEFT),  LSFT(KC_DOWN),  LSFT(KC_RGHT),  KC_NO,     KC_NO,
              KC_TRNS,   KC_NO,    KC_NO,          KC_NO,          KC_NO,          KC_NO,     KC_NO,
@@ -437,6 +439,14 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case 17:
         if (record->event.pressed) {
             return MACRO(D(LALT), D(LSFT), T(MINS), U(LSFT), U(LALT), END);
+        }
+    case 18:
+        if (record->event.pressed) {
+            return MACRO(D(LCTL), T(X), U(LCTL), T(LEFT), END);
+        }
+    case 19:
+        if (record->event.pressed) {
+            return MACRO(D(LCTL), T(X), U(LCTL), T(RGHT), END);
         }
     }
     return MACRO_NONE;
