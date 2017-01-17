@@ -529,16 +529,6 @@ void matrix_scan_user(void) {
         leading = false;
         leader_end();
 
-        SEQ_THREE_KEYS(KC_G, KC_D, KC_S) {
-            SEND_STRING("git diff --staged");
-        }
-        SEQ_THREE_KEYS(KC_G, KC_L, KC_O) {
-            SEND_STRING("git log --oneline");
-        }
-        SEQ_TWO_KEYS(KC_G, KC_C) {
-            SEND_STRING("git commit -m ''");
-            send_keystrokes(KC_LEFT, KC_NO);
-        }
         SEQ_TWO_KEYS(KC_G, KC_A) {
             SEND_STRING("git add .");
         }
@@ -554,8 +544,21 @@ void matrix_scan_user(void) {
         SEQ_TWO_KEYS(KC_G, KC_P) {
             SEND_STRING("git pull");
         }
+        SEQ_TWO_KEYS(KC_G, KC_M) {
+            SEND_STRING("git merge-base ");
+        }
         SEQ_TWO_KEYS(KC_G, KC_S) {
             SEND_STRING("git status");
+        }
+        SEQ_THREE_KEYS(KC_G, KC_D, KC_S) {
+            SEND_STRING("git diff --staged");
+        }
+        SEQ_THREE_KEYS(KC_G, KC_L, KC_O) {
+            SEND_STRING("git log --oneline");
+        }
+        SEQ_TWO_KEYS(KC_G, KC_C) {
+            SEND_STRING("git commit -m ''");
+            send_keystrokes(KC_LEFT, KC_NO);
         }
     }
 
