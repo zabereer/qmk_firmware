@@ -3,6 +3,8 @@
 #include "action_layer.h"
 #include "version.h"
 
+#include <stdarg.h>
+
 /* use UK keymap */
 
 #define UK_HASH KC_NONUS_HASH
@@ -63,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   |Ctrl/[| Alt/]|   #  | Left |Right |                                       |  Up  | Down |   -  | Alt/[|Ctrl/]|
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        |  [   |  L2  |       |  L2  |  Ins |
+ *                                        |  L2  | lead |       | lead |  Ins |
  *                                 ,------|------|------|       |------+------+------.
  *                                 | Space| BkSp | Home |       | PgUp | Enter|Space |
  *                                 |  /   |  /   |------|       |------|   /  |  /   |
@@ -77,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         LT(NUMB, KC_CAPS), KC_A,            KC_S,       KC_D,      KC_F,           KC_G,
         KC_LSPO,           KC_Z,            KC_X,       KC_C,      LT(CRSR, KC_V), LT(MOUS, KC_B), MO(EMAC),
         CTL_T(KC_LBRC),    ALT_T(KC_RBRC),  UK_HASH,    KC_LEFT,   KC_RGHT,
-                                                                                     KC_LBRC,         TG(NUMB),
+                                                                                     TG(NUMB),        KC_LEAD,
                                                                                                       KC_HOME,
                                                                      CTL_T(KC_SPC),  ALT_T(KC_BSPC),  LT(KEYW, KC_END),
         // right hand
@@ -86,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               KC_H,            KC_J,            KC_K,      KC_L,       KC_SCLN,          LT(NUMB, KC_ENT),
              MO(EMAC),        LT(MOUS, KC_N),  LT(CRSR, KC_M),  KC_COMM,   KC_DOT,     KC_SLSH,          KC_RSPC,
                                                  KC_UP,           KC_DOWN,   KC_MINS,    ALT_T(KC_LBRC),   CTL_T(KC_RBRC),
-           TG(NUMB),           KC_INS,
+           KC_LEAD,            KC_INS,
            KC_PGUP,
            LT(KEYW, KC_PGDN),  ALT_T(KC_ENT),   CTL_T(KC_SPC)
     ),
@@ -506,10 +508,52 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 void matrix_init_user(void) {
 };
 
+void send_keystrokes(uint8_t key, ...)
+{
+    va_list vl;
+    va_start(vl, key);
+    while (key != KC_NO) {
+        register_code(key);
+        unregister_code(key);
+        key = va_arg(vl, int);
+    }
+    va_end(vl);
+}
+
+LEADER_EXTERNS();
 
 // Runs constantly in the background, in a loop.
 void matrix_scan_user(void) {
 
+    LEADER_DICTIONARY() {
+        leading = false;
+        leader_end();
+
+        SEQ_THREE_KEYS(KC_G, KC_D, KC_S) {
+            SEND_STRING("git diff --staged");
+        }
+        SEQ_THREE_KEYS(KC_G, KC_L, KC_O) {
+            SEND_STRING("git log --oneline");
+        }
+        SEQ_TWO_KEYS(KC_G, KC_C) {
+            SEND_STRING("git commit -m ''");
+            send_keystrokes(KC_LEFT, KC_NO);
+        }
+        SEQ_TWO_KEYS(KC_G, KC_A) {
+            SEND_STRING("git add .");
+        }
+        SEQ_TWO_KEYS(KC_G, KC_D) {
+            SEND_STRING("git diff");
+        }
+        SEQ_TWO_KEYS(KC_G, KC_L) {
+            SEND_STRING("git log");
+        }
+        SEQ_TWO_KEYS(KC_G, KC_S) {
+            SEND_STRING("git status");
+        }
+    }
+
+    /*
     uint8_t layer = biton32(layer_state);
 
     ergodox_board_led_off();
@@ -531,5 +575,5 @@ void matrix_scan_user(void) {
             // none
             break;
     }
-
+    */
 };
