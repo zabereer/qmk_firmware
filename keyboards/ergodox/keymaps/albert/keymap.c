@@ -548,6 +548,12 @@ void matrix_scan_user(void) {
         SEQ_TWO_KEYS(KC_G, KC_L) {
             SEND_STRING("git log");
         }
+        SEQ_TWO_KEYS(KC_G, KC_F) {
+            SEND_STRING("git fetch");
+        }
+        SEQ_TWO_KEYS(KC_G, KC_P) {
+            SEND_STRING("git pull");
+        }
         SEQ_TWO_KEYS(KC_G, KC_S) {
             SEND_STRING("git status");
         }
