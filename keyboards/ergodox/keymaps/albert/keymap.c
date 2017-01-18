@@ -270,7 +270,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   |       |      |  inc |      |      |                                       |      |      |      |      |      |
  *   `-----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        |      | ecet |       |      |      |
+ *                                        |      |      |       | ecet |      |
  *                                 ,------|------|------|       |------+------+------.
  *                                 |      |      |      |       |      |      |      |
  *                                 |      |      |------|       |------|      |      |
@@ -306,7 +306,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |         |      | emwr |      |      |      |------|           |------|      |w-left|w-down|w-right      |        |
  * |---------+------+------+------+------+------|  ##  |           |  ##  |------+------+------+------+------+--------|
- * |         |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |         |      |      |      |      |      |      |           |      |      |      |w-down|      |      |        |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |       |      |      |      |      |                                       |      |      |      |      |      |
  *   `-----------------------------------'                                       `----------------------------------'
@@ -332,7 +332,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              UM_EMNB,   KC_NO,    KC_NO,          KC_NO,          KC_NO,          KC_NO,     KC_NO,
              KC_NO,     UM_EMUN,  UM_EMRE,        LSFT(KC_UP),    KC_NO,          KC_NO,     KC_NO,
                         KC_NO,    LSFT(KC_LEFT),  LSFT(KC_DOWN),  LSFT(KC_RGHT),  KC_NO,     KC_NO,
-             KC_TRNS,   KC_NO,    KC_NO,          KC_NO,          KC_NO,          KC_NO,     KC_NO,
+             KC_TRNS,   KC_NO,    KC_NO,          LSFT(KC_DOWN),  KC_NO,          KC_NO,     KC_NO,
                                   KC_NO,          KC_NO,          KC_NO,          KC_NO,     KC_NO,
            KC_NO,   KC_NO,
            KC_NO,
