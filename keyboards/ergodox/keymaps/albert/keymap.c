@@ -27,7 +27,7 @@ enum custom_keycodes {
 };
 
 // my macros
-#define UM_ECET   M(0)  // ENT, LCBR, ENT, TAB
+#define UM_ECET   M(0)  // { }
 #define UM_0x     M(1)
 #define UM_PUB    M(2)
 #define UM_PRO    M(3)
@@ -49,6 +49,7 @@ enum custom_keycodes {
 #define UM_EMNB   M(19) // emacs next buffer
 #define UM_GOODN  M(20)
 #define UM_MTCA   M(21)
+#define UM_ECETS  M(22)  // { };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -270,7 +271,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   |       |      |  inc |      |      |                                       |      |      |      |      |      |
  *   `-----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        |      |      |       | ecet |      |
+ *                                        |      |      |       | ecet | ecets|
  *                                 ,------|------|------|       |------+------+------.
  *                                 |      |      |      |       |      |      |      |
  *                                 |      |      |------|       |------|      |      |
@@ -293,7 +294,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
              UM_RHDT,   UM_NAMESP, UM_GOODM,  UM_GOODN,  UM_MTCA,   KC_NO,     KC_NO,
                                    KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
-           UM_ECET,  KC_NO,
+           UM_ECET,  UM_ECETS,
            KC_NO,
            KC_TRNS,  KC_NO,   KC_NO
     ),
@@ -471,6 +472,13 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
                          T(T), T(H), T(A), T(N), T(K), T(S), T(ENT),
                          T(C), T(H), T(E), T(E), T(R), T(S), T(ENT),
                          T(A), T(L), T(B), T(E), T(R), T(T), T(ENT), END);
+        }
+        break;
+    case 22:
+        if (record->event.pressed) {
+            return MACRO(T(ENT), D(LSFT), T(LBRC), U(LSFT), T(ENT),
+                         D(LSFT), T(RBRC), U(LSFT), T(SCLN), T(UP),
+                         T(TAB), END);
         }
         break;
     }
