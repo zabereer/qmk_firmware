@@ -50,6 +50,14 @@ enum custom_keycodes {
 #define UM_GOODN  M(20)
 #define UM_MTCA   M(21)
 #define UM_ECETS  M(22)  // { };
+#define UM_TMPL   M(23)
+#define UM_TYPN   M(24)
+#define UM_CONT   M(25)
+#define UM_BREAK  M(26)
+#define UM_CONST  M(27)
+#define UM_SMILY  M(28)
+#define UM_SADF   M(29)
+#define UM_SCARF  M(30)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -260,13 +268,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 5: Keywords
  *
  * ,---------------------------------------------------.           ,--------------------------------------------------.
- * |         |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |         |      |      | scarf| sadf | smily|      |           |      |      |      |      |      |      |        |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
- * |         |      |      |      |  ret |      |      |           |      |      |      |  prv |  pro | pub  |        |
+ * |         | const|      |      |  ret | tmpl |      |           |      | typen| cont |  prv |  pro | pub  |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |         |      |  str |  obj |      | gitl |------|           |------|      |      |      |      |      |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |         |      |      |  cls |      |      |      |           | rhdt |namesp| goodm| goodn| mtca |      |        |
+ * |         |      |      |  cls |      | break|      |           | rhdt |namesp| goodm| goodn| mtca |      |        |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |       |      |  inc |      |      |                                       |      |      |      |      |      |
  *   `-----------------------------------'                                       `----------------------------------'
@@ -280,17 +288,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [KEYW] = KEYMAP(
         // left hand
-        KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
-        KC_NO,     KC_NO,     KC_NO,     KC_NO,     UM_RET,    KC_NO,     KC_NO,
+        KC_NO,     KC_NO,     KC_NO,     UM_SCARF,  UM_SADF,   UM_SMILY,   KC_NO,
+        KC_NO,     UM_CONST,  KC_NO,     KC_NO,     UM_RET,    UM_TMPL,    KC_NO,
         KC_NO,     KC_NO,     UM_STR,    UM_OBJ,    KC_NO,     UM_GITLOG,
-        KC_NO,     KC_NO,     KC_NO,     UM_CLS,    KC_NO,     KC_NO,     KC_NO,
+        KC_NO,     KC_NO,     KC_NO,     UM_CLS,    KC_NO,     UM_BREAK,   KC_NO,
         KC_NO,     KC_NO,     UM_INC,    KC_NO,     KC_NO,
                                                                    KC_NO,    KC_NO,
                                                                              KC_NO,
                                                           KC_NO,   KC_NO,    KC_TRNS,
         // right hand
              KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
-             KC_NO,     KC_NO,     KC_NO,     UM_PRV,    UM_PRO,    UM_PUB,    KC_NO,
+             KC_NO,     UM_TYPN,   UM_CONT,   UM_PRV,    UM_PRO,    UM_PUB,    KC_NO,
                         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
              UM_RHDT,   UM_NAMESP, UM_GOODM,  UM_GOODN,  UM_MTCA,   KC_NO,     KC_NO,
                                    KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
@@ -479,6 +487,46 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             return MACRO(T(ENT), D(LSFT), T(LBRC), U(LSFT), T(ENT),
                          D(LSFT), T(RBRC), U(LSFT), T(SCLN), T(UP),
                          T(TAB), END);
+        }
+        break;
+    case 23:
+        if (record->event.pressed) {
+            SEND_STRING("template");
+        }
+        break;
+    case 24:
+        if (record->event.pressed) {
+            SEND_STRING("typename");
+        }
+        break;
+    case 25:
+        if (record->event.pressed) {
+            SEND_STRING("continue;");
+        }
+        break;
+    case 26:
+        if (record->event.pressed) {
+            SEND_STRING("break;");
+        }
+        break;
+    case 27:
+        if (record->event.pressed) {
+            SEND_STRING("const ");
+        }
+        break;
+    case 28:
+        if (record->event.pressed) {
+            SEND_STRING(":-)");
+        }
+        break;
+    case 29:
+        if (record->event.pressed) {
+            SEND_STRING(":-(");
+        }
+        break;
+    case 30:
+        if (record->event.pressed) {
+            SEND_STRING("o_o ");
         }
         break;
     }
