@@ -501,12 +501,14 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 25:
         if (record->event.pressed) {
-            SEND_STRING("continue;");
+            SEND_STRING("continue");
+            return MACRO(T(SCLN), END);
         }
         break;
     case 26:
         if (record->event.pressed) {
-            SEND_STRING("break;");
+            SEND_STRING("break");
+            return MACRO(T(SCLN), END);
         }
         break;
     case 27:
@@ -526,7 +528,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 30:
         if (record->event.pressed) {
-            SEND_STRING("o_o ");
+            SEND_STRING("o_o");
         }
         break;
     }
@@ -565,7 +567,7 @@ void matrix_init_user(void) {
 };
 
 enum next_key_down_up {
-    NK_DOWN_UP,
+    NK_DOWN_UP = 0,
     NK_DOWN,
     NK_UP // a bit of a hack, this works as long as NK_UP < KC_A
 };
@@ -582,10 +584,10 @@ void send_keystrokes(uint8_t key, ...)
             switch (nkdu) {
             case NK_DOWN_UP:
                 register_code(key);
-            case NK_DOWN:
+            case NK_UP:
                 unregister_code(key);
                 break;
-            case NK_UP:
+            case NK_DOWN:
                 register_code(key);
             }
             nkdu = NK_DOWN_UP;
