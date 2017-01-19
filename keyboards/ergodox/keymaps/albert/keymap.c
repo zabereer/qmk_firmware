@@ -397,7 +397,9 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     switch(id) {
     case 0: // { }
         if (record->event.pressed) {
-            return MACRO(T(ENT), D(LSFT), T(LBRC), U(LSFT), T(ENT), T(TAB), END);
+            return MACRO(T(ENT), D(LSFT), T(LBRC), U(LSFT), T(ENT),
+                         D(LSFT), T(RBRC), U(LSFT), T(UP),
+                         T(TAB), END);
         }
         break;
     case 1:
@@ -711,3 +713,4 @@ void matrix_scan_user(void) {
     }
     */
 };
+
