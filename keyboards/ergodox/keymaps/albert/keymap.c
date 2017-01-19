@@ -564,13 +564,32 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 void matrix_init_user(void) {
 };
 
+enum next_key_down_up {
+    NK_DOWN_UP,
+    NK_DOWN,
+    NK_UP // a bit of a hack, this works as long as NK_UP < KC_A
+};
+
 void send_keystrokes(uint8_t key, ...)
 {
     va_list vl;
     va_start(vl, key);
+    enum next_key_down_up nkdu = NK_DOWN_UP;
     while (key != KC_NO) {
-        register_code(key);
-        unregister_code(key);
+        if (key < KC_A) {
+            nkdu = key;
+        } else {
+            switch (nkdu) {
+            case NK_DOWN_UP:
+                register_code(key);
+            case NK_DOWN:
+                unregister_code(key);
+                break;
+            case NK_UP:
+                register_code(key);
+            }
+            nkdu = NK_DOWN_UP;
+        }
         key = va_arg(vl, int);
     }
     va_end(vl);
@@ -612,6 +631,12 @@ void matrix_scan_user(void) {
         SEQ_TWO_KEYS(KC_G, KC_C) {
             SEND_STRING("git commit -m ''");
             send_keystrokes(KC_LEFT, KC_NO);
+        }
+        SEQ_ONE_KEY(KC_SLSH) {
+            send_keystrokes(KC_SLSH, NK_DOWN, KC_LSFT, KC_8, KC_8, NK_UP, KC_LSFT, KC_ENT,
+                            NK_DOWN, KC_LSFT, KC_8, NK_UP, KC_LSFT, KC_ENT,
+                            NK_DOWN, KC_LSFT, KC_8, NK_UP, KC_LSFT, KC_SLSH, KC_UP, KC_END, KC_SPC,
+                            KC_NO);
         }
     }
 
