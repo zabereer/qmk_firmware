@@ -545,7 +545,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 27:
         if (record->event.pressed) {
-            SEND_STRING("const ");
+            SEND_STRING("const");
         }
         break;
     case 28:
