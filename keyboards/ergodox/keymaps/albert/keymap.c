@@ -58,6 +58,7 @@ enum custom_keycodes {
 #define UM_SMILY  M(28)
 #define UM_SADF   M(29)
 #define UM_SCARF  M(30)
+#define UM_DECAF  M(31)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -268,7 +269,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 5: Keywords
  *
  * ,---------------------------------------------------.           ,--------------------------------------------------.
- * |         |      |      | scarf| sadf | smily|      |           |      |      |      |      |      |      |        |
+ * |         |      |      | scarf| sadf | smily|      |           |      | decaf|      |      |      |      |        |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
  * |         | const|      |      |  ret | tmpl |      |           |      | typen| cont |  prv |  pro | pub  |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -297,7 +298,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                              KC_NO,
                                                           KC_NO,   KC_NO,    KC_TRNS,
         // right hand
-             KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
+             KC_NO,     UM_DECAF,  KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
              KC_NO,     UM_TYPN,   UM_CONT,   UM_PRV,    UM_PRO,    UM_PUB,    KC_NO,
                         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
              UM_RHDT,   UM_NAMESP, UM_GOODM,  UM_GOODN,  UM_MTCA,   KC_NO,     KC_NO,
@@ -352,6 +353,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 const uint16_t PROGMEM fn_actions[] = {
     [1] = ACTION_LAYER_TAP_TOGGLE(SYMB)                // FN1 - Momentary Layer 1 (Symbols)
 };
+
+enum next_key_down_up {
+    NK_DOWN_UP,
+    NK_DOWN,
+    NK_UP // a bit of a hack, this works as long as NK_UP < KC_A
+};
+
+void send_keystrokes(uint8_t key, ...)
+{
+    va_list vl;
+    va_start(vl, key);
+    enum next_key_down_up nkdu = NK_DOWN_UP;
+    while (key != KC_NO) {
+        if (key < KC_A) {
+            nkdu = key;
+        } else {
+            switch (nkdu) {
+            case NK_DOWN_UP:
+                register_code(key);
+            case NK_UP:
+                unregister_code(key);
+                break;
+            case NK_DOWN:
+                register_code(key);
+            }
+            nkdu = NK_DOWN_UP;
+        }
+        key = va_arg(vl, int);
+    }
+    va_end(vl);
+}
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
@@ -528,12 +560,17 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 30:
         if (record->event.pressed) {
-            SEND_STRING("o_o");
+            send_keystrokes(NK_DOWN, KC_LSFT, KC_8, KC_MINS, KC_8, NK_UP, KC_LSFT, KC_NO);
+        }
+        break;
+    case 31:
+        if (record->event.pressed) {
+            send_keystrokes(NK_DOWN, KC_LSFT, KC_C, KC_9, KC_MINS, KC_9, NK_UP, KC_LSFT, KC_NO);
         }
         break;
     }
     return MACRO_NONE;
-};
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -565,37 +602,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // Runs just one time when the keyboard initializes.
 void matrix_init_user(void) {
 };
-
-enum next_key_down_up {
-    NK_DOWN_UP = 0,
-    NK_DOWN,
-    NK_UP // a bit of a hack, this works as long as NK_UP < KC_A
-};
-
-void send_keystrokes(uint8_t key, ...)
-{
-    va_list vl;
-    va_start(vl, key);
-    enum next_key_down_up nkdu = NK_DOWN_UP;
-    while (key != KC_NO) {
-        if (key < KC_A) {
-            nkdu = key;
-        } else {
-            switch (nkdu) {
-            case NK_DOWN_UP:
-                register_code(key);
-            case NK_UP:
-                unregister_code(key);
-                break;
-            case NK_DOWN:
-                register_code(key);
-            }
-            nkdu = NK_DOWN_UP;
-        }
-        key = va_arg(vl, int);
-    }
-    va_end(vl);
-}
 
 LEADER_EXTERNS();
 
