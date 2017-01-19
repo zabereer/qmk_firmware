@@ -59,6 +59,10 @@ enum custom_keycodes {
 #define UM_SADF   M(29)
 #define UM_SCARF  M(30)
 #define UM_DECAF  M(31)
+#define UM_OPER   M(32)
+#define UM_NULP   M(33)
+#define UM_EXTR   M(34)
+#define UM_VIRT   M(35)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -271,11 +275,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,---------------------------------------------------.           ,--------------------------------------------------.
  * |         |      |      | scarf| sadf | smily|      |           |      | decaf|      |      |      |      |        |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
- * |         | const|      |      |  ret | tmpl |      |           |      | typen| cont |  prv |  pro | pub  |        |
+ * |         | const|      | oper |  ret | tmpl |      |           |      | typen| cont |  prv |  pro | pub  |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |         |      |  str |  obj |      | gitl |------|           |------|      |      |      |      |      |        |
+ * |         |      |  str |  obj |      | gitl |------|           |------|      |      |      | nulp |      |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |         |      |      |  cls |      | break|      |           | rhdt |namesp| goodm| goodn| mtca |      |        |
+ * |         |      | extr |  cls | virt | break|      |           | rhdt |namesp| goodm| goodn| mtca |      |        |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |       |      |  inc |      |      |                                       |      |      |      |      |      |
  *   `-----------------------------------'                                       `----------------------------------'
@@ -290,9 +294,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [KEYW] = KEYMAP(
         // left hand
         KC_NO,     KC_NO,     KC_NO,     UM_SCARF,  UM_SADF,   UM_SMILY,   KC_NO,
-        KC_NO,     UM_CONST,  KC_NO,     KC_NO,     UM_RET,    UM_TMPL,    KC_NO,
+        KC_NO,     UM_CONST,  KC_NO,     UM_OPER,   UM_RET,    UM_TMPL,    KC_NO,
         KC_NO,     KC_NO,     UM_STR,    UM_OBJ,    KC_NO,     UM_GITLOG,
-        KC_NO,     KC_NO,     KC_NO,     UM_CLS,    KC_NO,     UM_BREAK,   KC_NO,
+        KC_NO,     KC_NO,     UM_EXTR,   UM_CLS,    UM_VIRT,   UM_BREAK,   KC_NO,
         KC_NO,     KC_NO,     UM_INC,    KC_NO,     KC_NO,
                                                                    KC_NO,    KC_NO,
                                                                              KC_NO,
@@ -300,7 +304,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // right hand
              KC_NO,     UM_DECAF,  KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
              KC_NO,     UM_TYPN,   UM_CONT,   UM_PRV,    UM_PRO,    UM_PUB,    KC_NO,
-                        KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
+                        KC_NO,     KC_NO,     KC_NO,     UM_NULP,   KC_NO,     KC_NO,
              UM_RHDT,   UM_NAMESP, UM_GOODM,  UM_GOODN,  UM_MTCA,   KC_NO,     KC_NO,
                                    KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
            UM_ECET,  UM_ECETS,
@@ -566,6 +570,26 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case 31:
         if (record->event.pressed) {
             send_keystrokes(NK_DOWN, KC_LSFT, KC_C, KC_9, KC_MINS, KC_9, NK_UP, KC_LSFT, KC_NO);
+        }
+        break;
+    case 32:
+        if (record->event.pressed) {
+            SEND_STRING("operator");
+        }
+        break;
+    case 33:
+        if (record->event.pressed) {
+            SEND_STRING("nullptr");
+        }
+        break;
+    case 34:
+        if (record->event.pressed) {
+            SEND_STRING("extern");
+        }
+        break;
+    case 35:
+        if (record->event.pressed) {
+            SEND_STRING("virtual");
         }
         break;
     }
