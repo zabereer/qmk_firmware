@@ -664,6 +664,9 @@ void matrix_scan_user(void) {
             SEND_STRING("git commit -m ''");
             send_keystrokes(KC_LEFT, KC_NO);
         }
+        SEQ_THREE_KEYS(KC_G, KC_C, KC_A) {
+            SEND_STRING("git commit --amend");
+        }
         SEQ_ONE_KEY(KC_SLSH) {
             send_keystrokes(KC_SLSH, NK_DOWN, KC_LSFT, KC_8, KC_8, NK_UP, KC_LSFT, KC_ENT,
                             NK_DOWN, KC_LSFT, KC_8, NK_UP, KC_LSFT, KC_ENT,
