@@ -19,13 +19,6 @@
 #define KEYW 5 // keyword macros
 #define EMAC 6 // emacs
 
-enum custom_keycodes {
-  PLACEHOLDER = SAFE_RANGE, // can always be here
-  EPRM,
-  VRSN,
-  RGB_SLD
-};
-
 // my macros
 #define UM_ECET   M(0)  // { }
 #define UM_0x     M(1)
@@ -356,10 +349,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 };
 
-const uint16_t PROGMEM fn_actions[] = {
-    [1] = ACTION_LAYER_TAP_TOGGLE(SYMB)                // FN1 - Momentary Layer 1 (Symbols)
-};
-
 enum next_key_down_up {
     NK_DOWN_UP,
     NK_DOWN,
@@ -608,37 +597,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     }
     return MACRO_NONE;
-}
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    // dynamically generate these.
-    case EPRM:
-      if (record->event.pressed) {
-        eeconfig_init();
-      }
-      return false;
-      break;
-    case VRSN:
-      if (record->event.pressed) {
-        SEND_STRING (QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
-      }
-      return false;
-      break;
-    case RGB_SLD:
-      if (record->event.pressed) {
-        #ifdef RGBLIGHT_ENABLE
-          rgblight_mode(1);
-        #endif
-      }
-      return false;
-      break;
-  }
-  return true;
-}
-
-// Runs just one time when the keyboard initializes.
-void matrix_init_user(void) {
 }
 
 LEADER_EXTERNS();
