@@ -63,6 +63,8 @@ enum custom_keycodes {
 #define UM_NULP   M(33)
 #define UM_EXTR   M(34)
 #define UM_VIRT   M(35)
+#define UM_EMFB   M(36) // emacs font bigger
+#define UM_EMFS   M(37) // emacs font smaller
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -314,11 +316,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 6: emacs
  *
  * ,---------------------------------------------------.           ,--------------------------------------------------.
- * |         |      |      |      |      |      | empf |           | emnf |      |      |      |      |      |        |
+ * |         |      |      |      |      |      | empb |           | emnb | emfs | emfb |      |      |      |        |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
  * |         | emtr |      |      |      |      |      |           |      | emun | emre | w-up |      |      |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |         |      | emwr |      |      |      |------|           |------|      |w-left|w-down|w-right      |        |
+ * |         |      | emwr |      |      |      |------|           |------|      |w-left|w-down|w-rght|      |        |
  * |---------+------+------+------+------+------|  ##  |           |  ##  |------+------+------+------+------+--------|
  * |         |      |      |      |      |      |      |           |      |      |      |w-down|      |      |        |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
@@ -343,7 +345,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                             KC_NO,
                                                           KC_NO,   KC_NO,   KC_NO,
         // right hand
-             UM_EMNB,   KC_NO,    KC_NO,          KC_NO,          KC_NO,          KC_NO,     KC_NO,
+             UM_EMNB,   UM_EMFS,  UM_EMFB,        KC_NO,          KC_NO,          KC_NO,     KC_NO,
              KC_NO,     UM_EMUN,  UM_EMRE,        LSFT(KC_UP),    KC_NO,          KC_NO,     KC_NO,
                         KC_NO,    LSFT(KC_LEFT),  LSFT(KC_DOWN),  LSFT(KC_RGHT),  KC_NO,     KC_NO,
              KC_TRNS,   KC_NO,    KC_NO,          LSFT(KC_DOWN),  KC_NO,          KC_NO,     KC_NO,
@@ -393,7 +395,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
   // MACRODOWN only works in this function
     switch(id) {
-    case 0:
+    case 0: // { }
         if (record->event.pressed) {
             return MACRO(T(ENT), D(LSFT), T(LBRC), U(LSFT), T(ENT), T(TAB), END);
         }
@@ -418,7 +420,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             SEND_STRING("private");
         }
         break;
-    case 5:
+    case 5: // class
         if (record->event.pressed) {
             return MACRO(T(C), T(L), T(A), T(S), T(S), T(ENT),
                          D(LSFT), T(LBRC), U(LSFT), T(ENT),
@@ -431,7 +433,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
                          T(END), T(SPC), END);
         }
         break;
-    case 6:
+    case 6: // struct
         if (record->event.pressed) {
             return MACRO(T(S), T(T), T(R), T(U), T(C), T(T), T(ENT),
                          D(LSFT), T(LBRC), U(LSFT), T(ENT),
@@ -445,7 +447,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             SEND_STRING("return");
         }
         break;
-    case 8:
+    case 8: // #include
         if (record->event.pressed) {
             return MACRO(T(NONUS_HASH), T(I), T(N), T(C), T(L), T(U), T(D), T(E), END);
         }
@@ -475,32 +477,32 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             SEND_STRING("/opt/rh/devtoolset-4/root/usr/bin/");
         }
         break;
-    case 14:
+    case 14: // emacs toggle read-only
         if (record->event.pressed) {
             return MACRO(D(LCTL), T(X), T(Q), U(LCTL), END);
         }
         break;
-    case 15:
+    case 15: // emacs write buffer
         if (record->event.pressed) {
             return MACRO(D(LCTL), T(X), T(S), U(LCTL), END);
         }
         break;
-    case 16:
+    case 16: // emacs undo
         if (record->event.pressed) {
             return MACRO(D(LCTL), D(LSFT), T(MINS), U(LSFT), U(LCTL), END);
         }
         break;
-    case 17:
+    case 17: // emacs redo
         if (record->event.pressed) {
             return MACRO(D(LALT), D(LSFT), T(MINS), U(LSFT), U(LALT), END);
         }
         break;
-    case 18:
+    case 18: // emacs previous buffer
         if (record->event.pressed) {
             return MACRO(D(LCTL), T(X), U(LCTL), T(LEFT), END);
         }
         break;
-    case 19:
+    case 19: // emacs next buffer
         if (record->event.pressed) {
             return MACRO(D(LCTL), T(X), U(LCTL), T(RGHT), END);
         }
@@ -510,7 +512,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             SEND_STRING("good night");
         }
         break;
-    case 21:
+    case 21: // email sig (I know, could be done in outlook, but outlook sucks)
         if (record->event.pressed) {
             return MACRO(T(M), T(A), T(N), T(Y), T(SPC),
                          T(T), T(H), T(A), T(N), T(K), T(S), T(ENT),
@@ -518,7 +520,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
                          T(A), T(L), T(B), T(E), T(R), T(T), T(ENT), END);
         }
         break;
-    case 22:
+    case 22: // { };
         if (record->event.pressed) {
             return MACRO(T(ENT), D(LSFT), T(LBRC), U(LSFT), T(ENT),
                          D(LSFT), T(RBRC), U(LSFT), T(SCLN), T(UP),
@@ -562,12 +564,12 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             SEND_STRING(":-(");
         }
         break;
-    case 30:
+    case 30: // dazed
         if (record->event.pressed) {
             send_keystrokes(NK_DOWN, KC_LSFT, KC_8, KC_MINS, KC_8, NK_UP, KC_LSFT, KC_NO);
         }
         break;
-    case 31:
+    case 31: // decaf
         if (record->event.pressed) {
             send_keystrokes(NK_DOWN, KC_LSFT, KC_C, KC_9, KC_MINS, KC_9, NK_UP, KC_LSFT, KC_NO);
         }
@@ -590,6 +592,16 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case 35:
         if (record->event.pressed) {
             SEND_STRING("virtual");
+        }
+        break;
+    case 36: // emacs font smaller
+        if (record->event.pressed) {
+            return MACRO(D(LCTL), T(X), T(EQL), U(LCTL), END);
+        }
+        break;
+    case 37:  // emacs font bigger
+        if (record->event.pressed) {
+            return MACRO(D(LCTL), T(X), T(MINS), U(LCTL), END);
         }
         break;
     }
