@@ -563,7 +563,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 31: // decaf
         if (record->event.pressed) {
-            send_keystrokes(NK_DOWN, KC_LSFT, KC_C, KC_9, KC_MINS, KC_9, NK_UP, KC_LSFT, KC_NO);
+            send_keystrokes(NK_DOWN, KC_LSFT, KC_C, KC_9, KC_MINS, KC_0, NK_UP, KC_LSFT, KC_NO);
         }
         break;
     case 32:
