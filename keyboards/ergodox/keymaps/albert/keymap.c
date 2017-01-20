@@ -58,6 +58,7 @@
 #define UM_VIRT   M(35)
 #define UM_EMFB   M(36) // emacs font bigger
 #define UM_EMFS   M(37) // emacs font smaller
+#define UM_VOLAT  M(38)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -270,7 +271,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,---------------------------------------------------.           ,--------------------------------------------------.
  * |         |      |      | scarf| sadf | smily|      |           |      | decaf|      |      |      |      |        |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
- * |         | const|      | oper |  ret | tmpl |      |           |      | typen| cont |  prv |  pro | pub  |        |
+ * |         | const| volat| oper |  ret | tmpl |      |           |      | typen| cont |  prv |  pro | pub  |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |         |      |  str |  obj |      | gitl |------|           |------|      |      |      | nulp |      |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -289,7 +290,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [KEYW] = KEYMAP(
         // left hand
         KC_NO,     KC_NO,     KC_NO,     UM_SCARF,  UM_SADF,   UM_SMILY,   KC_NO,
-        KC_NO,     UM_CONST,  KC_NO,     UM_OPER,   UM_RET,    UM_TMPL,    KC_NO,
+        KC_NO,     UM_CONST,  UM_VOLAT,  UM_OPER,   UM_RET,    UM_TMPL,    KC_NO,
         KC_NO,     KC_NO,     UM_STR,    UM_OBJ,    KC_NO,     UM_GITLOG,
         KC_NO,     KC_NO,     UM_EXTR,   UM_CLS,    UM_VIRT,   UM_BREAK,   KC_NO,
         KC_NO,     KC_NO,     UM_INC,    KC_NO,     KC_NO,
@@ -595,6 +596,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             return MACRO(D(LCTL), T(X), T(MINS), U(LCTL), END);
         }
         break;
+    case 38:
+        if (record->event.pressed) {
+            SEND_STRING("volatile");
+        }
+        break;
     }
     return MACRO_NONE;
 }
@@ -614,8 +620,14 @@ void matrix_scan_user(void) {
         SEQ_TWO_KEYS(KC_G, KC_D) {
             SEND_STRING("git diff");
         }
+        SEQ_THREE_KEYS(KC_G, KC_D, KC_S) {
+            SEND_STRING("git diff --staged");
+        }
         SEQ_TWO_KEYS(KC_G, KC_L) {
             SEND_STRING("git log");
+        }
+        SEQ_THREE_KEYS(KC_G, KC_L, KC_O) {
+            SEND_STRING("git log --oneline");
         }
         SEQ_TWO_KEYS(KC_G, KC_F) {
             SEND_STRING("git fetch");
@@ -626,12 +638,6 @@ void matrix_scan_user(void) {
         SEQ_TWO_KEYS(KC_G, KC_S) {
             SEND_STRING("git status");
         }
-        SEQ_THREE_KEYS(KC_G, KC_D, KC_S) {
-            SEND_STRING("git diff --staged");
-        }
-        SEQ_THREE_KEYS(KC_G, KC_L, KC_O) {
-            SEND_STRING("git log --oneline");
-        }
         SEQ_TWO_KEYS(KC_G, KC_C) {
             SEND_STRING("git commit -m ''");
             send_keystrokes(KC_LEFT, KC_NO);
@@ -639,6 +645,24 @@ void matrix_scan_user(void) {
         SEQ_THREE_KEYS(KC_G, KC_C, KC_A) {
             SEND_STRING("git commit --amend");
         }
+
+        SEQ_TWO_KEYS(KC_C, KC_C) {
+            SEND_STRING("const_cast<>");
+            send_keystrokes(KC_LEFT, KC_NO);
+        }
+        SEQ_TWO_KEYS(KC_C, KC_D) {
+            SEND_STRING("dynamic_cast<>");
+            send_keystrokes(KC_LEFT, KC_NO);
+        }
+        SEQ_TWO_KEYS(KC_C, KC_R) {
+            SEND_STRING("reinterpret_cast<>");
+            send_keystrokes(KC_LEFT, KC_NO);
+        }
+        SEQ_TWO_KEYS(KC_C, KC_S) {
+            SEND_STRING("static_cast<>");
+            send_keystrokes(KC_LEFT, KC_NO);
+        }
+
         SEQ_ONE_KEY(KC_SLSH) {
             send_keystrokes(KC_SLSH, NK_DOWN, KC_LSFT, KC_8, KC_8, NK_UP, KC_LSFT, KC_ENT,
                             NK_DOWN, KC_LSFT, KC_8, NK_UP, KC_LSFT, KC_ENT,
