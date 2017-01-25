@@ -632,6 +632,9 @@ void matrix_scan_user(void) {
         SEQ_TWO_KEYS(KC_G, KC_F) {
             SEND_STRING("git fetch");
         }
+        SEQ_TWO_KEYS(KC_G, KC_O) {
+            SEND_STRING("git checkout");
+        }
         SEQ_TWO_KEYS(KC_G, KC_P) {
             SEND_STRING("git pull");
         }
@@ -670,19 +673,23 @@ void matrix_scan_user(void) {
                             KC_NO);
         }
 
-        SEQ_THREE_KEYS(KC_G, KC_C, KC_A) {
+        SEQ_THREE_KEYS(KC_T, KC_S, KC_S) {
             send_keystrokes(KC_T, KC_M, KC_U, KC_X, KC_ENT, KC_NO);
+            _delay_ms(500);
             SEND_STRING("cd /space/apretori/EMS");
             send_keystrokes(KC_ENT, KC_F12, KC_COMM, NK_DOWN, KC_LCTL, KC_A, KC_K, NK_UP, KC_LCTL, KC_NO);
             SEND_STRING("EMS source");
             send_keystrokes(KC_ENT, KC_F12, NK_DOWN, KC_LSFT, KC_5, NK_UP, KC_LSFT, KC_NO);
+            _delay_ms(500);
             SEND_STRING("cd /space/apretori/EMS");
 
             send_keystrokes(KC_ENT, KC_F12, KC_C, KC_NO);
+            _delay_ms(500);
             SEND_STRING("cd /space/apretori/EMS2");
             send_keystrokes(KC_ENT, KC_F12, KC_COMM, NK_DOWN, KC_LCTL, KC_A, KC_K, NK_UP, KC_LCTL, KC_NO);
             SEND_STRING("EMS2 source");
             send_keystrokes(KC_ENT, KC_F12, NK_DOWN, KC_LSFT, KC_5, NK_UP, KC_LSFT, KC_NO);
+            _delay_ms(500);
             SEND_STRING("cd /space/apretori/EMS2");
 
             send_keystrokes(KC_ENT, KC_F12, KC_C, KC_NO);
@@ -698,13 +705,14 @@ void matrix_scan_user(void) {
             SEND_STRING("client");
 
             send_keystrokes(KC_ENT, KC_F12, KC_C, KC_NO);
+            _delay_ms(500);
             SEND_STRING("cd /space/apretori/ems/config");
             send_keystrokes(KC_ENT, KC_F12, KC_COMM, NK_DOWN, KC_LCTL, KC_A, KC_K, NK_UP, KC_LCTL, KC_NO);
             SEND_STRING("config");
             send_keystrokes(KC_ENT, KC_F12, NK_DOWN, KC_LSFT, KC_5, NK_UP, KC_LSFT, KC_NO);
+            _delay_ms(500);
             SEND_STRING("cd /space/apretori/ems/dbcache");
             send_keystrokes(KC_ENT, KC_NO);
         }
     }
 }
-
