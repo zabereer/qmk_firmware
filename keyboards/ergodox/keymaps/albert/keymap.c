@@ -632,6 +632,9 @@ void matrix_scan_user(void) {
         SEQ_TWO_KEYS(KC_G, KC_F) {
             SEND_STRING("git fetch");
         }
+        SEQ_THREE_KEYS(KC_G, KC_F, KC_A) {
+            SEND_STRING("git fetch --all");
+        }
         SEQ_TWO_KEYS(KC_G, KC_O) {
             SEND_STRING("git checkout");
         }
