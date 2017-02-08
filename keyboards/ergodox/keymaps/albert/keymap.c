@@ -59,6 +59,7 @@
 #define UM_EMFB   M(36) // emacs font bigger
 #define UM_EMFS   M(37) // emacs font smaller
 #define UM_VOLAT  M(38)
+#define UM_EMIND  M(39) // emacs indent region
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -316,7 +317,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |         |      | emwr |      |      |      |------|           |------|      |w-left|w-down|w-rght|      |        |
  * |---------+------+------+------+------+------|  ##  |           |  ##  |------+------+------+------+------+--------|
- * |         |      |      |      |      |      |      |           |      |      |      |w-down|      |      |        |
+ * |         | emind|      |      |      |      |      |           |      |      |      |w-down|      |      |        |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |       |      |      |      |      |                                       |      |      |      |      |      |
  *   `-----------------------------------'                                       `----------------------------------'
@@ -333,7 +334,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     UM_EMPB,
         KC_NO,     UM_EMTR,   KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
         KC_NO,     KC_NO,     UM_EMWR,   KC_NO,     KC_NO,     KC_NO,
-        KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_TRNS,
+        KC_NO,     UM_EMIND,  KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_TRNS,
         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
                                                                    KC_NO,   KC_NO,
                                                                             KC_NO,
@@ -601,6 +602,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             SEND_STRING("volatile");
         }
         break;
+    case 39: // emacs indent region
+        if (record->event.pressed) {
+            return MACRO(D(LCTL), D(LALT), T(NONUS_BSLASH), U(LALT), U(LCTL), END);
+        }
+        break;
     }
     return MACRO_NONE;
 }
@@ -634,6 +640,15 @@ void matrix_scan_user(void) {
         }
         SEQ_THREE_KEYS(KC_G, KC_F, KC_A) {
             SEND_STRING("git fetch --all");
+        }
+        SEQ_THREE_KEYS(KC_G, KC_R, KC_A) {
+            SEND_STRING("git branch --all");
+        }
+        SEQ_THREE_KEYS(KC_G, KC_R, KC_C) {
+            SEND_STRING("git branch --contains");
+        }
+        SEQ_FOUR_KEYS(KC_G, KC_R, KC_A, KC_C) {
+            SEND_STRING("git branch --all --contains");
         }
         SEQ_TWO_KEYS(KC_G, KC_O) {
             SEND_STRING("git checkout");
