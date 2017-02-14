@@ -60,6 +60,7 @@
 #define UM_EMFS   M(37) // emacs font smaller
 #define UM_VOLAT  M(38)
 #define UM_EMIND  M(39) // emacs indent region
+#define UM_EMKILL M(40) // emacs kill buffer
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -315,7 +316,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
  * |         | emtr |      |      |      |      |      |           |      | emun | emre | w-up |      |      |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |         |      | emwr |      |      |      |------|           |------|      |w-left|w-down|w-rght|      |        |
+ * |         |      | emwr |      |      |      |------|           |------|      |w-left|emkill|w-rght|      |        |
  * |---------+------+------+------+------+------|  ##  |           |  ##  |------+------+------+------+------+--------|
  * |         | emind|      |      |      |      |      |           |      |      |      |w-down|      |      |        |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
@@ -342,7 +343,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // right hand
              UM_EMNB,   UM_EMFS,  UM_EMFB,        KC_NO,          KC_NO,          KC_NO,     KC_NO,
              KC_NO,     UM_EMUN,  UM_EMRE,        LSFT(KC_UP),    KC_NO,          KC_NO,     KC_NO,
-                        KC_NO,    LSFT(KC_LEFT),  LSFT(KC_DOWN),  LSFT(KC_RGHT),  KC_NO,     KC_NO,
+                        KC_NO,    LSFT(KC_LEFT),  UM_EMKILL,      LSFT(KC_RGHT),  KC_NO,     KC_NO,
              KC_TRNS,   KC_NO,    KC_NO,          LSFT(KC_DOWN),  KC_NO,          KC_NO,     KC_NO,
                                   KC_NO,          KC_NO,          KC_NO,          KC_NO,     KC_NO,
            KC_NO,   KC_NO,
@@ -605,6 +606,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case 39: // emacs indent region
         if (record->event.pressed) {
             return MACRO(D(LCTL), D(LALT), T(NONUS_BSLASH), U(LALT), U(LCTL), END);
+        }
+        break;
+    case 40:  // emacs kill buffer
+        if (record->event.pressed) {
+            return MACRO(D(LCTL), T(X), U(LCTL), T(K), END);
         }
         break;
     }
