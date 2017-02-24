@@ -61,6 +61,7 @@
 #define UM_VOLAT  M(38)
 #define UM_EMIND  M(39) // emacs indent region
 #define UM_EMKILL M(40) // emacs kill buffer
+#define UM_WINK   M(41)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -271,7 +272,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 5: Keywords
  *
  * ,---------------------------------------------------.           ,--------------------------------------------------.
- * |         |      |      | scarf| sadf | smily|      |           |      | decaf|      |      |      |      |        |
+ * |         |      | scarf| sadf | wink | smily|      |           |      | decaf|      |      |      |      |        |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
  * |         | const| volat| oper |  ret | tmpl |      |           |      | typen| cont |  prv |  pro | pub  |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -291,7 +292,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [KEYW] = KEYMAP(
         // left hand
-        KC_NO,     KC_NO,     KC_NO,     UM_SCARF,  UM_SADF,   UM_SMILY,   KC_NO,
+        KC_NO,     KC_NO,     UM_SCARF,  UM_SADF,   UM_WINK,   UM_SMILY,   KC_NO,
         KC_NO,     UM_CONST,  UM_VOLAT,  UM_OPER,   UM_RET,    UM_TMPL,    KC_NO,
         KC_NO,     KC_NO,     UM_STR,    UM_OBJ,    KC_NO,     UM_GITLOG,
         KC_NO,     KC_NO,     UM_EXTR,   UM_CLS,    UM_VIRT,   UM_BREAK,   KC_NO,
@@ -611,6 +612,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case 40:  // emacs kill buffer
         if (record->event.pressed) {
             return MACRO(D(LCTL), T(X), U(LCTL), T(K), END);
+        }
+        break;
+    case 41:
+        if (record->event.pressed) {
+            SEND_STRING(";-)");
         }
         break;
     }
