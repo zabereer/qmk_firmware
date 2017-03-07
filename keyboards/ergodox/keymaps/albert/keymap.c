@@ -117,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|  ##  |           |  ##  |------+------+------+------+------+--------|
  * |   ##   |   \  |   |  |   `  |   -  |   /  |      |           |      |   [  |   ]  |   <  |   >  |   ?  |   ##   |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |  ##  |  ##  |  ##  |  ##  |  ##  |                                       |  ##  |  ##  |  ##  |  ##  |  ##  |
+ *   |  (   |   )  |  ##  |  ##  |  ##  |                                       |  ##  |  ##  |  ##  |   (  |   )  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |  ##  |  ##  |       |  ##  |  ##  |
@@ -129,11 +129,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [SYMB] = KEYMAP(
         // left hand
-        KC_TRNS,   KC_F1,       KC_F2,       KC_F3,       KC_F4,          KC_F5,       KC_TRNS,
-        KC_TRNS,   KC_EXLM,     LSFT(KC_2),  LSFT(KC_3),  LSFT(KC_4),     LSFT(KC_5),  KC_TRNS,
-        KC_TRNS,   LSFT(KC_6),  LSFT(KC_7),  LSFT(KC_8),  LSFT(KC_MINS),  UK_HASH,
-        KC_TRNS,   UK_BSLS,     UK_PIPE,     KC_GRV,      KC_MINS,        KC_SLSH,     KC_TRNS,
-        KC_TRNS,   KC_TRNS,     KC_TRNS,     KC_TRNS,     KC_TRNS,
+        KC_TRNS,    KC_F1,       KC_F2,       KC_F3,       KC_F4,          KC_F5,       KC_TRNS,
+        KC_TRNS,    KC_EXLM,     LSFT(KC_2),  LSFT(KC_3),  LSFT(KC_4),     LSFT(KC_5),  KC_TRNS,
+        KC_TRNS,    LSFT(KC_6),  LSFT(KC_7),  LSFT(KC_8),  LSFT(KC_MINS),  UK_HASH,
+        KC_TRNS,    UK_BSLS,     UK_PIPE,     KC_GRV,      KC_MINS,        KC_SLSH,     KC_TRNS,
+        LSFT(KC_9), LSFT(KC_0),  KC_TRNS,     KC_TRNS,     KC_TRNS,
                                                                             KC_TRNS,   KC_TRNS,
                                                                                        KC_TRNS,
                                                                  KC_TRNS,   KC_TRNS,   KC_TRNS,
@@ -142,7 +142,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_TRNS,   KC_PLUS,     KC_MINS,     KC_EQL,         LSFT(KC_QUOT),  LSFT(UK_HASH),  KC_F12,
                         KC_LCBR,     KC_RCBR,     KC_SCLN,        KC_QUOT,        UK_HASH,        KC_TRNS,
              KC_TRNS,   KC_LBRC,     KC_RBRC,     LSFT(KC_COMM),  LSFT(KC_DOT),   LSFT(KC_SLSH),  KC_TRNS,
-                                     KC_TRNS,     KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+                                     KC_TRNS,     KC_TRNS,        KC_TRNS,        LSFT(KC_9),     LSFT(KC_0),
            KC_TRNS,   KC_TRNS,
            KC_TRNS,
            KC_TRNS,   KC_TRNS,  KC_TRNS
