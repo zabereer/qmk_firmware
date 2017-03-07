@@ -25,7 +25,7 @@ Double hashes (`##`) indicate transparent keys (`KC_TRNS`) and blanks indicate n
 |--------|------|------|------|------|------|      |           |      |------|------|------|------|------|--------|
 | Caps/L2|   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  |Enter/L2|
 |--------|------|------|------|------|------|  L6  |           |  L6  |------|------|------|------|------|--------|
-| LSft/( |   Z  |   X  |   C  | V/L3 | B/L4 |      |           |      | N/L4 | M/L3 |   ,  |   .  |   /  | RSft/) |
+| LSft   |   Z  |   X  |   C  | V/L3 | B/L4 |      |           |      | N/L4 | M/L3 |   ,  |   .  |   /  | RSft   |
 `--------|------|------|------|------|-------------'           `-------------|------|------|------|------|--------'
   |Ctrl/[| Alt/]|   #  | Left |Right |                                       |  Up  | Down |   -  | Alt/[|Ctrl/]|
   `----------------------------------'                                       `----------------------------------'
@@ -38,7 +38,7 @@ Double hashes (`##`) indicate transparent keys (`KC_TRNS`) and blanks indicate n
                                 `--------------------'       `--------------------'
 ```
 
-Space Cadet shift is enabled. Ctrl and Alt doubles up as normal keys when tapped.  
+Ctrl and Alt doubles up as normal keys when tapped.  
 SfLt and SfRt sends Shift + left and Shift + Right respectively - for use with emacs with `windmove-default-keybindings`.  
 Caps and Enter may be held down to activate layer 2 (hexadecimal number pad).  
 Please see `matrix_scan_user` function in `keymap.c` for list of commands available via `lead` key.
