@@ -63,6 +63,7 @@
 #define UM_EMKILL M(40) // emacs kill buffer
 #define UM_WINK   M(41)
 #define UM_EMDW   M(42) // emacs delete window
+#define UM_EMSB   M(43) // emacs select buffer
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -320,7 +321,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |         |      | emwr |      |      |      |------|           |------|      |w-left|emkill|w-rght|      |        |
  * |---------+------+------+------+------+------|  ##  |           |  ##  |------+------+------+------+------+--------|
- * |         | emind|      |      |      |      |      |           |      |      |      |w-down|      |      |        |
+ * |         | emind|      |      |      | emsb |      |           |      |      |      |w-down|      |      |        |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |       |      |      |      |      |                                       |      |      |      |      |      |
  *   `-----------------------------------'                                       `----------------------------------'
@@ -337,7 +338,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     UM_EMPB,
         KC_NO,     UM_EMTR,   KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
         KC_NO,     KC_NO,     UM_EMWR,   KC_NO,     KC_NO,     KC_NO,
-        KC_NO,     UM_EMIND,  KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_TRNS,
+        KC_NO,     UM_EMIND,  KC_NO,     KC_NO,     KC_NO,     UM_EMSB,   KC_TRNS,
         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
                                                                    KC_NO,   KC_NO,
                                                                             KC_NO,
@@ -623,6 +624,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case 42:  // emacs delete window
         if (record->event.pressed) {
             return MACRO(D(LCTL), T(X), U(LCTL), T(0), END);
+        }
+        break;
+    case 43:  // emacs select buffer
+        if (record->event.pressed) {
+            return MACRO(D(LCTL), T(X), U(LCTL), T(B), END);
         }
         break;
     }
