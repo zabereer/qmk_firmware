@@ -315,7 +315,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 6: emacs
  *
  * ,---------------------------------------------------.           ,--------------------------------------------------.
- * |         |      |      |      |      |      | empb |           | emnb | emfs | emfb |      |      | emdw |        |
+ * |         |      |      |      |      |      | empb |           | emnb | emfb | emfs |      |      | emdw |        |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
  * |         | emtr |      |      |      |      |      |           |      | emun | emre | w-up |      |      |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -344,7 +344,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                             KC_NO,
                                                           KC_NO,   KC_NO,   KC_NO,
         // right hand
-             UM_EMNB,   UM_EMFS,  UM_EMFB,        KC_NO,          KC_NO,          UM_EMDW,   KC_NO,
+             UM_EMNB,   UM_EMFB,  UM_EMFS,        KC_NO,          KC_NO,          UM_EMDW,   KC_NO,
              KC_NO,     UM_EMUN,  UM_EMRE,        LSFT(KC_UP),    KC_NO,          KC_NO,     KC_NO,
                         KC_NO,    LSFT(KC_LEFT),  UM_EMKILL,      LSFT(KC_RGHT),  KC_NO,     KC_NO,
              KC_TRNS,   KC_NO,    KC_NO,          LSFT(KC_DOWN),  KC_NO,          KC_NO,     KC_NO,
