@@ -64,6 +64,7 @@
 #define UM_WINK   M(41)
 #define UM_EMDW   M(42) // emacs delete window
 #define UM_EMSB   M(43) // emacs select buffer
+#define UM_EMDE   M(44) // emacs dired
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -319,7 +320,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
  * |         | emtr |      |      |      |      |      |           |      | emun | emre | w-up |      |      |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |         |      | emwr |      |      |      |------|           |------|      |w-left|emkill|w-rght|      |        |
+ * |         |      | emwr | emde |      |      |------|           |------|      |w-left|emkill|w-rght|      |        |
  * |---------+------+------+------+------+------|  ##  |           |  ##  |------+------+------+------+------+--------|
  * |         | emind|      |      |      | emsb |      |           |      |      |      |w-down|      |      |        |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
@@ -337,7 +338,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // left hand
         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     UM_EMPB,
         KC_NO,     UM_EMTR,   KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
-        KC_NO,     KC_NO,     UM_EMWR,   KC_NO,     KC_NO,     KC_NO,
+        KC_NO,     KC_NO,     UM_EMWR,   UM_EMDE,   KC_NO,     KC_NO,
         KC_NO,     UM_EMIND,  KC_NO,     KC_NO,     KC_NO,     UM_EMSB,   KC_TRNS,
         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
                                                                    KC_NO,   KC_NO,
@@ -629,6 +630,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case 43:  // emacs select buffer
         if (record->event.pressed) {
             return MACRO(D(LCTL), T(X), U(LCTL), T(B), END);
+        }
+        break;
+    case 44:  // emacs dired
+        if (record->event.pressed) {
+            return MACRO(D(LCTL), T(X), U(LCTL), T(D), END);
         }
         break;
     }
