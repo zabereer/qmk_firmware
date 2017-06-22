@@ -67,8 +67,10 @@ void action_exec(keyevent_t event)
 
 #if (defined(ONESHOT_TIMEOUT) && (ONESHOT_TIMEOUT > 0))
     if (has_oneshot_layer_timed_out()) {
-        dprintf("Oneshot layer: timeout\n");
         clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
+    }
+    if (has_oneshot_mods_timed_out()) {
+        clear_oneshot_mods();
     }
 #endif
 
@@ -324,9 +326,10 @@ void process_action(keyrecord_t *record, action_t action)
                         tp_buttons |= (1<<2);
                         break;
                     default:
-                        mousekey_on(action.key.code);
-                        mousekey_send();
+                        break;
                 }
+                mousekey_on(action.key.code);
+                mousekey_send();
             } else {
                 switch (action.key.code) {
                     case KC_MS_BTN1:
@@ -339,9 +342,10 @@ void process_action(keyrecord_t *record, action_t action)
                         tp_buttons &= ~(1<<2);
                         break;
                     default:
-                        mousekey_off(action.key.code);
-                        mousekey_send();
+                        break;
                 }
+                mousekey_off(action.key.code);
+                mousekey_send();
             }
             break;
 #endif

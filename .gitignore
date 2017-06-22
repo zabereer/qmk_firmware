@@ -1,3 +1,7 @@
+GPATH
+GRTAGS
+GTAGS
+
 .dep
 *.o
 *.bin
@@ -22,6 +26,7 @@ quantum/version.h
 .idea/
 CMakeLists.txt
 .DS_STORE
+/util/wsl_downloaded
 
 # Eclipse/PyCharm/Other IDE Settings
 .cproject
@@ -34,6 +39,7 @@ util/Win_Check_Output.txt
 .vscode
 .stfolder
 
-GPATH
-GRTAGS
-GTAGS
+# ignore image files
+*.png
+*.jpg
+*.gif
