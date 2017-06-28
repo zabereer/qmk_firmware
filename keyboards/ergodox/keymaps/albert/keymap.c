@@ -65,6 +65,10 @@
 #define UM_EMDW   M(42) // emacs delete window
 #define UM_EMSB   M(43) // emacs select buffer
 #define UM_EMDE   M(44) // emacs dired
+#define UM_EMX2   M(45) // emacs C-x 2
+#define UM_EMX3   M(46) // emacs C-x 3
+#define UM_EMX52  M(47) // emacs C-x 5 2
+#define UM_EMX50  M(48) // emacs C-x 5 0
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -316,7 +320,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 6: emacs
  *
  * ,---------------------------------------------------.           ,--------------------------------------------------.
- * |         |      |      |      |      |      | empb |           | emnb | emfb | emfs |      |      | emdw |        |
+ * |         |      | emx2 | emx3 | emx52| emx50| empb |           | emnb | emfb | emfs |      |      | emdw |        |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
  * |         | emtr |      |      |      |      |      |           |      | emun | emre | w-up |      |      |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -336,7 +340,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [EMAC] = KEYMAP(
         // left hand
-        KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     UM_EMPB,
+        KC_NO,     KC_NO,     UM_EMX2,   UM_EMX3,   UM_EMX52,  UM_EMX50,  UM_EMPB,
         KC_NO,     UM_EMTR,   KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
         KC_NO,     KC_NO,     UM_EMWR,   UM_EMDE,   KC_NO,     KC_NO,
         KC_NO,     UM_EMIND,  KC_NO,     KC_NO,     KC_NO,     UM_EMSB,   KC_TRNS,
@@ -635,6 +639,25 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case 44:  // emacs dired
         if (record->event.pressed) {
             return MACRO(D(LCTL), T(X), U(LCTL), T(D), END);
+        }
+        break;
+    case 45:  // emacs C-x 2
+        if (record->event.pressed) {
+            return MACRO(D(LCTL), T(X), U(LCTL), T(2), END);
+        }
+    case 46:  // emacs C-x 3
+        if (record->event.pressed) {
+            return MACRO(D(LCTL), T(X), U(LCTL), T(3), END);
+        }
+        break;
+    case 47:  // emacs C-x 5 2
+        if (record->event.pressed) {
+            return MACRO(D(LCTL), T(X), U(LCTL), T(5), T(2), END);
+        }
+        break;
+    case 48:  // emacs C-x 5 0
+        if (record->event.pressed) {
+            return MACRO(D(LCTL), T(X), U(LCTL), T(5), T(0), END);
         }
         break;
     }
