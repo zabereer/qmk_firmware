@@ -69,6 +69,7 @@
 #define UM_EMX3   M(46) // emacs C-x 3
 #define UM_EMX52  M(47) // emacs C-x 5 2
 #define UM_EMX50  M(48) // emacs C-x 5 0
+#define UM_EMX1   M(49) // emacs C-x 1
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -320,7 +321,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 6: emacs
  *
  * ,---------------------------------------------------.           ,--------------------------------------------------.
- * |         |      | emx2 | emx3 | emx50| emx52| empb |           | emnb | emfb | emfs |      |      | emdw |        |
+ * |         | emx1 | emx2 | emx3 | emx50| emx52| empb |           | emnb | emfb | emfs |      |      | emdw |        |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
  * |         | emtr |      |      |      |      |      |           |      | emun | emre | w-up |      |      |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -340,7 +341,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [EMAC] = KEYMAP(
         // left hand
-        KC_NO,     KC_NO,     UM_EMX2,   UM_EMX3,   UM_EMX50,  UM_EMX52,  UM_EMPB,
+        KC_NO,     UM_EMX1,   UM_EMX2,   UM_EMX3,   UM_EMX50,  UM_EMX52,  UM_EMPB,
         KC_NO,     UM_EMTR,   KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
         KC_NO,     KC_NO,     UM_EMWR,   UM_EMDE,   KC_NO,     KC_NO,
         KC_NO,     UM_EMIND,  KC_NO,     KC_NO,     KC_NO,     UM_EMSB,   KC_TRNS,
@@ -660,6 +661,10 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             return MACRO(D(LCTL), T(X), U(LCTL), T(5), T(0), END);
         }
         break;
+    case 49:  // emacs C-x 1
+        if (record->event.pressed) {
+            return MACRO(D(LCTL), T(X), U(LCTL), T(1), END);
+        }
     }
     return MACRO_NONE;
 }
