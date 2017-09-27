@@ -30,7 +30,7 @@ Double hashes (`##`) indicate transparent keys (`KC_TRNS`) and blanks indicate n
   |Ctrl/[| Alt/]|   #  | Left |Right |                                       |  Up  | Down |   -  | Alt/[|Ctrl/]|
   `----------------------------------'                                       `----------------------------------'
                                        ,-------------.       ,-------------.
-                                       |  L2  | lead |       | lead |  Ins |
+                                       |  \   | lead |       | lead |  Ins |
                                 ,------|------|------|       |------|------|------.
                                 | Space| BkSp | Home |       | PgUp | Enter|Space |
                                 |  /   |  /   |------|       |------|   /  |  /   |
