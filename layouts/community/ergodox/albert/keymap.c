@@ -742,6 +742,13 @@ void matrix_scan_user(void) {
             send_keystrokes(KC_LEFT, KC_NO);
         }
 
+        SEQ_TWO_KEYS(KC_A, KC_G) {
+            SEND_STRING("alias g='grep --color=auto'");
+        }
+        SEQ_TWO_KEYS(KC_A, KC_L) {
+            SEND_STRING("alias l='ls -alF --color=auto'");
+        }
+
         SEQ_ONE_KEY(KC_SLSH) {
             send_keystrokes(KC_SLSH, NK_DOWN, KC_LSFT, KC_8, KC_8, NK_UP, KC_LSFT, KC_ENT,
                             NK_DOWN, KC_LSFT, KC_8, NK_UP, KC_LSFT, KC_ENT,
