@@ -149,10 +149,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_TRNS,   KC_PLUS,     KC_MINS,     KC_EQL,         LSFT(KC_QUOT),  LSFT(UK_HASH),  KC_F12,
                         KC_LCBR,     KC_RCBR,     KC_SCLN,        KC_QUOT,        UK_HASH,        KC_TRNS,
              KC_TRNS,   KC_LBRC,     KC_RBRC,     LSFT(KC_COMM),  LSFT(KC_DOT),   LSFT(KC_SLSH),  KC_TRNS,
-                                     KC_TRNS,     KC_TRNS,        KC_TRNS,        LSFT(KC_9),     LSFT(KC_0),
+                                     KC_PGUP,     KC_PGDN,        KC_TRNS,        LSFT(KC_9),     LSFT(KC_0),
            KC_TRNS,   KC_TRNS,
-           KC_PGUP,
-           KC_PGDN,   KC_TRNS,  KC_TRNS
+           KC_TRNS,
+           KC_TRNS,   KC_TRNS,  KC_TRNS
     ),
 /* Keymap 2: Numerics and hex
  *
