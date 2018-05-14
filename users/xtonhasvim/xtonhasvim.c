@@ -53,24 +53,17 @@ static void ALT(uint16_t keycode) {
 }
 
 
-uint16_t vstate = VIM_START;
-bool yank_was_lines = false;
-bool SHIFTED = false;
-uint32_t mod_override_layer_state = 0;
-uint16_t mod_override_triggering_key = 0;
-bool do_check_kb_clear = false;
+static uint16_t vstate = VIM_START;
+static bool yank_was_lines = false;
+static bool SHIFTED = false;
+static uint32_t mod_override_layer_state = 0;
+static uint16_t mod_override_triggering_key = 0;
 
-void vim_reset(void) {
-  vstate = VIM_START;
-  SHIFTED = false;
-  yank_was_lines = false;
-}
-
-void edit(void) { vstate = VIM_START; layer_on(_EDIT); layer_off(_CMD); }
+static void edit(void) { vstate = VIM_START; layer_on(_EDIT); layer_off(_CMD); }
 #define EDIT edit()
 
 
-void simple_movement(uint16_t keycode) {
+static void simple_movement(uint16_t keycode) {
   switch(keycode) {
     case VIM_B:
       PRESS(KC_LALT);
@@ -109,18 +102,25 @@ void simple_movement(uint16_t keycode) {
   }
 }
 
-bool process_record_xtonhasvim(uint16_t keycode, keyrecord_t *record) {
+__attribute__ ((weak))
+bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
+  return true;
+}
+
+#define PASS_THRU process_record_keymap(keycode, record)
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if(record->event.pressed && layer_state_is(_CMD) && IS_MOD(keycode)) {
     mod_override_layer_state = layer_state;
     mod_override_triggering_key = keycode;
     layer_clear();
-    return true; // let the event fall through...
+    return PASS_THRU; // let the event fall through...
   }
   if(mod_override_layer_state && !record->event.pressed && keycode == mod_override_triggering_key) {
     layer_state_set(mod_override_layer_state);
     mod_override_layer_state = 0;
     mod_override_triggering_key = 0;
-    return true;
+    return PASS_THRU;
   }
 
   if (VIM_START <= keycode && keycode <= VIM_ESC) {
@@ -134,6 +134,13 @@ bool process_record_xtonhasvim(uint16_t keycode, keyrecord_t *record) {
         // entry from anywhere
         layer_on(_CMD);
         vstate = VIM_START;
+
+        // reset state
+        yank_was_lines = false;
+        SHIFTED = false;
+        mod_override_layer_state = 0;
+        mod_override_triggering_key = 0;
+
         return false;
       }
       switch(vstate) {
@@ -377,6 +384,7 @@ bool process_record_xtonhasvim(uint16_t keycode, keyrecord_t *record) {
             simple_movement(keycode);
             CMD(KC_X);
             yank_was_lines = false;
+            vstate = VIM_START;
             break;
           case VIM_D:
             CMD(KC_LEFT);
@@ -460,6 +468,10 @@ bool process_record_xtonhasvim(uint16_t keycode, keyrecord_t *record) {
               SHIFT(KC_LEFT);  // select to start of next word
               RELEASE(KC_LALT);
               break;
+            case VIM_P:
+              CMD(KC_V);
+              vstate = VIM_START;
+              break;
             case VIM_Y:
               CMD(KC_C);
               TAP(KC_RIGHT);
@@ -516,6 +528,10 @@ bool process_record_xtonhasvim(uint16_t keycode, keyrecord_t *record) {
               CMD(KC_C);
               yank_was_lines = true;
               TAP(KC_RIGHT);
+              vstate = VIM_START;
+              break;
+            case VIM_P:
+              CMD(KC_V);
               vstate = VIM_START;
               break;
             case VIM_V:
@@ -594,6 +610,6 @@ bool process_record_xtonhasvim(uint16_t keycode, keyrecord_t *record) {
     }
     return false;
   } else {
-    return true;
+    return PASS_THRU;
   }
 }
