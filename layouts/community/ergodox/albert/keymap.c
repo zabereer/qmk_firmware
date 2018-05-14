@@ -124,7 +124,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|  ##  |           |  ##  |------+------+------+------+------+--------|
  * |   ##   |   \  |   |  |   `  |   -  |   /  |      |           |      |   [  |   ]  |   <  |   >  |   ?  |   ##   |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |  (   |   )  |  ##  |  ##  |  ##  |                                       |  ##  |  ##  |  ##  |   (  |   )  |
+ *   |  (   |   )  |  ##  | Home | End  |                                       | PgUp | PgDn |  ##  |   (  |   )  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |  ##  |  ##  |       |  ##  |  ##  |
@@ -140,7 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,    KC_EXLM,     LSFT(KC_2),  LSFT(KC_3),  LSFT(KC_4),     LSFT(KC_5),  KC_TRNS,
         KC_TRNS,    LSFT(KC_6),  LSFT(KC_7),  LSFT(KC_8),  LSFT(KC_MINS),  UK_HASH,
         KC_TRNS,    UK_BSLS,     UK_PIPE,     KC_GRV,      KC_MINS,        KC_SLSH,     KC_TRNS,
-        LSFT(KC_9), LSFT(KC_0),  KC_TRNS,     KC_TRNS,     KC_TRNS,
+        LSFT(KC_9), LSFT(KC_0),  KC_TRNS,     KC_HOME,     KC_END,
                                                                             KC_TRNS,   KC_TRNS,
                                                                                        KC_TRNS,
                                                                  KC_TRNS,   KC_TRNS,   KC_TRNS,
@@ -151,8 +151,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_TRNS,   KC_LBRC,     KC_RBRC,     LSFT(KC_COMM),  LSFT(KC_DOT),   LSFT(KC_SLSH),  KC_TRNS,
                                      KC_TRNS,     KC_TRNS,        KC_TRNS,        LSFT(KC_9),     LSFT(KC_0),
            KC_TRNS,   KC_TRNS,
-           KC_TRNS,
-           KC_TRNS,   KC_TRNS,  KC_TRNS
+           KC_PGUP,
+           KC_PGDN,   KC_TRNS,  KC_TRNS
     ),
 /* Keymap 2: Numerics and hex
  *
