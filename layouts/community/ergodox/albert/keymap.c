@@ -70,6 +70,7 @@
 #define UM_EMX52  M(47) // emacs C-x 5 2
 #define UM_EMX50  M(48) // emacs C-x 5 0
 #define UM_EMX1   M(49) // emacs C-x 1
+#define UM_GOODA  M(50)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -286,7 +287,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
  * |         |      |  str |  obj |      | gitl |------|           |------|      |      |      | nulp |      |       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
- * |         |      | extr |  cls | virt | break|      |           | rhdt |namesp| goodm| goodn| mtca |      |       |
+ * |         |      | extr |  cls | virt | break|      |           | rhdt |namesp| goodm| gooda| goodn| mtca |       |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+-------'
  *   |       |      |  inc |      |      |                                       |      |      |      |      |     |
  *   `-----------------------------------'                                       `---------------------------------'
@@ -312,7 +313,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_NO,     UM_DECAF,  KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
              KC_NO,     UM_TYPN,   UM_CONT,   UM_PRV,    UM_PRO,    UM_PUB,    KC_NO,
                         KC_NO,     KC_NO,     KC_NO,     UM_NULP,   KC_NO,     KC_NO,
-             UM_RHDT,   UM_NAMESP, UM_GOODM,  UM_GOODN,  UM_MTCA,   KC_NO,     KC_NO,
+             UM_RHDT,   UM_NAMESP, UM_GOODM,  UM_GOODA,  UM_GOODN,  UM_MTCA,   KC_NO,
                                    KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
            UM_ECET,  UM_ECETS,
            KC_NO,
@@ -665,6 +666,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         if (record->event.pressed) {
             return MACRO(D(LCTL), T(X), U(LCTL), T(1), END);
         }
+    case 50:
+        if (record->event.pressed) {
+            SEND_STRING("good afternoon");
+        }
+        break;
     }
     return MACRO_NONE;
 }
