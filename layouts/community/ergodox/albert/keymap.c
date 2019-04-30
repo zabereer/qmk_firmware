@@ -201,9 +201,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,---------------------------------------------------.           ,-------------------------------------------------.
  * |         |      |      |      |      |      |      |           |      |      |      |      |      |      |       |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+-------|
- * |         | Home |      |  Up  |      | PgUp |      |           |      | PgUp |      |  Up  |      | Home |       |
+ * |         | PgUp |      |  Up  |      | Home |      |           |      | Home |      |  Up  |      | PgUp |       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
- * |         | End  | Left | Down | Right| PgDn |------|           |------| PgDn | Left | Down | Right| End  |       |
+ * |         | PgDn | Left | Down | Right| End  |------|           |------| End  | Left | Down | Right| PgDn |       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
  * |   ##    |  Up  |      | Down |  ##  |      |      |           |      |      |  ##  | Down |      |  Up  |   ##  |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+-------'
@@ -220,8 +220,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [CRSR] = LAYOUT_ergodox(
         // left hand
         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
-        KC_NO,     KC_HOME,   KC_NO,     KC_UP,     KC_NO,     KC_PGUP,   KC_NO,
-        KC_NO,     KC_END,    KC_LEFT,   KC_DOWN,   KC_RGHT,   KC_PGDN,
+        KC_NO,     KC_PGUP,   KC_NO,     KC_UP,     KC_NO,     KC_HOME,   KC_NO,
+        KC_NO,     KC_PGDN,   KC_LEFT,   KC_DOWN,   KC_RGHT,   KC_END,
         KC_TRNS,   KC_UP,     KC_NO,     KC_DOWN,   KC_TRNS,   KC_NO,     KC_NO,
         KC_LEFT,   KC_DOWN,   KC_RGHT,   KC_NO,     KC_NO,
                                                                    KC_NO,     KC_NO,
@@ -229,8 +229,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                         KC_TRNS,   KC_TRNS,   KC_NO,
         // right hand
              KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
-             KC_NO,     KC_PGUP,   KC_NO,     KC_UP,     KC_NO,     KC_HOME,   KC_NO,
-                        KC_PGDN,   KC_LEFT,   KC_DOWN,   KC_RGHT,   KC_END,    KC_NO,
+             KC_NO,     KC_HOME,   KC_NO,     KC_UP,     KC_NO,     KC_PGUP,   KC_NO,
+                        KC_END,    KC_LEFT,   KC_DOWN,   KC_RGHT,   KC_PGDN,   KC_NO,
              KC_NO,     KC_NO,     KC_TRNS,   KC_DOWN,   KC_NO,     KC_UP,     KC_TRNS,
                                    KC_NO,     KC_NO,     KC_LEFT,   KC_DOWN,   KC_RGHT,
            KC_NO,   KC_NO,
