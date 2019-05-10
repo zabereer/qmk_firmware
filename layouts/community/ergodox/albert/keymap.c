@@ -761,11 +761,17 @@ void matrix_scan_user(void) {
             SEND_STRING("alias l='ls -alF --color=auto'");
         }
 
+        // old C-style comment block
         SEQ_ONE_KEY(KC_SLSH) {
             send_keystrokes(KC_SLSH, NK_DOWN, KC_LSFT, KC_8, KC_8, NK_UP, KC_LSFT, KC_ENT,
                             NK_DOWN, KC_LSFT, KC_8, NK_UP, KC_LSFT, KC_ENT,
                             NK_DOWN, KC_LSFT, KC_8, NK_UP, KC_LSFT, KC_SLSH, KC_UP, KC_END, KC_SPC,
                             KC_NO);
+        }
+
+        // windoze lock (urgh)
+        SEQ_TWO_KEYS(KC_W, KC_L) {
+            send_keystrokes(NK_DOWN, KC_LGUI, KC_L, NK_UP, KC_LGUI, KC_NO);
         }
     }
 }
