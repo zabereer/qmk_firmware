@@ -768,5 +768,47 @@ void matrix_scan_user(void) {
                             NK_DOWN, KC_LSFT, KC_8, NK_UP, KC_LSFT, KC_SLSH, KC_UP, KC_END, KC_SPC,
                             KC_NO);
         }
+
+        SEQ_THREE_KEYS(KC_T, KC_S, KC_S) {
+            send_keystrokes(KC_T, KC_M, KC_U, KC_X, KC_ENT, KC_NO);
+            _delay_ms(500);
+            SEND_STRING("cd /space/apretori/EMS");
+            send_keystrokes(KC_ENT, KC_F12, KC_COMM, NK_DOWN, KC_LCTL, KC_A, KC_K, NK_UP, KC_LCTL, KC_NO);
+            SEND_STRING("EMS source");
+            send_keystrokes(KC_ENT, KC_F12, NK_DOWN, KC_LSFT, KC_5, NK_UP, KC_LSFT, KC_NO);
+            _delay_ms(500);
+            SEND_STRING("cd /space/apretori/EMS");
+
+            send_keystrokes(KC_ENT, KC_F12, KC_C, KC_NO);
+            _delay_ms(500);
+            SEND_STRING("cd /space/apretori/EMS2");
+            send_keystrokes(KC_ENT, KC_F12, KC_COMM, NK_DOWN, KC_LCTL, KC_A, KC_K, NK_UP, KC_LCTL, KC_NO);
+            SEND_STRING("EMS2 source");
+            send_keystrokes(KC_ENT, KC_F12, NK_DOWN, KC_LSFT, KC_5, NK_UP, KC_LSFT, KC_NO);
+            _delay_ms(500);
+            SEND_STRING("cd /space/apretori/EMS2");
+
+            send_keystrokes(KC_ENT, KC_F12, KC_C, KC_NO);
+            send_keystrokes(KC_F12, KC_COMM, NK_DOWN, KC_LCTL, KC_A, KC_K, NK_UP, KC_LCTL, KC_NO);
+            SEND_STRING("passthru");
+
+            send_keystrokes(KC_ENT, KC_F12, KC_C, KC_NO);
+            send_keystrokes(KC_F12, KC_COMM, NK_DOWN, KC_LCTL, KC_A, KC_K, NK_UP, KC_LCTL, KC_NO);
+            SEND_STRING("simulator");
+
+            send_keystrokes(KC_ENT, KC_F12, KC_C, KC_NO);
+            send_keystrokes(KC_F12, KC_COMM, NK_DOWN, KC_LCTL, KC_A, KC_K, NK_UP, KC_LCTL, KC_NO);
+            SEND_STRING("client");
+
+            send_keystrokes(KC_ENT, KC_F12, KC_C, KC_NO);
+            _delay_ms(500);
+            SEND_STRING("cd /space/apretori/ems/config");
+            send_keystrokes(KC_ENT, KC_F12, KC_COMM, NK_DOWN, KC_LCTL, KC_A, KC_K, NK_UP, KC_LCTL, KC_NO);
+            SEND_STRING("config");
+            send_keystrokes(KC_ENT, KC_F12, NK_DOWN, KC_LSFT, KC_5, NK_UP, KC_LSFT, KC_NO);
+            _delay_ms(500);
+            SEND_STRING("cd /space/apretori/ems/dbcache");
+            send_keystrokes(KC_ENT, KC_NO);
+        }
     }
 }
