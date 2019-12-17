@@ -71,6 +71,7 @@
 #define UM_EMX50  M(48) // emacs C-x 5 0
 #define UM_EMX1   M(49) // emacs C-x 1
 #define UM_GOODA  M(50)
+#define UM_ROLEYE M(51)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -281,7 +282,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 5: Keywords
  *
  * ,---------------------------------------------------.           ,-------------------------------------------------.
- * |         |      | scarf| sadf | wink | smily|      |           |      | decaf|      |      |      |      |       |
+ * |         |roleye| scarf| sadf | wink | smily|      |           |      | decaf|      |      |      |      |       |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+-------|
  * |         | const| volat| oper |  ret | tmpl |      |           |      | typen| cont |  prv |  pro | pub  |       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
@@ -301,7 +302,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [KEYW] = LAYOUT_ergodox(
         // left hand
-        KC_NO,     KC_NO,     UM_SCARF,  UM_SADF,   UM_WINK,   UM_SMILY,   KC_NO,
+        KC_NO,     UM_ROLEYE, UM_SCARF,  UM_SADF,   UM_WINK,   UM_SMILY,   KC_NO,
         KC_NO,     UM_CONST,  UM_VOLAT,  UM_OPER,   UM_RET,    UM_TMPL,    KC_NO,
         KC_NO,     KC_NO,     UM_STR,    UM_OBJ,    KC_NO,     UM_GITLOG,
         KC_NO,     KC_NO,     UM_EXTR,   UM_CLS,    UM_VIRT,   UM_BREAK,   KC_NO,
@@ -671,6 +672,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             SEND_STRING("good afternoon");
         }
         break;
+    case 51:
+        if (record->event.pressed) {
+            SEND_STRING("o_o");
+        }
+        break;
     }
     return MACRO_NONE;
 }
@@ -723,6 +729,9 @@ void matrix_scan_user(void) {
         SEQ_TWO_KEYS(KC_G, KC_S) {
             SEND_STRING("git status");
         }
+        SEQ_THREE_KEYS(KC_G, KC_S, KC_U) {
+            SEND_STRING("git submodule update --init --recursive");
+        }
         SEQ_TWO_KEYS(KC_G, KC_C) {
             SEND_STRING("git commit -m ''");
             send_keystrokes(KC_LEFT, KC_NO);
@@ -772,21 +781,21 @@ void matrix_scan_user(void) {
         SEQ_THREE_KEYS(KC_T, KC_S, KC_S) {
             send_keystrokes(KC_T, KC_M, KC_U, KC_X, KC_ENT, KC_NO);
             _delay_ms(500);
-            SEND_STRING("cd /space/apretori/EMS");
+            SEND_STRING("/space/apretori/EMS/");
             send_keystrokes(KC_ENT, KC_F12, KC_COMM, NK_DOWN, KC_LCTL, KC_A, KC_K, NK_UP, KC_LCTL, KC_NO);
             SEND_STRING("EMS source");
             send_keystrokes(KC_ENT, KC_F12, NK_DOWN, KC_LSFT, KC_5, NK_UP, KC_LSFT, KC_NO);
             _delay_ms(500);
-            SEND_STRING("cd /space/apretori/EMS");
+            SEND_STRING("/space/apretori/EMS/");
 
             send_keystrokes(KC_ENT, KC_F12, KC_C, KC_NO);
             _delay_ms(500);
-            SEND_STRING("cd /space/apretori/EMS2");
+            SEND_STRING("/space/apretori/EMS2/");
             send_keystrokes(KC_ENT, KC_F12, KC_COMM, NK_DOWN, KC_LCTL, KC_A, KC_K, NK_UP, KC_LCTL, KC_NO);
             SEND_STRING("EMS2 source");
             send_keystrokes(KC_ENT, KC_F12, NK_DOWN, KC_LSFT, KC_5, NK_UP, KC_LSFT, KC_NO);
             _delay_ms(500);
-            SEND_STRING("cd /space/apretori/EMS2");
+            SEND_STRING("space/apretori/EMS2/");
 
             send_keystrokes(KC_ENT, KC_F12, KC_C, KC_NO);
             send_keystrokes(KC_F12, KC_COMM, NK_DOWN, KC_LCTL, KC_A, KC_K, NK_UP, KC_LCTL, KC_NO);
@@ -802,12 +811,12 @@ void matrix_scan_user(void) {
 
             send_keystrokes(KC_ENT, KC_F12, KC_C, KC_NO);
             _delay_ms(500);
-            SEND_STRING("cd /space/apretori/ems/config");
+            SEND_STRING("space/apretori/ems/config/");
             send_keystrokes(KC_ENT, KC_F12, KC_COMM, NK_DOWN, KC_LCTL, KC_A, KC_K, NK_UP, KC_LCTL, KC_NO);
             SEND_STRING("config");
             send_keystrokes(KC_ENT, KC_F12, NK_DOWN, KC_LSFT, KC_5, NK_UP, KC_LSFT, KC_NO);
             _delay_ms(500);
-            SEND_STRING("cd /space/apretori/ems/dbcache");
+            SEND_STRING("/space/apretori/ems/dbcache/");
             send_keystrokes(KC_ENT, KC_NO);
         }
     }
