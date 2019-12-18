@@ -118,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 1: Symbol Layer with F keys
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |   ##   |  F1  |  F2  |  F3  |  F4  |  F5  |  ##  |           |  ##  |  F6  |  F7  |  F8  |  F9  |  F10 |   F11  |
+ * |   `    |  F1  |  F2  |  F3  |  F4  |  F5  |  ##  |           |  ##  |  F6  |  F7  |  F8  |  F9  |  F10 |   F11  |
  * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
  * |   ##   |   !  |   "  |   £  |   $  |   %  |  ##  |           |  ##  |   +  |   -  |   =  |   @  |   ~  |   F12  |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -138,7 +138,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [SYMB] = LAYOUT_ergodox(
         // left hand
-        KC_TRNS,    KC_F1,       KC_F2,       KC_F3,       KC_F4,          KC_F5,       KC_TRNS,
+        KC_GRV,     KC_F1,       KC_F2,       KC_F3,       KC_F4,          KC_F5,       KC_TRNS,
         KC_TRNS,    KC_EXLM,     LSFT(KC_2),  LSFT(KC_3),  LSFT(KC_4),     LSFT(KC_5),  KC_TRNS,
         KC_TRNS,    LSFT(KC_6),  LSFT(KC_7),  LSFT(KC_8),  LSFT(KC_MINS),  UK_HASH,
         KC_TRNS,    UK_BSLS,     UK_PIPE,     KC_GRV,      KC_MINS,        KC_SLSH,     KC_TRNS,
