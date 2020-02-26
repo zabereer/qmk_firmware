@@ -72,6 +72,7 @@
 #define UM_EMX1   M(49) // emacs C-x 1
 #define UM_GOODA  M(50)
 #define UM_ROLEYE M(51)
+#define UM_CXO    M(52) // emacs C-x o
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -325,7 +326,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,---------------------------------------------------.           ,-------------------------------------------------.
  * |         | emx1 | emx2 | emx3 | emx50| emx52| empb |           | emnb | emfb | emfs |      |      | emdw |       |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+-------|
- * |         | emtr |      |      |      |      |      |           |      | emun | emre | w-up |      |      |       |
+ * |         | emtr |      |      |      |      |      |           |      | emun | emre | w-up |c-x-o |      |       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
  * |         |      | emwr | emde |      |      |------|           |------|      |w-left|emkill|w-rght|      |       |
  * |---------+------+------+------+------+------|  ##  |           |  ##  |------+------+------+------+------+-------|
@@ -353,7 +354,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                           KC_NO,   KC_NO,   KC_NO,
         // right hand
              UM_EMNB,   UM_EMFB,  UM_EMFS,        KC_NO,          KC_NO,          UM_EMDW,   KC_NO,
-             KC_NO,     UM_EMUN,  UM_EMRE,        LSFT(KC_UP),    KC_NO,          KC_NO,     KC_NO,
+             KC_NO,     UM_EMUN,  UM_EMRE,        LSFT(KC_UP),    UM_CXO,         KC_NO,     KC_NO,
                         KC_NO,    LSFT(KC_LEFT),  UM_EMKILL,      LSFT(KC_RGHT),  KC_NO,     KC_NO,
              KC_TRNS,   KC_NO,    KC_NO,          LSFT(KC_DOWN),  KC_NO,          KC_NO,     KC_NO,
                                   KC_NO,          KC_NO,          KC_NO,          KC_NO,     KC_NO,
@@ -675,6 +676,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case 51:
         if (record->event.pressed) {
             SEND_STRING("o_o");
+        }
+        break;
+    case 52:  // emacs C-x o
+        if (record->event.pressed) {
+            return MACRO(D(LCTL), T(X), U(LCTL), T(O), END);
         }
         break;
     }
