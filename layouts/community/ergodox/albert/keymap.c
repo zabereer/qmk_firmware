@@ -73,6 +73,7 @@
 #define UM_GOODA  M(50)
 #define UM_ROLEYE M(51)
 #define UM_CXO    M(52) // emacs C-x o
+#define UM_CSE    M(53) // VSCode Ctl + Shft + E (explorer)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -326,7 +327,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,---------------------------------------------------.           ,-------------------------------------------------.
  * |         | emx1 | emx2 | emx3 | emx50| emx52| empb |           | emnb | emfb | emfs |      |      | emdw |       |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+-------|
- * |         | emtr |      |      |      |      |      |           |      | emun | emre | w-up |c-x-o |      |       |
+ * |         | emtr |      |C+S+E |      |      |      |           |      | emun | emre | w-up |c-x-o |      |       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
  * |         |      | emwr | emde |      |      |------|           |------|      |w-left|emkill|w-rght|      |       |
  * |---------+------+------+------+------+------|  ##  |           |  ##  |------+------+------+------+------+-------|
@@ -345,7 +346,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [EMAC] = LAYOUT_ergodox(
         // left hand
         KC_NO,     UM_EMX1,   UM_EMX2,   UM_EMX3,   UM_EMX50,  UM_EMX52,  UM_EMPB,
-        KC_NO,     UM_EMTR,   KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
+        KC_NO,     UM_EMTR,   KC_NO,     UM_CSE,    KC_NO,     KC_NO,     KC_NO,
         KC_NO,     KC_NO,     UM_EMWR,   UM_EMDE,   KC_NO,     KC_NO,
         KC_NO,     UM_EMIND,  KC_NO,     KC_NO,     KC_NO,     UM_EMSB,   KC_TRNS,
         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
@@ -681,6 +682,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case 52:  // emacs C-x o
         if (record->event.pressed) {
             return MACRO(D(LCTL), T(X), U(LCTL), T(O), END);
+        }
+        break;
+    case 53:  // VSCode Ctl + Shft + E
+        if (record->event.pressed) {
+            return MACRO(D(LCTL), D(LSFT), T(E), U(LSFT), U(LCTL), END);
         }
         break;
     }
