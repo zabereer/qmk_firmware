@@ -33,7 +33,7 @@
 #define UM_GITLOG M(10)
 #define UM_GOODM  M(11)
 #define UM_NAMESP M(12)
-#define UM_RHDT   M(13)
+#define UM_EML    M(13)
 #define UM_EMTR   M(14) // emacs toggle read-only
 #define UM_EMWR   M(15) // emacs write buffer (save)
 #define UM_EMUN   M(16) // emacs undo
@@ -317,7 +317,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_NO,     UM_DECAF,  KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
              KC_NO,     UM_TYPN,   UM_CONT,   UM_PRV,    UM_PRO,    UM_PUB,    KC_NO,
                         KC_NO,     KC_NO,     KC_NO,     UM_NULP,   KC_NO,     KC_NO,
-             UM_RHDT,   UM_NAMESP, UM_GOODM,  UM_GOODA,  UM_GOODN,  UM_MTCA,   KC_NO,
+             UM_EML,    UM_NAMESP, UM_GOODM,  UM_GOODA,  UM_GOODN,  UM_MTCA,   KC_NO,
                                    KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
            UM_ECET,  UM_ECETS,
            KC_NO,
@@ -482,7 +482,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 13:
         if (record->event.pressed) {
-            SEND_STRING("/opt/rh/devtoolset-4/root/usr/bin/");
+            return MACRO(T(A), T(L), T(B), T(E), T(R), T(T), T(P), T(R), T(E),
+                         T(T), T(O), T(R), T(I), T(U), T(S),
+                         D(LSFT), T(QUOT), U(LSFT), T(Y), T(A), T(H),
+                         T(O), T(O), T(DOT), T(C), T(O), T(DOT), T(U), T(K),
+                         END);
         }
         break;
     case 14: // emacs toggle read-only
