@@ -75,6 +75,7 @@
 #define UM_CXO    M(52) // emacs C-x o
 #define UM_CSE    M(53) // VSCode Ctl + Shft + E (explorer)
 #define UM_TERM   M(54) // VSCode Ctl + ` (terminal)
+#define UM_CEXPR  M(55)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -289,7 +290,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+-------|
  * |         | const| volat| oper |  ret | tmpl |      |           |      | typen| cont |  prv |  pro | pub  |       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
- * |         |      |  str |  obj |      | gitl |------|           |------|      |      |      | nulp |      |       |
+ * |         |consxp|  str |  obj |      | gitl |------|           |------|      |      |      | nulp |      |       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
  * |         |      | extr |  cls | virt | break|      |           | rhdt |namesp| goodm| gooda| goodn| mtca |       |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+-------'
@@ -307,7 +308,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // left hand
         KC_NO,     UM_ROLEYE, UM_SCARF,  UM_SADF,   UM_WINK,   UM_SMILY,   KC_NO,
         KC_NO,     UM_CONST,  UM_VOLAT,  UM_OPER,   UM_RET,    UM_TMPL,    KC_NO,
-        KC_NO,     KC_NO,     UM_STR,    UM_OBJ,    KC_NO,     UM_GITLOG,
+        KC_NO,     UM_CEXPR,  UM_STR,    UM_OBJ,    KC_NO,     UM_GITLOG,
         KC_NO,     KC_NO,     UM_EXTR,   UM_CLS,    UM_VIRT,   UM_BREAK,   KC_NO,
         KC_NO,     KC_NO,     UM_INC,    KC_NO,     KC_NO,
                                                                    KC_NO,    KC_NO,
@@ -699,6 +700,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             send_keystrokes(NK_DOWN, KC_LCTL, KC_GRV, NK_UP, KC_LCTL, KC_NO);
         }
         break;
+    case 55:
+        if (record->event.pressed) {
+            SEND_STRING("constexpr");
+        }
+        break;
     }
     return MACRO_NONE;
 }
@@ -743,7 +749,7 @@ void matrix_scan_user(void) {
             SEND_STRING("git branch --all --contains");
         }
         SEQ_TWO_KEYS(KC_G, KC_O) {
-            SEND_STRING("git checkout");
+            SEND_STRING("git checkout ");
         }
         SEQ_TWO_KEYS(KC_G, KC_P) {
             SEND_STRING("git pull");
