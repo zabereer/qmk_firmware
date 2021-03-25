@@ -767,6 +767,11 @@ void matrix_scan_user(void) {
         SEQ_THREE_KEYS(KC_G, KC_C, KC_A) {
             SEND_STRING("git commit --amend");
         }
+        SEQ_THREE_KEYS(KC_G, KC_C, KC_I) {
+            SEND_STRING("git ls-files ");
+            send_keystrokes(NK_DOWN, KC_LSFT, KC_NONUS_BSLASH, NK_UP, KC_LSFT, KC_NO);
+            SEND_STRING(" git check-ignore --stdin --verbose --non-match --no-index");
+        }
         SEQ_TWO_KEYS(KC_G, KC_N) {
             SEND_STRING("git clean -dxf && git submodule foreach --recursive 'git clean -dxf'");
         }
