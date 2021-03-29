@@ -755,7 +755,10 @@ void matrix_scan_user(void) {
             SEND_STRING("git pull");
         }
         SEQ_TWO_KEYS(KC_G, KC_S) {
-            SEND_STRING("git status");
+            SEND_STRING("git submodule ");
+        }
+        SEQ_THREE_KEYS(KC_G, KC_S, KC_S) {
+            SEND_STRING("git submodule summary");
         }
         SEQ_THREE_KEYS(KC_G, KC_S, KC_U) {
             SEND_STRING("git submodule update --init --recursive");
