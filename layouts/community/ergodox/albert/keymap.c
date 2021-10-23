@@ -45,7 +45,7 @@
 #define UM_ECETS  M(22)  // { };
 #define UM_TMPL   M(23)
 #define UM_TYPN   M(24)
-#define UM_CONT   M(25)
+#define UM_NULLP  M(25)
 #define UM_BREAK  M(26)
 #define UM_CONST  M(27)
 #define UM_SMILY  M(28)
@@ -53,7 +53,7 @@
 #define UM_SCARF  M(30)
 #define UM_DECAF  M(31)
 #define UM_OPER   M(32)
-#define UM_NULP   M(33)
+#define UM_LESS   M(33)
 #define UM_EXTR   M(34)
 #define UM_VIRT   M(35)
 #define UM_EMFB   M(36) // emacs font bigger
@@ -296,9 +296,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,---------------------------------------------------.           ,-------------------------------------------------.
  * |         |roleye| scarf| sadf | wink | smily|      |           |      | decaf|      |      |      |      |       |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+-------|
- * |         | const| volat| oper |  ret | tmpl |      |           |      | typen| cont |  prv |  pro | pub  |       |
+ * |         | const| volat| oper |  ret | tmpl |      |           |      | typen| nullp|  prv |  pro | pub  |       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
- * |         |consxp|  str |  obj |      | gitl |------|           |------|      |      |      | nulp |      |       |
+ * |         |consxp|  str |  obj |      | gitl |------|           |------|      |      |      | less |      |       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
  * |         |      | extr |  cls | virt | break|      |           | rhdt |namesp| goodm| gooda| goodn| mtca |       |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+-------'
@@ -324,8 +324,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                           KC_NO,   KC_NO,    KC_TRNS,
         // right hand
              KC_NO,     UM_DECAF,  KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
-             KC_NO,     UM_TYPN,   UM_CONT,   UM_PRV,    UM_PRO,    UM_PUB,    KC_NO,
-                        KC_NO,     KC_NO,     KC_NO,     UM_NULP,   KC_NO,     KC_NO,
+             KC_NO,     UM_TYPN,   UM_NULLP,  UM_PRV,    UM_PRO,    UM_PUB,    KC_NO,
+                        KC_NO,     KC_NO,     KC_NO,     UM_LESS,   KC_NO,     KC_NO,
              UM_EML,    UM_NAMESP, UM_GOODM,  UM_GOODA,  UM_GOODN,  UM_MTCA,   KC_NO,
                                    UM_UP10,   UM_DN10,   KC_NO,     KC_NO,     KC_NO,
            UM_ECET,  UM_ECETS,
@@ -560,8 +560,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 25:
         if (record->event.pressed) {
-            SEND_STRING("continue");
-            return MACRO(T(SCLN), END);
+            SEND_STRING("nullptr");
         }
         break;
     case 26:
@@ -602,7 +601,10 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 33:
         if (record->event.pressed) {
-            SEND_STRING("nullptr");
+            SEND_STRING(" &");
+            send_keystrokes(NK_DOWN, KC_LSFT, KC_NONUS_BSLASH, NK_UP, KC_LSFT, KC_NO);
+            SEND_STRING(" less -i");
+            /* send_keystrokes(NK_DOWN, KC_LSFT, KC_NONUS_BSLASH, NK_UP, KC_LSFT, KC_NO); */
         }
         break;
     case 34:
