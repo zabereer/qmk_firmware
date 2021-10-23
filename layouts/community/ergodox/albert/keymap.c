@@ -76,6 +76,14 @@
 #define UM_CSE    M(53) // VSCode Ctl + Shft + E (explorer)
 #define UM_TERM   M(54) // VSCode Ctl + ` (terminal)
 #define UM_CEXPR  M(55)
+#define UM_UP10   M(56)
+#define UM_DN10   M(57)
+#define UM_RT10   M(58)
+#define UM_LT10   M(59)
+#define UM_UP20   M(60)
+#define UM_DN20   M(61)
+#define UM_RT20   M(62)
+#define UM_LT20   M(63)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -294,7 +302,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
  * |         |      | extr |  cls | virt | break|      |           | rhdt |namesp| goodm| gooda| goodn| mtca |       |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+-------'
- *   |       |      |  inc |      |      |                                       |      |      |      |      |     |
+ *   |       |      |  inc | lt10 | rt10 |                                       | up10 | dn10 |      |      |     |
  *   `-----------------------------------'                                       `---------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       | ecet | ecets|
@@ -310,7 +318,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,     UM_CONST,  UM_VOLAT,  UM_OPER,   UM_RET,    UM_TMPL,    KC_NO,
         KC_NO,     UM_CEXPR,  UM_STR,    UM_OBJ,    KC_NO,     UM_GITLOG,
         KC_NO,     KC_NO,     UM_EXTR,   UM_CLS,    UM_VIRT,   UM_BREAK,   KC_NO,
-        KC_NO,     KC_NO,     UM_INC,    KC_NO,     KC_NO,
+        KC_NO,     KC_NO,     UM_INC,    UM_LT10,   UM_RT10,
                                                                    KC_NO,    KC_NO,
                                                                              KC_NO,
                                                           KC_NO,   KC_NO,    KC_TRNS,
@@ -319,7 +327,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_NO,     UM_TYPN,   UM_CONT,   UM_PRV,    UM_PRO,    UM_PUB,    KC_NO,
                         KC_NO,     KC_NO,     KC_NO,     UM_NULP,   KC_NO,     KC_NO,
              UM_EML,    UM_NAMESP, UM_GOODM,  UM_GOODA,  UM_GOODN,  UM_MTCA,   KC_NO,
-                                   KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
+                                   UM_UP10,   UM_DN10,   KC_NO,     KC_NO,     KC_NO,
            UM_ECET,  UM_ECETS,
            KC_NO,
            KC_TRNS,  KC_NO,   KC_NO
@@ -335,7 +343,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------|  ##  |           |  ##  |------+------+------+------+------+-------|
  * |         | emind|      |      |      | emsb |      |           |      |      |      |w-down|      |      |       |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+-------'
- *   |       |      |      |      |      |                                       |      |      |      |      |     |
+ *   |       |      |      | lt20 | rt20 |                                       | up20 | dn20 |      |      |     |
  *   `-----------------------------------'                                       `---------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |      |
@@ -351,7 +359,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,     UM_EMTR,   KC_NO,     UM_CSE,    KC_NO,     KC_NO,     KC_NO,
         KC_NO,     KC_NO,     UM_EMWR,   UM_EMDE,   KC_NO,     KC_NO,
         KC_NO,     UM_EMIND,  KC_NO,     KC_NO,     KC_NO,     UM_EMSB,   KC_TRNS,
-        KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
+        KC_NO,     KC_NO,     KC_NO,     UM_LT20,   UM_RT20,
                                                                    KC_NO,   KC_NO,
                                                                             KC_NO,
                                                           KC_NO,   KC_NO,   KC_NO,
@@ -360,7 +368,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_NO,     UM_EMUN,  UM_EMRE,        LSFT(KC_UP),    UM_CXO,         KC_NO,     KC_NO,
                         KC_NO,    LSFT(KC_LEFT),  UM_EMKILL,      LSFT(KC_RGHT),  KC_NO,     KC_NO,
              KC_TRNS,   KC_NO,    KC_NO,          LSFT(KC_DOWN),  KC_NO,          KC_NO,     KC_NO,
-                                  KC_NO,          KC_NO,          KC_NO,          KC_NO,     KC_NO,
+                                  UM_UP20,        UM_DN20,        KC_NO,          KC_NO,     KC_NO,
            KC_NO,   KC_NO,
            KC_NO,
            KC_NO,   KC_NO,   KC_NO
@@ -703,6 +711,62 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case 55:
         if (record->event.pressed) {
             SEND_STRING("constexpr");
+        }
+        break;
+    case 56:  // up 10
+        if (record->event.pressed) {
+            return MACRO(T(UP), T(UP), T(UP), T(UP), T(UP),
+                         T(UP), T(UP), T(UP), T(UP), T(UP), END);
+        }
+        break;
+    case 57:  // down 10
+        if (record->event.pressed) {
+            return MACRO(T(DOWN), T(DOWN), T(DOWN), T(DOWN), T(DOWN),
+                         T(DOWN), T(DOWN), T(DOWN), T(DOWN), T(DOWN), END);
+        }
+        break;
+    case 58:  // right 10
+        if (record->event.pressed) {
+            return MACRO(T(RIGHT), T(RIGHT), T(RIGHT), T(RIGHT), T(RIGHT),
+                         T(RIGHT), T(RIGHT), T(RIGHT), T(RIGHT), T(RIGHT), END);
+        }
+        break;
+    case 59:  // left 10
+        if (record->event.pressed) {
+            return MACRO(T(LEFT), T(LEFT), T(LEFT), T(LEFT), T(LEFT),
+                         T(LEFT), T(LEFT), T(LEFT), T(LEFT), T(LEFT), END);
+        }
+        break;
+    case 60:  // up 20
+        if (record->event.pressed) {
+            return MACRO(T(UP), T(UP), T(UP), T(UP), T(UP),
+                         T(UP), T(UP), T(UP), T(UP), T(UP),
+                         T(UP), T(UP), T(UP), T(UP), T(UP),
+                         T(UP), T(UP), T(UP), T(UP), T(UP), END);
+        }
+        break;
+    case 61:  // down 20
+        if (record->event.pressed) {
+            return MACRO(T(DOWN), T(DOWN), T(DOWN), T(DOWN), T(DOWN),
+                         T(DOWN), T(DOWN), T(DOWN), T(DOWN), T(DOWN),
+                         T(DOWN), T(DOWN), T(DOWN), T(DOWN), T(DOWN),
+                         T(DOWN), T(DOWN), T(DOWN), T(DOWN), T(DOWN), END);
+        }
+        break;
+    case 62:  // right 20
+        if (record->event.pressed) {
+            return MACRO(T(RIGHT), T(RIGHT), T(RIGHT), T(RIGHT), T(RIGHT),
+                         T(RIGHT), T(RIGHT), T(RIGHT), T(RIGHT), T(RIGHT),
+                         T(RIGHT), T(RIGHT), T(RIGHT), T(RIGHT), T(RIGHT),
+                         T(RIGHT), T(RIGHT), T(RIGHT), T(RIGHT), T(RIGHT), END);
+        }
+        break;
+    case 63:  // left 20
+        if (record->event.pressed) {
+            return MACRO(T(LEFT), T(LEFT), T(LEFT), T(LEFT), T(LEFT),
+                         T(LEFT), T(LEFT), T(LEFT), T(LEFT), T(LEFT),
+                         T(LEFT), T(LEFT), T(LEFT), T(LEFT), T(LEFT),
+                         T(LEFT), T(LEFT), T(LEFT), T(LEFT), T(LEFT), END);
         }
         break;
     }
