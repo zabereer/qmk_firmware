@@ -446,7 +446,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
                          T(P), T(R), T(I), T(V), T(A), T(T), T(E),
                          D(LSFT), T(SCLN), U(LSFT), T(ENT),
                          D(LSFT), T(RBRC), U(LSFT), T(SCLN), T(ENT),
-                         T(UP), T(UP), T(UP), T(UP), T(UP), T(UP), T(UP),
+                         T(UP), T(UP), T(UP), T(UP), T(UP), T(UP),
                          T(END), T(SPC), END);
         }
         break;
@@ -455,7 +455,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             return MACRO(T(S), T(T), T(R), T(U), T(C), T(T), T(ENT),
                          D(LSFT), T(LBRC), U(LSFT), T(ENT),
                          D(LSFT), T(RBRC), U(LSFT), T(SCLN), T(ENT),
-                         T(UP), T(UP), T(UP), T(UP),
+                         T(UP), T(UP), T(UP),
                          T(END), T(SPC), END);
         }
         break;
@@ -604,7 +604,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             SEND_STRING(" &");
             send_keystrokes(NK_DOWN, KC_LSFT, KC_NONUS_BSLASH, NK_UP, KC_LSFT, KC_NO);
             SEND_STRING(" less -i");
-            /* send_keystrokes(NK_DOWN, KC_LSFT, KC_NONUS_BSLASH, NK_UP, KC_LSFT, KC_NO); */
         }
         break;
     case 34:
