@@ -220,7 +220,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
  * |   ##    |  Up  |      | Down |  ##  |      |      |           |      |      |  ##  | Down |      |  Up  |   ##  |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+-------'
- *   | Left  | Down | Right|      |      |                                       |      |      | Left | Down | Right|
+ *   | Left  | Down | Right| lt10 | rt10 |                                       | up10 | dn10 | Left | Down | Right|
  *   `-----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |      |
@@ -236,7 +236,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,     KC_PGUP,   KC_NO,     KC_UP,     KC_NO,     KC_HOME,   KC_NO,
         KC_NO,     KC_PGDN,   KC_LEFT,   KC_DOWN,   KC_RGHT,   KC_END,
         KC_TRNS,   KC_UP,     KC_NO,     KC_DOWN,   KC_TRNS,   KC_NO,     KC_NO,
-        KC_LEFT,   KC_DOWN,   KC_RGHT,   KC_NO,     KC_NO,
+        KC_LEFT,   KC_DOWN,   KC_RGHT,   UM_LT10,   UM_RT10,
                                                                    KC_NO,     KC_NO,
                                                                               KC_NO,
                                                         KC_TRNS,   KC_TRNS,   KC_NO,
@@ -245,7 +245,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_NO,     KC_HOME,   KC_NO,     KC_UP,     KC_NO,     KC_PGUP,   KC_NO,
                         KC_END,    KC_LEFT,   KC_DOWN,   KC_RGHT,   KC_PGDN,   KC_NO,
              KC_NO,     KC_NO,     KC_TRNS,   KC_DOWN,   KC_NO,     KC_UP,     KC_TRNS,
-                                   KC_NO,     KC_NO,     KC_LEFT,   KC_DOWN,   KC_RGHT,
+                                   UM_UP10,   UM_DN10,   KC_LEFT,   KC_DOWN,   KC_RGHT,
            KC_NO,   KC_NO,
            KC_NO,
            KC_NO,   KC_TRNS,   KC_TRNS
@@ -261,7 +261,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |  Lclk  | MsUp | Rclk |MsDown|      |  ##  |      |           |      |  ##  |      |MsDown| Lclk | MsUp | Rclk   |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |MsLeft|MsDown|MsRight      |      |                                       |      |      |MsLeft|MsDown|MsRght|
+ *   |MsLeft|MsDown|MsRight lt20 | rt20 |                                       | up20 | dn20 |MsLeft|MsDown|MsRght|
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |      |
@@ -277,7 +277,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,     KC_NO,     KC_BTN1,   KC_MS_U,   KC_BTN2,   KC_NO,     KC_NO,
         KC_NO,     KC_NO,     KC_MS_L,   KC_MS_D,   KC_MS_R,   KC_NO,
         KC_BTN1,   KC_MS_U,   KC_BTN2,   KC_MS_D,   KC_NO,     KC_TRNS,   KC_NO,
-        KC_MS_L,   KC_MS_D,   KC_MS_R,   KC_NO,     KC_NO,
+        KC_MS_L,   KC_MS_D,   KC_MS_R,   UM_LT20,   UM_RT20,
                                                                    KC_NO,   KC_NO,
                                                                             KC_NO,
                                                           KC_NO,   KC_NO,   KC_NO,
@@ -286,7 +286,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_NO,     KC_NO,     KC_BTN1,   KC_MS_U,   KC_BTN2,   KC_NO,     KC_NO,
                         KC_NO,     KC_MS_L,   KC_MS_D,   KC_MS_R,   KC_NO,     KC_NO,
              KC_NO,     KC_TRNS,   KC_NO,     KC_MS_D,   KC_BTN1,   KC_MS_U,   KC_BTN2,
-                                   KC_NO,     KC_NO,     KC_MS_L,   KC_MS_D,   KC_MS_R,
+                                   UM_UP20,   UM_DN20,   KC_MS_L,   KC_MS_D,   KC_MS_R,
            KC_NO,   KC_NO,
            KC_NO,
            KC_NO,   KC_NO,   KC_NO
