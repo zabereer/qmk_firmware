@@ -322,7 +322,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,     KC_NO,     UM_INC,    UM_LT10,   UM_RT10,
                                                                    KC_NO,    KC_NO,
                                                                              KC_NO,
-                                                          KC_NO,   KC_NO,    KC_TRNS,
+                                                          KC_TRNS, KC_TRNS,  KC_TRNS,
         // right hand
              KC_NO,     UM_DECAF,  KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
              KC_NO,     UM_TYPN,   UM_NULLP,  UM_PRV,    UM_PRO,    UM_PUB,    KC_NO,
@@ -331,7 +331,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                    UM_UP10,   UM_DN10,   KC_NO,     KC_NO,     KC_NO,
            UM_ECET,  UM_ECETS,
            KC_NO,
-           KC_TRNS,  KC_NO,   KC_NO
+           KC_TRNS,  KC_TRNS, KC_TRNS
     ),
 /* Keymap 6: emacs
  *
