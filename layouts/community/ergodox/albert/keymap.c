@@ -84,6 +84,7 @@
 #define UM_DN20   M(61)
 #define UM_RT20   M(62)
 #define UM_LT20   M(63)
+#define UM_STATIC M(64)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -300,7 +301,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
  * |         |consxp|  str |  obj |      | gitl |------|           |------|      |      |      | less |      |       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
- * |         |      | extr |  cls | virt | break|      |           | rhdt |namesp| goodm| gooda| goodn| mtca |       |
+ * |         |static| extr |  cls | virt | break|      |           | rhdt |namesp| goodm| gooda| goodn| mtca |       |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+-------'
  *   |       |      |  inc | lt10 | rt10 |                                       | up10 | dn10 |      |      |     |
  *   `-----------------------------------'                                       `---------------------------------'
@@ -317,7 +318,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,     UM_ROLEYE, UM_SCARF,  UM_SADF,   UM_WINK,   UM_SMILY,   KC_NO,
         KC_NO,     UM_CONST,  UM_VOLAT,  UM_OPER,   UM_RET,    UM_TMPL,    KC_NO,
         KC_NO,     UM_CEXPR,  UM_STR,    UM_OBJ,    KC_NO,     UM_GITLOG,
-        KC_NO,     KC_NO,     UM_EXTR,   UM_CLS,    UM_VIRT,   UM_BREAK,   KC_NO,
+        KC_NO,     UM_STATIC, UM_EXTR,   UM_CLS,    UM_VIRT,   UM_BREAK,   KC_NO,
         KC_NO,     KC_NO,     UM_INC,    UM_LT10,   UM_RT10,
                                                                    KC_NO,    KC_NO,
                                                                              KC_NO,
@@ -768,6 +769,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
                          T(LEFT), T(LEFT), T(LEFT), T(LEFT), T(LEFT),
                          T(LEFT), T(LEFT), T(LEFT), T(LEFT), T(LEFT),
                          T(LEFT), T(LEFT), T(LEFT), T(LEFT), T(LEFT), END);
+        }
+        break;
+    case 64:
+        if (record->event.pressed) {
+            SEND_STRING("static");
         }
         break;
     }
