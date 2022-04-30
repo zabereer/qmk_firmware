@@ -602,9 +602,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 33:
         if (record->event.pressed) {
-            SEND_STRING(" &");
-            send_keystrokes(NK_DOWN, KC_LSFT, KC_NONUS_BSLASH, NK_UP, KC_LSFT, KC_NO);
-            SEND_STRING(" less -i");
+            SEND_STRING("less -iR");
         }
         break;
     case 34:
@@ -792,6 +790,9 @@ void matrix_scan_user(void) {
         SEQ_TWO_KEYS(KC_G, KC_A) {
             SEND_STRING("git add .");
         }
+        SEQ_THREE_KEYS(KC_G, KC_A, KC_U) {
+            SEND_STRING("git add -u");
+        }
         SEQ_TWO_KEYS(KC_G, KC_D) {
             SEND_STRING("git diff");
         }
@@ -819,11 +820,23 @@ void matrix_scan_user(void) {
         SEQ_FOUR_KEYS(KC_G, KC_R, KC_A, KC_C) {
             SEND_STRING("git branch --all --contains");
         }
+        SEQ_TWO_KEYS(KC_G, KC_M) {
+            SEND_STRING("git merge");
+        }
+        SEQ_THREE_KEYS(KC_G, KC_M, KC_F) {
+            SEND_STRING("git merge --ff-only upstream/");
+        }
         SEQ_TWO_KEYS(KC_G, KC_O) {
             SEND_STRING("git checkout ");
         }
         SEQ_TWO_KEYS(KC_G, KC_P) {
             SEND_STRING("git pull");
+        }
+        SEQ_TWO_KEYS(KC_G, KC_U) {
+            SEND_STRING("git push");
+        }
+        SEQ_THREE_KEYS(KC_G, KC_U, KC_F) {
+            SEND_STRING("git push --force");
         }
         SEQ_TWO_KEYS(KC_G, KC_S) {
             SEND_STRING("git submodule ");
@@ -840,6 +853,9 @@ void matrix_scan_user(void) {
         }
         SEQ_THREE_KEYS(KC_G, KC_C, KC_A) {
             SEND_STRING("git commit --amend");
+        }
+        SEQ_FOUR_KEYS(KC_G, KC_C, KC_A, KC_N) {
+            SEND_STRING("git commit --amend --no-edit");
         }
         SEQ_THREE_KEYS(KC_G, KC_C, KC_I) {
             SEND_STRING("git ls-files ");
