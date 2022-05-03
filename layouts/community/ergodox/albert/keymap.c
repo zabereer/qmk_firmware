@@ -58,7 +58,7 @@
 #define UM_VIRT   M(35)
 #define UM_EMFB   M(36) // emacs font bigger
 #define UM_EMFS   M(37) // emacs font smaller
-#define UM_VOLAT  M(38)
+#define UM_AUTO   M(38)
 #define UM_EMIND  M(39) // emacs indent region
 #define UM_EMKILL M(40) // emacs kill buffer
 #define UM_WINK   M(41)
@@ -297,9 +297,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,---------------------------------------------------.           ,-------------------------------------------------.
  * |         |roleye| scarf| sadf | wink | smily|      |           |      | decaf|      |      |      |      |       |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+-------|
- * |         | const| volat| oper |  ret | tmpl |      |           |      | typen| nullp|  prv |  pro | pub  |       |
+ * |         | const|consxp| oper |  ret | tmpl |      |           |      | typen| nullp|  prv |  pro | pub  |       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
- * |         |consxp|  str |  obj |      | gitl |------|           |------|      |      |      | less |      |       |
+ * |         | auto |  str |  obj |      | gitl |------|           |------|      |      |      | less |      |       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
  * |         |static| extr |  cls | virt | break|      |           | rhdt |namesp| goodm| gooda| goodn| mtca |       |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+-------'
@@ -316,8 +316,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [KEYW] = LAYOUT_ergodox(
         // left hand
         KC_NO,     UM_ROLEYE, UM_SCARF,  UM_SADF,   UM_WINK,   UM_SMILY,   KC_NO,
-        KC_NO,     UM_CONST,  UM_VOLAT,  UM_OPER,   UM_RET,    UM_TMPL,    KC_NO,
-        KC_NO,     UM_CEXPR,  UM_STR,    UM_OBJ,    KC_NO,     UM_GITLOG,
+        KC_NO,     UM_CONST,  UM_CEXPR,  UM_OPER,   UM_RET,    UM_TMPL,    KC_NO,
+        KC_NO,     UM_AUTO,   UM_STR,    UM_OBJ,    KC_NO,     UM_GITLOG,
         KC_NO,     UM_STATIC, UM_EXTR,   UM_CLS,    UM_VIRT,   UM_BREAK,   KC_NO,
         KC_NO,     KC_NO,     UM_INC,    UM_LT10,   UM_RT10,
                                                                    KC_NO,    KC_NO,
@@ -627,7 +627,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 38:
         if (record->event.pressed) {
-            SEND_STRING("volatile");
+            SEND_STRING("auto");
         }
         break;
     case 39: // emacs indent region
@@ -837,6 +837,9 @@ void matrix_scan_user(void) {
         }
         SEQ_THREE_KEYS(KC_G, KC_U, KC_F) {
             SEND_STRING("git push --force");
+        }
+        SEQ_THREE_KEYS(KC_G, KC_U, KC_S) {
+            SEND_STRING("git push --set-upstream origin HEAD");
         }
         SEQ_TWO_KEYS(KC_G, KC_S) {
             SEND_STRING("git submodule ");
