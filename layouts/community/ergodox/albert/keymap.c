@@ -90,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * | ESC/GRV|   1  |   2  |   3  |   4  |   5  | SfLt |           | SfRt |   6  |   7  |   8  |   9  |   0  | BkSp   |
+ * | ESC/GRV|   1  |   2  |   3  |   4  |   5  |  L2  |           |  L2  |   6  |   7  |   8  |   9  |   0  | BkSp   |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * | Tab    |   Q  |   W  |   E  |   R  |   T  |  L1  |           |  L1  |   Y  |   U  |   I  |   O  |   P  | Del    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -110,7 +110,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [BASE] = LAYOUT_ergodox(  // layer 0 : default
         // left hand
-        KC_GESC,           KC_1,            KC_2,       KC_3,      KC_4,           KC_5,           LSFT(KC_LEFT),
+        KC_GESC,           KC_1,            KC_2,       KC_3,      KC_4,           KC_5,           MO(NUMB),
         KC_TAB,            KC_Q,            KC_W,       KC_E,      KC_R,           KC_T,           MO(SYMB),
         LT(NUMB, KC_CAPS), KC_A,            KC_S,       KC_D,      KC_F,           KC_G,
         KC_LSFT,           KC_Z,            KC_X,       KC_C,      LT(CRSR, KC_V), LT(MOUS, KC_B), MO(EMAC),
@@ -119,7 +119,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                                                       KC_HOME,
                                                                      CTL_T(KC_SPC),  ALT_T(KC_BSPC),  LT(KEYW, KC_END),
         // right hand
-             LSFT(KC_RGHT),   KC_6,            KC_7,            KC_8,      KC_9,       KC_0,             KC_BSPC,
+             MO(NUMB),        KC_6,            KC_7,            KC_8,      KC_9,       KC_0,             KC_BSPC,
              MO(SYMB),        KC_Y,            KC_U,            KC_I,      KC_O,       KC_P,             KC_DEL,
                               KC_H,            KC_J,            KC_K,      KC_L,       KC_SCLN,          LT(NUMB, KC_ENT),
              MO(EMAC),        LT(MOUS, KC_N),  LT(CRSR, KC_M),  KC_COMM,   KC_DOT,     KC_SLSH,          KC_RSFT,
