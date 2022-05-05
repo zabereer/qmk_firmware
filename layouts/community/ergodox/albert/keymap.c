@@ -112,7 +112,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // left hand
         KC_GESC,           KC_1,            KC_2,       KC_3,      KC_4,           KC_5,           MO(NUMB),
         KC_TAB,            KC_Q,            KC_W,       KC_E,      KC_R,           KC_T,           MO(SYMB),
-        LT(NUMB, KC_CAPS), KC_A,            KC_S,       KC_D,      KC_F,           KC_G,
+        MO(NUMB),          KC_A,            KC_S,       KC_D,      KC_F,           KC_G,
         KC_LSFT,           KC_Z,            KC_X,       KC_C,      LT(CRSR, KC_V), LT(MOUS, KC_B), MO(EMAC),
         CTL_T(KC_LBRC),    ALT_T(KC_RBRC),  UK_HASH,    KC_LEFT,   KC_RGHT,
                                                                                      UK_BSLS,         KC_LEAD,
@@ -135,7 +135,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
  * |   ##   |   !  |   "  |   £  |   $  |   %  |  ##  |           |  ##  |   +  |   -  |   =  |   @  |   ~  |   F12  |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |   ##   |   ^  |   &  |   *  |   _  |   #  |------|           |------|   {  |   }  |   ;  |   '  |   #  |   ##   |
+ * |  CAPS  |   ^  |   &  |   *  |   _  |   #  |------|           |------|   {  |   }  |   ;  |   '  |   #  |   ##   |
  * |--------+------+------+------+------+------|  ##  |           |  ##  |------+------+------+------+------+--------|
  * |   ##   |   \  |   |  |   `  |   -  |   /  |      |           |      |   [  |   ]  |   <  |   >  |   ?  |   ##   |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
@@ -153,7 +153,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // left hand
         KC_GRV,     KC_F1,       KC_F2,       KC_F3,       KC_F4,          KC_F5,       KC_TRNS,
         KC_TRNS,    KC_EXLM,     LSFT(KC_2),  LSFT(KC_3),  LSFT(KC_4),     LSFT(KC_5),  KC_TRNS,
-        KC_TRNS,    LSFT(KC_6),  LSFT(KC_7),  LSFT(KC_8),  LSFT(KC_MINS),  UK_HASH,
+        KC_CAPS,    LSFT(KC_6),  LSFT(KC_7),  LSFT(KC_8),  LSFT(KC_MINS),  UK_HASH,
         KC_TRNS,    UK_BSLS,     UK_PIPE,     KC_GRV,      KC_MINS,        KC_SLSH,     KC_TRNS,
         LSFT(KC_9), LSFT(KC_0),  KC_TRNS,     KC_HOME,     KC_END,
                                                                             KC_TRNS,   KC_TRNS,
