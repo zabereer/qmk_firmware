@@ -811,14 +811,20 @@ void matrix_scan_user(void) {
         SEQ_THREE_KEYS(KC_G, KC_F, KC_A) {
             SEND_STRING("git fetch --all");
         }
-        SEQ_THREE_KEYS(KC_G, KC_R, KC_A) {
+        SEQ_TWO_KEYS(KC_G, KC_B) {
+            SEND_STRING("git branch");
+        }
+        SEQ_THREE_KEYS(KC_G, KC_B, KC_A) {
             SEND_STRING("git branch --all");
         }
-        SEQ_THREE_KEYS(KC_G, KC_R, KC_C) {
+        SEQ_THREE_KEYS(KC_G, KC_B, KC_C) {
             SEND_STRING("git branch --contains");
         }
-        SEQ_FOUR_KEYS(KC_G, KC_R, KC_A, KC_C) {
+        SEQ_FOUR_KEYS(KC_G, KC_B, KC_A, KC_C) {
             SEND_STRING("git branch --all --contains");
+        }
+        SEQ_TWO_KEYS(KC_G, KC_G) {
+            SEND_STRING("git grep ");
         }
         SEQ_TWO_KEYS(KC_G, KC_M) {
             SEND_STRING("git merge");
