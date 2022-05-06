@@ -487,7 +487,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 12:
         if (record->event.pressed) {
-            SEND_STRING("namespace");
+            SEND_STRING("namespace ");
         }
         break;
     case 13:
@@ -556,7 +556,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 24:
         if (record->event.pressed) {
-            SEND_STRING("typename");
+            SEND_STRING("typename ");
         }
         break;
     case 25:
@@ -566,13 +566,13 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 26:
         if (record->event.pressed) {
-            SEND_STRING("break");
+            SEND_STRING("break;");
             return MACRO(T(SCLN), END);
         }
         break;
     case 27:
         if (record->event.pressed) {
-            SEND_STRING("const");
+            SEND_STRING("const ");
         }
         break;
     case 28:
@@ -602,7 +602,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 33:
         if (record->event.pressed) {
-            SEND_STRING("less -iR");
+            SEND_STRING("less -iR ");
         }
         break;
     case 34:
@@ -612,7 +612,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 35:
         if (record->event.pressed) {
-            SEND_STRING("virtual");
+            SEND_STRING("virtual ");
         }
         break;
     case 36: // emacs font smaller
@@ -627,7 +627,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 38:
         if (record->event.pressed) {
-            SEND_STRING("auto");
+            SEND_STRING("auto ");
         }
         break;
     case 39: // emacs indent region
@@ -710,7 +710,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 55:
         if (record->event.pressed) {
-            SEND_STRING("constexpr");
+            SEND_STRING("constexpr ");
         }
         break;
     case 56:  // up 10
@@ -771,7 +771,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 64:
         if (record->event.pressed) {
-            SEND_STRING("static");
+            SEND_STRING("static ");
         }
         break;
     }
