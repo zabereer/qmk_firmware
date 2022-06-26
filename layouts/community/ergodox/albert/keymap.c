@@ -52,7 +52,7 @@
 #define UM_SADF   M(29)
 #define UM_SCARF  M(30)
 #define UM_DECAF  M(31)
-#define UM_OPER   M(32)
+#define UM_OVER   M(32)
 #define UM_LESS   M(33)
 #define UM_EXTR   M(34)
 #define UM_VIRT   M(35)
@@ -85,6 +85,10 @@
 #define UM_RT20   M(62)
 #define UM_LT20   M(63)
 #define UM_STATIC M(64)
+#define UM_PLESS  M(65)
+#define UM_NODIS  M(66)
+#define UM_HELLO  M(67)
+#define UM_GOODE  M(68)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -297,13 +301,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,---------------------------------------------------.           ,-------------------------------------------------.
  * |         |roleye| scarf| sadf | wink | smily|      |           |      | decaf|      |      |      |      |       |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+-------|
- * |         | const|consxp| oper |  ret | tmpl |      |           |      | typen| nullp|  prv |  pro | pub  |       |
+ * |         | const|consxp| over |  ret | tmpl |      |           |      | typen| nullp|  prv |  pro | pub  |       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
- * |         | auto |  str |  obj |      | gitl |------|           |------|      |      |      | less |      |       |
+ * |         | auto |  str |  obj |      | gitl |------|           |------| hello|      | nodis| less | |less|       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
  * |         |static| extr |  cls | virt | break|      |           | rhdt |namesp| goodm| gooda| goodn| mtca |       |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+-------'
- *   |       |      |  inc | lt10 | rt10 |                                       | up10 | dn10 |      |      |     |
+ *   |       |      |  inc | lt10 | rt10 |                                       | up10 | dn10 | goode|      |     |
  *   `-----------------------------------'                                       `---------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       | ecet | ecets|
@@ -316,7 +320,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [KEYW] = LAYOUT_ergodox(
         // left hand
         KC_NO,     UM_ROLEYE, UM_SCARF,  UM_SADF,   UM_WINK,   UM_SMILY,   KC_NO,
-        KC_NO,     UM_CONST,  UM_CEXPR,  UM_OPER,   UM_RET,    UM_TMPL,    KC_NO,
+        KC_NO,     UM_CONST,  UM_CEXPR,  UM_OVER,   UM_RET,    UM_TMPL,    KC_NO,
         KC_NO,     UM_AUTO,   UM_STR,    UM_OBJ,    KC_NO,     UM_GITLOG,
         KC_NO,     UM_STATIC, UM_EXTR,   UM_CLS,    UM_VIRT,   UM_BREAK,   KC_NO,
         KC_NO,     KC_NO,     UM_INC,    UM_LT10,   UM_RT10,
@@ -326,9 +330,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // right hand
              KC_NO,     UM_DECAF,  KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
              KC_NO,     UM_TYPN,   UM_NULLP,  UM_PRV,    UM_PRO,    UM_PUB,    KC_NO,
-                        KC_NO,     KC_NO,     KC_NO,     UM_LESS,   KC_NO,     KC_NO,
+                        UM_HELLO,  KC_NO,     UM_NODIS,  UM_LESS,   UM_PLESS,  KC_NO,
              UM_EML,    UM_NAMESP, UM_GOODM,  UM_GOODA,  UM_GOODN,  UM_MTCA,   KC_NO,
-                                   UM_UP10,   UM_DN10,   KC_NO,     KC_NO,     KC_NO,
+                                   UM_UP10,   UM_DN10,   UM_GOODE,  KC_NO,     KC_NO,
            UM_ECET,  UM_ECETS,
            KC_NO,
            KC_TRNS,  KC_TRNS, KC_TRNS
@@ -567,7 +571,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case 26:
         if (record->event.pressed) {
             SEND_STRING("break;");
-            return MACRO(T(SCLN), END);
         }
         break;
     case 27:
@@ -597,7 +600,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 32:
         if (record->event.pressed) {
-            SEND_STRING("operator");
+            SEND_STRING("override");
         }
         break;
     case 33:
@@ -772,6 +775,27 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case 64:
         if (record->event.pressed) {
             SEND_STRING("static ");
+        }
+        break;
+    case 65:
+        if (record->event.pressed) {
+            send_keystrokes(NK_DOWN, KC_LSFT, KC_NONUS_BSLASH, NK_UP, KC_LSFT, KC_NO);
+            SEND_STRING(" less -iR");
+        }
+        break;
+    case 66:
+        if (record->event.pressed) {
+            SEND_STRING("[[nodiscard]] ");
+        }
+        break;
+    case 67:
+        if (record->event.pressed) {
+            SEND_STRING("hello");
+        }
+        break;
+    case 68:
+        if (record->event.pressed) {
+            SEND_STRING("good night");
         }
         break;
     }
