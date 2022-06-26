@@ -795,7 +795,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 68:
         if (record->event.pressed) {
-            SEND_STRING("good night");
+            SEND_STRING("good evening");
         }
         break;
     }
