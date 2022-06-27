@@ -89,6 +89,7 @@
 #define UM_NODIS  M(66)
 #define UM_HELLO  M(67)
 #define UM_GOODE  M(68)
+#define UM_JOBPS  M(69)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -303,7 +304,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+-------|
  * |         | const|consxp| over |  ret | tmpl |      |           |      | typen| nullp|  prv |  pro | pub  |       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
- * |         | auto |  str |  obj |      | gitl |------|           |------| hello|      | nodis| less | |less|       |
+ * |         | auto |  str |  obj |      | gitl |------|           |------| hello| jobps| nodis| less | |less|       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
  * |         |static| extr |  cls | virt | break|      |           | rhdt |namesp| goodm| gooda| goodn| mtca |       |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+-------'
@@ -330,7 +331,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // right hand
              KC_NO,     UM_DECAF,  KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
              KC_NO,     UM_TYPN,   UM_NULLP,  UM_PRV,    UM_PRO,    UM_PUB,    KC_NO,
-                        UM_HELLO,  KC_NO,     UM_NODIS,  UM_LESS,   UM_PLESS,  KC_NO,
+                        UM_HELLO,  UM_JOBPS,  UM_NODIS,  UM_LESS,   UM_PLESS,  KC_NO,
              UM_EML,    UM_NAMESP, UM_GOODM,  UM_GOODA,  UM_GOODN,  UM_MTCA,   KC_NO,
                                    UM_UP10,   UM_DN10,   UM_GOODE,  KC_NO,     KC_NO,
            UM_ECET,  UM_ECETS,
@@ -779,7 +780,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 65:
         if (record->event.pressed) {
-            send_keystrokes(NK_DOWN, KC_LSFT, KC_NONUS_BSLASH, NK_UP, KC_LSFT, KC_NO);
+            send_keystrokes(KC_SPC, NK_DOWN, KC_LSFT, KC_NONUS_BSLASH, NK_UP, KC_LSFT, KC_NO);
             SEND_STRING(" less -iR");
         }
         break;
@@ -796,6 +797,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case 68:
         if (record->event.pressed) {
             SEND_STRING("good evening");
+        }
+        break;
+    case 69:
+        if (record->event.pressed) {
+            SEND_STRING("ps -L -O pid,ppid,lwp,user,args,comm,psr,pcpu,pmem,vsz,rss,etime,time");
         }
         break;
     }
