@@ -938,6 +938,13 @@ void matrix_scan_user(void) {
             SEND_STRING("alias l='ls -alF --color=auto'");
         }
 
+        SEQ_TWO_KEYS(KC_D, KC_A) {
+            SEND_STRING("gdb --args ");
+        }
+        SEQ_TWO_KEYS(KC_D, KC_P) {
+            SEND_STRING("gdb --pid=");
+        }
+
         // old C-style comment block
         SEQ_ONE_KEY(KC_SLSH) {
             send_keystrokes(KC_SLSH, NK_DOWN, KC_LSFT, KC_8, KC_8, NK_UP, KC_LSFT, KC_ENT,
