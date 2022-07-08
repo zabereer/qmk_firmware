@@ -26,7 +26,7 @@
 #define UM_PRO    M(3)
 #define UM_PRV    M(4)
 #define UM_CLS    M(5)
-#define UM_STR    M(6)
+#define UM_STD    M(6)
 #define UM_RET    M(7)
 #define UM_INC    M(8)
 #define UM_OBJ    M(9)
@@ -304,7 +304,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+-------|
  * |         | const|consxp| over |  ret | tmpl |      |           |      | typen| nullp|  prv |  pro | pub  |       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
- * |         | auto |  str |  obj |      | gitl |------|           |------| hello| jobps| nodis| less | |less|       |
+ * |         | auto |  std |  obj |      | gitl |------|           |------| hello| jobps| nodis| less | |less|       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
  * |         |static| extr |  cls | virt | break|      |           | rhdt |namesp| goodm| gooda| goodn| mtca |       |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+-------'
@@ -322,7 +322,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // left hand
         KC_NO,     UM_ROLEYE, UM_SCARF,  UM_SADF,   UM_WINK,   UM_SMILY,   KC_NO,
         KC_NO,     UM_CONST,  UM_CEXPR,  UM_OVER,   UM_RET,    UM_TMPL,    KC_NO,
-        KC_NO,     UM_AUTO,   UM_STR,    UM_OBJ,    KC_NO,     UM_GITLOG,
+        KC_NO,     UM_AUTO,   UM_STD,    UM_OBJ,    KC_NO,     UM_GITLOG,
         KC_NO,     UM_STATIC, UM_EXTR,   UM_CLS,    UM_VIRT,   UM_BREAK,   KC_NO,
         KC_NO,     KC_NO,     UM_INC,    UM_LT10,   UM_RT10,
                                                                    KC_NO,    KC_NO,
@@ -456,13 +456,9 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
                          T(END), T(SPC), END);
         }
         break;
-    case 6: // struct
+    case 6:
         if (record->event.pressed) {
-            return MACRO(T(S), T(T), T(R), T(U), T(C), T(T), T(ENT),
-                         D(LSFT), T(LBRC), U(LSFT), T(ENT),
-                         D(LSFT), T(RBRC), U(LSFT), T(SCLN), T(ENT),
-                         T(UP), T(UP), T(UP),
-                         T(END), T(SPC), END);
+            SEND_STRING("std::");
         }
         break;
     case 7:
