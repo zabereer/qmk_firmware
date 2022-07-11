@@ -820,7 +820,7 @@ void matrix_scan_user(void) {
             SEND_STRING("git add -u");
         }
         SEQ_TWO_KEYS(KC_G, KC_D) {
-            SEND_STRING("git diff");
+            SEND_STRING("git diff ");
         }
         SEQ_THREE_KEYS(KC_G, KC_D, KC_S) {
             SEND_STRING("git diff --staged");
