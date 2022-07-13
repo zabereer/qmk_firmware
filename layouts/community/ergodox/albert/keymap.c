@@ -945,6 +945,22 @@ void matrix_scan_user(void) {
             SEND_STRING("gdb --pid=");
         }
 
+        SEQ_TWO_KEYS(KC_Q, KC_P) {
+            SEND_STRING("podman run --interactive --tty --rm "
+                "--volume=/home/albert/qmk_firmware:/qmk_firmware "
+                "--volume=/dev:/dev qmk_cli");
+        }
+        SEQ_TWO_KEYS(KC_Q, KC_W) {
+            SEND_STRING("https://github.com/zabereer/qmk_firmware/blob/albert/"
+                        "layouts/community/ergodox/albert/keymap.c");
+        }
+        SEQ_TWO_KEYS(KC_Q, KC_C) {
+            SEND_STRING("qmk compile --keyboard ergodox_ez --keymap albert");
+        }
+        SEQ_TWO_KEYS(KC_Q, KC_F) {
+            SEND_STRING("qmk flash --keyboard ergodox_ez --keymap albert");
+        }
+
         // old C-style comment block
         SEQ_ONE_KEY(KC_SLSH) {
             send_keystrokes(KC_SLSH, NK_DOWN, KC_LSFT, KC_8, KC_8, NK_UP, KC_LSFT, KC_ENT,
