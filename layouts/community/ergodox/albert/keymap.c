@@ -473,12 +473,12 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 9:
         if (record->event.pressed) {
-            SEND_STRING("objdump -CT -x -d");
+            SEND_STRING("objdump -CT -x -d ");
         }
         break;
     case 10:
         if (record->event.pressed) {
-            SEND_STRING("git log --oneline --graph --decorate=short");
+            SEND_STRING("git log --oneline --graph --decorate=short ");
         }
         break;
     case 11:
