@@ -54,7 +54,7 @@
 #define UM_DECAF  M(31)
 #define UM_OVER   M(32)
 #define UM_LESS   M(33)
-#define UM_EXTR   M(34)
+#define UM_EXPL   M(34)
 #define UM_VIRT   M(35)
 #define UM_EMFB   M(36) // emacs font bigger
 #define UM_EMFS   M(37) // emacs font smaller
@@ -267,7 +267,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |  Lclk  | MsUp | Rclk |MsDown|      |  ##  |      |           |      |  ##  |      |MsDown| Lclk | MsUp | Rclk   |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |MsLeft|MsDown|MsRight lt20 | rt20 |                                       | up20 | dn20 |MsLeft|MsDown|MsRght|
+ *   |MsLeft|MsDown|MsRight lt10 | rt10 |                                       | up10 | dn10 |MsLeft|MsDown|MsRght|
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |      |
@@ -283,7 +283,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,     KC_NO,     KC_BTN1,   KC_MS_U,   KC_BTN2,   KC_NO,     KC_NO,
         KC_NO,     KC_NO,     KC_MS_L,   KC_MS_D,   KC_MS_R,   KC_NO,
         KC_BTN1,   KC_MS_U,   KC_BTN2,   KC_MS_D,   KC_NO,     KC_TRNS,   KC_NO,
-        KC_MS_L,   KC_MS_D,   KC_MS_R,   UM_LT20,   UM_RT20,
+        KC_MS_L,   KC_MS_D,   KC_MS_R,   UM_LT10,   UM_RT10,
                                                                    KC_NO,   KC_NO,
                                                                             KC_NO,
                                                           KC_NO,   KC_NO,   KC_NO,
@@ -292,7 +292,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_NO,     KC_NO,     KC_BTN1,   KC_MS_U,   KC_BTN2,   KC_NO,     KC_NO,
                         KC_NO,     KC_MS_L,   KC_MS_D,   KC_MS_R,   KC_NO,     KC_NO,
              KC_NO,     KC_TRNS,   KC_NO,     KC_MS_D,   KC_BTN1,   KC_MS_U,   KC_BTN2,
-                                   UM_UP20,   UM_DN20,   KC_MS_L,   KC_MS_D,   KC_MS_R,
+                                   UM_UP10,   UM_DN10,   KC_MS_L,   KC_MS_D,   KC_MS_R,
            KC_NO,   KC_NO,
            KC_NO,
            KC_NO,   KC_NO,   KC_NO
@@ -306,7 +306,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
  * |         | auto |  std |  obj |      | gitl |------|           |------| hello| jobps| nodis| less | |less|       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
- * |         |static| extr |  cls | virt | break|      |           | rhdt |namesp| goodm| gooda| goodn| mtca |       |
+ * |         |static| expl |  cls | virt | break|      |           | rhdt |namesp| goodm| gooda| goodn| mtca |       |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+-------'
  *   |       |      |  inc | lt10 | rt10 |                                       | up10 | dn10 | goode|      |     |
  *   `-----------------------------------'                                       `---------------------------------'
@@ -323,7 +323,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,     UM_ROLEYE, UM_SCARF,  UM_SADF,   UM_WINK,   UM_SMILY,   KC_NO,
         KC_NO,     UM_CONST,  UM_CEXPR,  UM_OVER,   UM_RET,    UM_TMPL,    KC_NO,
         KC_NO,     UM_AUTO,   UM_STD,    UM_OBJ,    KC_NO,     UM_GITLOG,
-        KC_NO,     UM_STATIC, UM_EXTR,   UM_CLS,    UM_VIRT,   UM_BREAK,   KC_NO,
+        KC_NO,     UM_STATIC, UM_EXPL,   UM_CLS,    UM_VIRT,   UM_BREAK,   KC_NO,
         KC_NO,     KC_NO,     UM_INC,    UM_LT10,   UM_RT10,
                                                                    KC_NO,    KC_NO,
                                                                              KC_NO,
@@ -607,7 +607,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 34:
         if (record->event.pressed) {
-            SEND_STRING("extern");
+            SEND_STRING("explicit");
         }
         break;
     case 35:
@@ -787,7 +787,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 67:
         if (record->event.pressed) {
-            SEND_STRING("hello");
+            SEND_STRING("hello ");
         }
         break;
     case 68:
