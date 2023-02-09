@@ -917,6 +917,20 @@ void matrix_scan_user(void) {
             send_keystrokes(KC_LEFT, KC_NO);
         }
 
+        SEQ_ONE_KEY(KC_J) {
+            SEND_STRING("journalctl --user ");
+        }
+        SEQ_TWO_KEYS(KC_J, KC_E) {
+            SEND_STRING("journalctl --user --pager-end");
+        }
+
+        SEQ_ONE_KEY(KC_S) {
+            SEND_STRING("systemctl --user ");
+        }
+        SEQ_TWO_KEYS(KC_S, KC_S) {
+            SEND_STRING("systemctl --user status ");
+        }
+
         SEQ_TWO_KEYS(KC_A, KC_A) {
             SEND_STRING("alias g='grep --color=auto'");
             send_keystrokes(KC_ENT, KC_NO);
