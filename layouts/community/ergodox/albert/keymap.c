@@ -25,7 +25,7 @@
 #define UM_PUB    M(2)
 #define UM_PRO    M(3)
 #define UM_PRV    M(4)
-#define UM_CLS    M(5)
+#define UM_SYSCTL M(5)
 #define UM_STD    M(6)
 #define UM_RET    M(7)
 #define UM_INC    M(8)
@@ -89,7 +89,7 @@
 #define UM_NODIS  M(66)
 #define UM_HELLO  M(67)
 #define UM_GOODE  M(68)
-#define UM_JOBPS  M(69)
+#define UM_JNCTL  M(69)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -323,7 +323,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,     UM_ROLEYE, UM_SCARF,  UM_SADF,   UM_WINK,   UM_SMILY,   KC_NO,
         KC_NO,     UM_CONST,  UM_CEXPR,  UM_OVER,   UM_RET,    UM_TMPL,    KC_NO,
         KC_NO,     UM_AUTO,   UM_STD,    UM_OBJ,    KC_NO,     UM_GITLOG,
-        KC_NO,     UM_STATIC, UM_EXPL,   UM_CLS,    UM_VIRT,   UM_BREAK,   KC_NO,
+        KC_NO,     UM_STATIC, UM_EXPL,   UM_SYSCTL, UM_VIRT,   UM_BREAK,   KC_NO,
         KC_NO,     KC_NO,     UM_INC,    UM_LT10,   UM_RT10,
                                                                    KC_NO,    KC_NO,
                                                                              KC_NO,
@@ -331,7 +331,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // right hand
              KC_NO,     UM_DECAF,  KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
              KC_NO,     UM_TYPN,   UM_NULLP,  UM_PRV,    UM_PRO,    UM_PUB,    KC_NO,
-                        UM_HELLO,  UM_JOBPS,  UM_NODIS,  UM_LESS,   UM_PLESS,  KC_NO,
+                        UM_HELLO,  UM_JNCTL,  UM_NODIS,  UM_LESS,   UM_PLESS,  KC_NO,
              UM_EML,    UM_NAMESP, UM_GOODM,  UM_GOODA,  UM_GOODN,  UM_MTCA,   KC_NO,
                                    UM_UP10,   UM_DN10,   UM_GOODE,  KC_NO,     KC_NO,
            UM_ECET,  UM_ECETS,
@@ -443,17 +443,9 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             SEND_STRING("private");
         }
         break;
-    case 5: // class
+    case 5:
         if (record->event.pressed) {
-            return MACRO(T(C), T(L), T(A), T(S), T(S), T(ENT),
-                         D(LSFT), T(LBRC), U(LSFT), T(ENT),
-                         T(P), T(U), T(B), T(L), T(I), T(C),
-                         D(LSFT), T(SCLN), U(LSFT), T(ENT), T(ENT),
-                         T(P), T(R), T(I), T(V), T(A), T(T), T(E),
-                         D(LSFT), T(SCLN), U(LSFT), T(ENT),
-                         D(LSFT), T(RBRC), U(LSFT), T(SCLN), T(ENT),
-                         T(UP), T(UP), T(UP), T(UP), T(UP), T(UP),
-                         T(END), T(SPC), END);
+            SEND_STRING("systemctl --user ");
         }
         break;
     case 6:
@@ -797,7 +789,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 69:
         if (record->event.pressed) {
-            SEND_STRING("ps -L -O pid,ppid,lwp,user,args,comm,psr,pcpu,pri,nice,pmem,vsz,rss,etime,time");
+            SEND_STRING("journalctl --user --pager-end ");
         }
         break;
     }
@@ -917,13 +909,6 @@ void matrix_scan_user(void) {
             send_keystrokes(KC_LEFT, KC_NO);
         }
 
-        SEQ_ONE_KEY(KC_J) {
-            SEND_STRING("journalctl --user ");
-        }
-        SEQ_TWO_KEYS(KC_J, KC_E) {
-            SEND_STRING("journalctl --user --pager-end");
-        }
-
         SEQ_ONE_KEY(KC_S) {
             SEND_STRING("systemctl --user ");
         }
@@ -959,6 +944,10 @@ void matrix_scan_user(void) {
         }
         SEQ_TWO_KEYS(KC_D, KC_P) {
             SEND_STRING("gdb --pid=");
+        }
+
+        SEQ_ONE_KEY(KC_P) {
+            SEND_STRING("ps -L -O pid,ppid,lwp,user,args,comm,psr,pcpu,pri,nice,pmem,vsz,rss,etime,time");
         }
 
         SEQ_TWO_KEYS(KC_Q, KC_P) {
