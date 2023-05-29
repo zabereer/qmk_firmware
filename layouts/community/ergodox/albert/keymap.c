@@ -797,7 +797,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 69:
         if (record->event.pressed) {
-            SEND_STRING("ps -L -O pid,ppid,lwp,user,args,comm,psr,pcpu,pmem,vsz,rss,etime,time");
+            SEND_STRING("ps -L -O pid,ppid,lwp,user,args,comm,psr,pcpu,pri,nice,pmem,vsz,rss,etime,time");
         }
         break;
     }
