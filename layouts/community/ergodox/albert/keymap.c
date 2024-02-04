@@ -46,7 +46,7 @@
 #define UM_TMPL   M(23)
 #define UM_TYPN   M(24)
 #define UM_NULLP  M(25)
-#define UM_BREAK  M(26)
+#define UM_BOOL   M(26)
 #define UM_CONST  M(27)
 #define UM_SMILY  M(28)
 #define UM_SADF   M(29)
@@ -306,7 +306,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
  * |         | auto |  std |  obj |      | gitl |------|           |------| hello| jobps| nodis| less | |less|       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
- * |         |static| expl |  cls | virt | break|      |           | rhdt |namesp| goodm| gooda| goodn| mtca |       |
+ * |         |static| expl |  cls | virt | bool |      |           | rhdt |namesp| goodm| gooda| goodn| mtca |       |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+-------'
  *   |       |      |  inc | lt10 | rt10 |                                       | up10 | dn10 | goode|      |     |
  *   `-----------------------------------'                                       `---------------------------------'
@@ -323,7 +323,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,     UM_ROLEYE, UM_SCARF,  UM_SADF,   UM_WINK,   UM_SMILY,   KC_NO,
         KC_NO,     UM_CONST,  UM_CEXPR,  UM_OVER,   UM_RET,    UM_TMPL,    KC_NO,
         KC_NO,     UM_AUTO,   UM_STD,    UM_OBJ,    KC_NO,     UM_GITLOG,
-        KC_NO,     UM_STATIC, UM_EXPL,   UM_SYSCTL, UM_VIRT,   UM_BREAK,   KC_NO,
+        KC_NO,     UM_STATIC, UM_EXPL,   UM_SYSCTL, UM_VIRT,   UM_BOOL,    KC_NO,
         KC_NO,     KC_NO,     UM_INC,    UM_LT10,   UM_RT10,
                                                                    KC_NO,    KC_NO,
                                                                              KC_NO,
@@ -559,12 +559,12 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 26:
         if (record->event.pressed) {
-            SEND_STRING("break;");
+            SEND_STRING("bool");
         }
         break;
     case 27:
         if (record->event.pressed) {
-            SEND_STRING("const ");
+            SEND_STRING("const");
         }
         break;
     case 28:
