@@ -619,7 +619,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 38:
         if (record->event.pressed) {
-            SEND_STRING("auto ");
+            SEND_STRING("auto");
         }
         break;
     case 39: // emacs indent region
