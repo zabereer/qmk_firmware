@@ -695,9 +695,9 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             return MACRO(D(LCTL), D(LSFT), T(E), U(LSFT), U(LCTL), END);
         }
         break;
-    case 54:  // VSCode Ctl + `
+    case 54:  // VSCode Ctl + ` (or rather ' for icaclient)
         if (record->event.pressed) {
-            send_keystrokes(NK_DOWN, KC_LCTL, KC_GRV, NK_UP, KC_LCTL, KC_NO);
+            send_keystrokes(NK_DOWN, KC_LCTL, KC_QUOT, NK_UP, KC_LCTL, KC_NO);
         }
         break;
     case 55:
