@@ -465,7 +465,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 9:
         if (record->event.pressed) {
-            SEND_STRING("objdump -CT -x -d ");
+            SEND_STRING("objdump -CT -x -D ");
         }
         break;
     case 10:
@@ -480,7 +480,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 12:
         if (record->event.pressed) {
-            SEND_STRING("namespace ");
+            SEND_STRING("namespace");
         }
         break;
     case 13:
