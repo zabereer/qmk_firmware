@@ -52,7 +52,7 @@
 #define UM_SADF   M(29)
 #define UM_SCARF  M(30)
 #define UM_DECAF  M(31)
-#define UM_OVER   M(32)
+#define UM_EMCSNW M(32)
 #define UM_LESS   M(33)
 #define UM_EXPL   M(34)
 #define UM_VIRT   M(35)
@@ -302,7 +302,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,---------------------------------------------------.           ,-------------------------------------------------.
  * |         |roleye| scarf| sadf | wink | smily|      |           |      | decaf|      |      |      |      |       |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+-------|
- * |         | const|consxp| over |  ret | tmpl |      |           |      | typen| nullp|  prv |  pro | pub  |       |
+ * |         | const|consxp|emacnw|  ret | tmpl |      |           |      | typen| nullp|  prv |  pro | pub  |       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
  * |         | auto |  std |  obj |      | gitl |------|           |------| hello| jobps| nodis| less | |less|       |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+-------|
@@ -321,7 +321,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [KEYW] = LAYOUT_ergodox(
         // left hand
         KC_NO,     UM_ROLEYE, UM_SCARF,  UM_SADF,   UM_WINK,   UM_SMILY,   KC_NO,
-        KC_NO,     UM_CONST,  UM_CEXPR,  UM_OVER,   UM_RET,    UM_TMPL,    KC_NO,
+        KC_NO,     UM_CONST,  UM_CEXPR,  UM_EMCSNW, UM_RET,    UM_TMPL,    KC_NO,
         KC_NO,     UM_AUTO,   UM_STD,    UM_OBJ,    KC_NO,     UM_GITLOG,
         KC_NO,     UM_STATIC, UM_EXPL,   UM_SYSCTL, UM_VIRT,   UM_BOOL,    KC_NO,
         KC_NO,     KC_NO,     UM_INC,    UM_LT10,   UM_RT10,
@@ -589,7 +589,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         break;
     case 32:
         if (record->event.pressed) {
-            SEND_STRING("override");
+            SEND_STRING("emacs -nw ");
         }
         break;
     case 33:
