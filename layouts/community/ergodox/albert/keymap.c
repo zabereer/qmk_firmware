@@ -931,6 +931,8 @@ void matrix_scan_user(void) {
             send_keystrokes(KC_ENT, KC_NO);
             SEND_STRING("export HISTCONTROL=ignorespace");
             send_keystrokes(KC_ENT, KC_NO);
+            SEND_STRING("unset LC_ALL");
+            send_keystrokes(KC_ENT, KC_NO);
         }
         SEQ_TWO_KEYS(KC_A, KC_G) {
             SEND_STRING("alias g='grep --color=auto'");
