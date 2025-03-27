@@ -954,7 +954,7 @@ void matrix_scan_user(void) {
             SEND_STRING("jj bookmark list ");
         }
         SEQ_THREE_KEYS(KC_J, KC_B, KC_A) {
-            SEND_STRING("jj bookmark list --all-remotes");
+            SEND_STRING("jj bookmark list --all-remotes ");
         }
         SEQ_TWO_KEYS(KC_J, KC_C) {
             SEND_STRING("jj bookmark create --revision @- ");
@@ -963,13 +963,13 @@ void matrix_scan_user(void) {
             SEND_STRING("jj diff ");
         }
         SEQ_TWO_KEYS(KC_J, KC_F) {
-            SEND_STRING("jj fetch --all-remotes");
+            SEND_STRING("jj git fetch --all-remotes");
         }
         SEQ_TWO_KEYS(KC_J, KC_L) {
             SEND_STRING("jj log --revisions '::@ & bookmarks()'");
         }
         SEQ_TWO_KEYS(KC_J, KC_P) {
-            SEND_STRING("jj git push --remote -origin --bookmark ");
+            SEND_STRING("jj git push --remote origin --bookmark ");
         }
         SEQ_TWO_KEYS(KC_J, KC_S) {
             SEND_STRING("jj status ");
