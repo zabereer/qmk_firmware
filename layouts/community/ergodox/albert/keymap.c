@@ -953,7 +953,7 @@ void matrix_scan_user(void) {
         SEQ_TWO_KEYS(KC_J, KC_B) {
             SEND_STRING("jj bookmark list ");
         }
-        SEQ_TWO_KEYS(KC_J, KC_B, KC_A) {
+        SEQ_THREE_KEYS(KC_J, KC_B, KC_A) {
             SEND_STRING("jj bookmark list --all-remotes");
         }
         SEQ_TWO_KEYS(KC_J, KC_S) {
