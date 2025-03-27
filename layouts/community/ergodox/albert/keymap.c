@@ -950,8 +950,18 @@ void matrix_scan_user(void) {
             SEND_STRING("gdb --pid=");
         }
 
+        SEQ_TWO_KEYS(KC_J, KC_B) {
+            SEND_STRING("jj bookmark list ");
+        }
+        SEQ_TWO_KEYS(KC_J, KC_B, KC_A) {
+            SEND_STRING("jj bookmark list --all-remotes");
+        }
+        SEQ_TWO_KEYS(KC_J, KC_S) {
+            SEND_STRING("jj status ");
+        }
+
         SEQ_ONE_KEY(KC_P) {
-            SEND_STRING("ps -L -O pid,ppid,lwp,user,args,comm,psr,pcpu,pri,nice,pmem,vsz,rss,etime,time,stat,wchan");
+            SEND_STRING("ps -L -O pid,ppid,lwp,user,args,comm,psr,pcpu,pri,nice,pmem,vsz,rss,etime,time,stat,wchan ");
         }
 
         SEQ_TWO_KEYS(KC_Q, KC_P) {
