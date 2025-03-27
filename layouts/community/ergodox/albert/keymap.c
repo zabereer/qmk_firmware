@@ -956,6 +956,21 @@ void matrix_scan_user(void) {
         SEQ_THREE_KEYS(KC_J, KC_B, KC_A) {
             SEND_STRING("jj bookmark list --all-remotes");
         }
+        SEQ_TWO_KEYS(KC_J, KC_C) {
+            SEND_STRING("jj bookmark create --revision @- ");
+        }
+        SEQ_TWO_KEYS(KC_J, KC_D) {
+            SEND_STRING("jj diff ");
+        }
+        SEQ_TWO_KEYS(KC_J, KC_F) {
+            SEND_STRING("jj fetch --all-remotes");
+        }
+        SEQ_TWO_KEYS(KC_J, KC_L) {
+            SEND_STRING("jj log --revisions '::@ & bookmarks()'");
+        }
+        SEQ_TWO_KEYS(KC_J, KC_P) {
+            SEND_STRING("jj git push --remote -origin --bookmark ");
+        }
         SEQ_TWO_KEYS(KC_J, KC_S) {
             SEND_STRING("jj status ");
         }
@@ -978,14 +993,6 @@ void matrix_scan_user(void) {
         }
         SEQ_TWO_KEYS(KC_Q, KC_F) {
             SEND_STRING("qmk flash --keyboard ergodox_ez --keymap albert");
-        }
-
-        // old C-style comment block
-        SEQ_ONE_KEY(KC_SLSH) {
-            send_keystrokes(KC_SLSH, NK_DOWN, KC_LSFT, KC_8, KC_8, NK_UP, KC_LSFT, KC_ENT,
-                            NK_DOWN, KC_LSFT, KC_8, NK_UP, KC_LSFT, KC_ENT,
-                            NK_DOWN, KC_LSFT, KC_8, NK_UP, KC_LSFT, KC_SLSH, KC_UP, KC_END, KC_SPC,
-                            KC_NO);
         }
     }
 }
