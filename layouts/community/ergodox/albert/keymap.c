@@ -951,7 +951,7 @@ void matrix_scan_user(void) {
         }
 
         SEQ_ONE_KEY(KC_P) {
-            SEND_STRING("ps -L -O pid,ppid,lwp,user,args,comm,psr,pcpu,pri,nice,pmem,vsz,rss,etime,time");
+            SEND_STRING("ps -L -O pid,ppid,lwp,user,args,comm,psr,pcpu,pri,nice,pmem,vsz,rss,etime,time,stat,wchan");
         }
 
         SEQ_TWO_KEYS(KC_Q, KC_P) {
