@@ -962,7 +962,8 @@ void matrix_scan_user(void) {
             SEND_STRING("- ");
         }
         SEQ_TWO_KEYS(KC_J, KC_D) {
-            SEND_STRING("jj diff ");
+            SEND_STRING("jj describe --message ''");
+            send_keystrokes(KC_LEFT, KC_NO);
         }
         SEQ_TWO_KEYS(KC_J, KC_F) {
             SEND_STRING("jj git fetch --all-remotes");
