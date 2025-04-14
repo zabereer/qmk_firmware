@@ -974,7 +974,9 @@ void matrix_scan_user(void) {
             SEND_STRING(" & bookmarks()'::");
         }
         SEQ_TWO_KEYS(KC_J, KC_M) {
-            SEND_STRING("jj bookmark move --to @- ");
+            SEND_STRING("jj bookmark move --to ");
+            send_keystrokes(NK_DOWN, KC_LSFT, KC_QUOT, NK_UP, KC_LSFT, KC_NO);
+            SEND_STRING("- ");
         }
         SEQ_TWO_KEYS(KC_J, KC_P) {
             SEND_STRING("jj git push --remote origin --bookmark ");
