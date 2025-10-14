@@ -917,23 +917,23 @@ void matrix_scan_user(void) {
         }
 
         SEQ_TWO_KEYS(KC_A, KC_A) {
-            SEND_STRING("alias g='grep --color=auto'");
+            SEND_STRING(" alias g='grep --color=auto'");
             send_keystrokes(KC_ENT, KC_NO);
-            SEND_STRING("alias l='ls -alF --color=auto'");
+            SEND_STRING(" alias l='ls -alF --color=auto'");
             send_keystrokes(KC_ENT, KC_NO);
         }
         SEQ_THREE_KEYS(KC_A, KC_A, KC_E) {
-            SEND_STRING("alias g='grep --color=auto'");
+            SEND_STRING(" alias g='grep --color=auto'");
             send_keystrokes(KC_ENT, KC_NO);
-            SEND_STRING("alias l='ls -alF --color=auto'");
+            SEND_STRING(" alias l='ls -alF --color=auto'");
             send_keystrokes(KC_ENT, KC_NO);
-            SEND_STRING("set -o emacs");
+            SEND_STRING(" set -o emacs");
             send_keystrokes(KC_ENT, KC_NO);
-            SEND_STRING("export HISTCONTROL=ignorespace");
+            SEND_STRING(" export HISTCONTROL=ignorespace");
             send_keystrokes(KC_ENT, KC_NO);
-            SEND_STRING("unset LC_ALL");
+            SEND_STRING(" unset LC_ALL");
             send_keystrokes(KC_ENT, KC_NO);
-            SEND_STRING("unset LESS");
+            SEND_STRING(" unset LESS");
             send_keystrokes(KC_ENT, KC_NO);
         }
         SEQ_TWO_KEYS(KC_A, KC_G) {
