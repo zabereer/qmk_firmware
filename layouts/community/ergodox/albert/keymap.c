@@ -90,6 +90,7 @@
 #define UM_HELLO  M(67)
 #define UM_GOODE  M(68)
 #define UM_JNCTL  M(69)
+#define UM_EMFF   M(70) // emacs find file
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Base layer
@@ -363,7 +364,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // left hand
         UM_TERM,   UM_EMX1,   UM_EMX2,   UM_EMX3,   UM_EMX50,  UM_EMX52,  UM_EMPB,
         KC_NO,     UM_EMTR,   KC_NO,     UM_CSE,    KC_NO,     KC_NO,     KC_NO,
-        KC_NO,     KC_NO,     UM_EMWR,   UM_EMDE,   KC_NO,     KC_NO,
+        KC_NO,     KC_NO,     UM_EMWR,   UM_EMDE,   UM_EMFF,   KC_NO,
         KC_NO,     UM_EMIND,  KC_NO,     KC_NO,     KC_NO,     UM_EMSB,   KC_TRNS,
         KC_NO,     KC_NO,     KC_NO,     UM_LT20,   UM_RT20,
                                                                    KC_NO,   KC_NO,
@@ -790,6 +791,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case 69:
         if (record->event.pressed) {
             SEND_STRING("journalctl --user --pager-end ");
+        }
+        break;
+    case 70: // emacs find file
+        if (record->event.pressed) {
+	    return MACRO(D(LCTL), T(X), T(F), U(LCTL), END);
         }
         break;
     }
